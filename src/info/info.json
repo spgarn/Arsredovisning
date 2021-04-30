@@ -1,0 +1,8 @@
+{
+  "fiscal_year_text":"Årsredovisning för räkenskapsåret",
+  "presentation_ceo_text":"Styrelsen och verkställande direktören avger följande årsredovisning.",
+  "round_up_method":"Samtliga belopp är angivna i hela kronor.",
+  "confirmation_certificate":"Undertecknad styrelseledamot i ${company_name} intygar att resultaträkningen och balansräkningen har fastställts på årstämman den ${date_annual_general_meeting}. Årstämman beslutade att godkänna styrelsens förslag till hur vinsten ska disponeras.",
+  "director_approve_text":"Jag intygar också att innehållet i årsredovisningen stämmer överens med originalet.",
+  "test_data":"Årets resultat Totalt Vid årets ingång 50 000 0 1 073 51 073 Balanseras i ny räkning 1 073 -1 073 0 Årets resultat 485 281 485 281 Vid årets utgång 50 000 1 073 485 281 536 354 Resultat disposition Styrelsen och VD föreslår att till förfogande stående medel Balanserat resultat 1 073 Årets resultat 485 281 Summa 486 354 Disponeras enligt följande Utdelas till aktieägare 177 100 Balanseras i ny räkning 309 254 Summa 486 354 Med hänvisning till ovanstående och vad som i övrigt kommit till styrelsens kännedom är det styrelsens bedömning attutdelningen är försvarbar (enligt ABL 17 kap 3 §) med tanke på de krav som verksamhetens art och omfattning samt riskerställer på storleken av bolagets egna kapital konsolideringsbehov likviditet och ställning"
+}
