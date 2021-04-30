@@ -3,14 +3,15 @@ import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/rendere
 import * as companyJson from '../info/company.json'
 import * as info from '../../src/info/info.json'
 import font from '../fonts/Comfortaa-Regular.ttf'
-import { CompanyInfo } from '../functions/interFaces';
+import { Company } from '../functions/interfaces';
+import { infoStore } from '../functions/infoStore'
 
 
 
 
 Font.register({  family: 'Comfortaa', src: font  });
 
-const company:CompanyInfo = companyJson
+const company:Partial<Company> = infoStore.company
 
 
 
@@ -58,10 +59,10 @@ export const MyDocument = () => (
   <Document language={'sv'}>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        <Text style={styles.h1}>{company.name}</Text>
-        <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company.registration_number}</Text>
+        <Text style={styles.h1}>{company?.company_info?.name}</Text>
+        <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.company_info?.registration_number}</Text>
         <Text style={styles.h2}>{info.fiscal_year_text}</Text>
-        <Text style={styles.h2}>{company.fiscal_year}</Text>
+        <Text style={styles.h2}>{company?.company_info?.fiscal_year_now}</Text>
         <Text style={styles.h3}>{info.presentation_ceo_text}</Text>
         <Text style={styles.h3}>{info.round_up_method}</Text>
         <Text style={{ marginTop: '24px', ...styles.h3 }}>{info.confirmation_certificate}</Text>
@@ -72,8 +73,8 @@ export const MyDocument = () => (
       </View>
       <View fixed style={styles.footer} >
         <View style={{ display: 'flex', flexDirection: 'column' }}>
-          <Text>{company.name}</Text>
-          <Text>{company.registration_number}</Text>
+          <Text>{company?.company_info?.name}</Text>
+          <Text>{company?.company_info?.registration_number}</Text>
         </View>
         <Text render={({ pageNumber, totalPages }) => (
           `sida ${pageNumber} av ${totalPages}`

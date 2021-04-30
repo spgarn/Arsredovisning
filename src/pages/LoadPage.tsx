@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Page from '../components/Page'
 import DropArea from '../components/DropArea'
 import PreviewText from '../components/PreviewText'
-import { dataStore } from '../functions/dataStore';
+import { infoStore } from '../functions/infoStore';
 
 
 

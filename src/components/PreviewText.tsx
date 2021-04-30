@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components'
-import { readFile } from '../functions/ReadFile'
+import { infoStore } from '../functions/infoStore'
 
 const TextArea = styled.div`
 display: flex;
@@ -18,17 +18,21 @@ flex-wrap:nowrap;
 
 
 const PreviewText = ({ fileInfo }) => {
-  const [text, setText] = React.useState([])
   useEffect(() => {
-    fileInfo && readFile(fileInfo[0], setText)
+    fileInfo && infoStore.readFile(fileInfo[0])
   }, [fileInfo])
 
-  if (!fileInfo) return <TextArea />
+  useEffect(() => {
+    infoStore.file_text && infoStore.getCompanyInfo()
+  }, [infoStore.file_text])
+
 
   return (
-    < TextArea >{text.map((word, i) => <p key={i}>{word}</p>)}</TextArea >
-
-
+   <>
+    < TextArea >{infoStore?.company?.company_info?.name}</TextArea >
+    {console.log(infoStore?.company?.company_info?.name)}
+    <button onClick={() => infoStore.getCompanyInfo()}></button>
+</>
   )
 }
 
