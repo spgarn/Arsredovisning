@@ -6,11 +6,17 @@ import fileReader from '../functions/fileReader';
 import type RootStore from './RootStore';
 
 class InfoStore {
-    company: Company = { companyInfo: { name: '' } } as Company
+    company: Company = {
+      companyInfo: {
+        name: '', address: '', fiscalYearLast: '', fiscalYearNow: '', registrationNumber: '',
+      },
+      companyBalance: { activeBalance: [], activeBalanceLast: [] },
+      companyResults: { activeAccountsLast: [], activeAccounts: [] },
+    } as Company
 
     fileText: string;
 
-    isReady: boolean;
+    isReady: boolean = false;
 
     rootStore: RootStore
 
@@ -53,8 +59,10 @@ class InfoStore {
 
   //   const filteredResultReport = rows.filter((row) => row.startsWith('RES 0'));
 
+  // eslint-disable-next-line max-len
   //   const accountNumbers = filteredResultReport.map((r) => accountNumber.push(r[6] + r[7] + r[8] + r[9]));
 
+  // eslint-disable-next-line max-len
   //   rows.map((data) => accountNumber.some((k) => (k === data[6] + data[7] + data[8] + data[9] ? data.includes('KONTO') && accountNames.push(data) : false)));
 
   //   accountNames.forEach((word) => {

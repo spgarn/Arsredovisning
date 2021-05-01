@@ -1,13 +1,12 @@
 import {
   Page, Text, View, Document, StyleSheet, Font,
 } from '@react-pdf/renderer';
+import { observer } from 'mobx-react';
 import * as info from '../info/info.json';
 import font from '../fonts/Comfortaa-Regular.ttf';
-import infoStore from '../stores/InfoStore';
+import useStore from '../hooks/useStore';
 
 Font.register({ family: 'Comfortaa', src: font });
-
-const { company } = infoStore;
 
 // Create styles
 const styles = StyleSheet.create({
@@ -49,35 +48,43 @@ const styles = StyleSheet.create({
   },
 });
 // Create Document Component
-const MyDocument = () => (
-  <Document language="sv">
-    <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Text style={styles.h1}>{company?.companyInfo?.name}</Text>
-        <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.companyInfo?.registrationNumber}</Text>
-        <Text style={styles.h2}>{info.fiscal_year_text}</Text>
-        <Text style={styles.h2}>{company?.companyInfo?.fiscalYearNow}</Text>
-        <Text style={styles.h3}>{info.presentation_ceo_text}</Text>
-        <Text style={styles.h3}>{info.round_up_method}</Text>
-        <Text style={{ marginTop: '24px', ...styles.h3 }}>{info.confirmation_certificate}</Text>
-        <Text style={{ marginTop: '24px', ...styles.h3 }}>{info.director_approve_text}</Text>
-      </View>
-      <View break style={styles.section}>
-        <Text style={styles.h1}>Förvaltningsberättelse</Text>
-      </View>
-      <View fixed style={styles.footer}>
-        <View style={{ display: 'flex', flexDirection: 'column' }}>
-          <Text>{company?.companyInfo?.name}</Text>
-          <Text>{company?.companyInfo?.registrationNumber}</Text>
+const Pdf = observer(() => {
+  const { infoStore } = useStore();
+
+  const { company } = infoStore;
+
+  console.log('PDF', JSON.stringify(company));
+  return (
+
+    <Document language="sv">
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <Text style={styles.h1}>{company?.companyInfo?.name}</Text>
+          <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.companyInfo?.registrationNumber}</Text>
+          <Text style={styles.h2}>{info.fiscal_year_text}</Text>
+          <Text style={styles.h2}>{company?.companyInfo?.fiscalYearNow}</Text>
+          <Text style={styles.h3}>{info.presentation_ceo_text}</Text>
+          <Text style={styles.h3}>{info.round_up_method}</Text>
+          <Text style={{ marginTop: '24px', ...styles.h3 }}>{info.confirmation_certificate}</Text>
+          <Text style={{ marginTop: '24px', ...styles.h3 }}>{info.director_approve_text}</Text>
         </View>
-        <Text render={({ pageNumber, totalPages }) => (
-          `sida ${pageNumber} av ${totalPages}`
-        )}
-        />
+        <View break style={styles.section}>
+          <Text style={styles.h1}>Förvaltningsberättelse</Text>
+        </View>
+        <View fixed style={styles.footer}>
+          <View style={{ display: 'flex', flexDirection: 'column' }}>
+            <Text>{company?.companyInfo?.name}</Text>
+            <Text>{company?.companyInfo?.registrationNumber}</Text>
+          </View>
+          <Text render={({ pageNumber, totalPages }) => (
+            `sida ${pageNumber} av ${totalPages}`
+          )}
+          />
 
-      </View>
-    </Page>
-  </Document>
-);
+        </View>
+      </Page>
+    </Document>
+  );
+});
 
-export default MyDocument;
+export default Pdf;
