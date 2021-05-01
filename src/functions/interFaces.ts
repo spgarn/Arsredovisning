@@ -1,24 +1,23 @@
-
 export interface CompanyInfo {
   name:string;
-  registration_number:string;
-  fiscal_year_now:string;
-  fiscal_year_last:string;
+  registrationNumber:string;
+  fiscalYearNow:string;
+  fiscalYearLast:string;
   address:string
 }
 
 export interface CompanyResults {
-active_accounts:{name:string,account:string}[]
-active_accounts_last:{name:string,account:string}[]
+activeAccounts:{name:string, account:string}[]
+activeAccountsLast:{name:string, account:string}[]
 }
 
 export interface CompanyBalance {
-  active_balance:{name:string,account:string}[]
-  active_balance_last:{name:string,account:string}[]
+  activeBalance:{name:string, account:string}[]
+  activeBalanceLast:{name:string, account:string}[]
   }
 
 export interface Company {
-  company_info: CompanyInfo
-  company_results:CompanyResults
-  company_balance:CompanyBalance
+  companyInfo: CompanyInfo
+  companyResults:CompanyResults
+  companyBalance:CompanyBalance
 }

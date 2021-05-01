@@ -1,24 +1,26 @@
-import React from 'react';
-import Dropzone from 'react-dropzone'
-import styled from 'styled-components'
+import { observer } from 'mobx-react-lite';
+import Dropzone from 'react-dropzone';
+import styled from 'styled-components';
+import useStore from '../hooks/useStore';
 
 const DropArea = styled.div`
-display: flex;
-justify-content: center;
-align-items:center;
-height:25vh;
-text-align: center;
-background-color:#c2e9fb;
-border-radius:8px;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25vh;
+  text-align: center;
+  background-color:#c2e9fb;
+  border-radius: 8px;
+`;
 
-
-
-const DropFile = ({ setFileInfo }) => {
+const DropFile = observer(() => {
+  const { infoStore } = useStore();
+  const handleOnDrop = (acceptedFiles: File[]) => {
+    infoStore.readFile(acceptedFiles[0]);
+  };
 
   return (
-
-    <Dropzone onDrop={acceptedFiles => setFileInfo(acceptedFiles)}>
+    <Dropzone onDrop={handleOnDrop}>
       {({ getRootProps, getInputProps }) => (
 
         <DropArea {...getRootProps()}>
@@ -29,10 +31,7 @@ const DropFile = ({ setFileInfo }) => {
       )}
     </Dropzone>
 
+  );
+});
 
-  )
-}
-
-
-
-export default DropFile
+export default DropFile;

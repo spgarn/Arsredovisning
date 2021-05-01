@@ -1,19 +1,13 @@
-import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
-import * as companyJson from '../info/company.json'
-import * as info from '../../src/info/info.json'
-import font from '../fonts/Comfortaa-Regular.ttf'
-import { Company } from '../functions/interfaces';
-import { infoStore } from '../functions/infoStore'
+import {
+  Page, Text, View, Document, StyleSheet, Font,
+} from '@react-pdf/renderer';
+import * as info from '../info/info.json';
+import font from '../fonts/Comfortaa-Regular.ttf';
+import infoStore from '../stores/InfoStore';
 
+Font.register({ family: 'Comfortaa', src: font });
 
-
-
-Font.register({  family: 'Comfortaa', src: font  });
-
-const company:Partial<Company> = infoStore.company
-
-
+const { company } = infoStore;
 
 // Create styles
 const styles = StyleSheet.create({
@@ -29,7 +23,7 @@ const styles = StyleSheet.create({
     padding: '50px',
     flexGrow: 1,
     textAlign: 'center',
-    lineHeight: 1.4
+    lineHeight: 1.4,
   },
   h1: {
     fontSize: '24px',
@@ -51,18 +45,18 @@ const styles = StyleSheet.create({
     borderTop: '1px black solid',
     width: '80%',
     fontSize: '10px',
-    padding: '8px 0px'
-  }
+    padding: '8px 0px',
+  },
 });
 // Create Document Component
-export const MyDocument = () => (
-  <Document language={'sv'}>
+const MyDocument = () => (
+  <Document language="sv">
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        <Text style={styles.h1}>{company?.company_info?.name}</Text>
-        <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.company_info?.registration_number}</Text>
+        <Text style={styles.h1}>{company?.companyInfo?.name}</Text>
+        <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.companyInfo?.registrationNumber}</Text>
         <Text style={styles.h2}>{info.fiscal_year_text}</Text>
-        <Text style={styles.h2}>{company?.company_info?.fiscal_year_now}</Text>
+        <Text style={styles.h2}>{company?.companyInfo?.fiscalYearNow}</Text>
         <Text style={styles.h3}>{info.presentation_ceo_text}</Text>
         <Text style={styles.h3}>{info.round_up_method}</Text>
         <Text style={{ marginTop: '24px', ...styles.h3 }}>{info.confirmation_certificate}</Text>
@@ -71,16 +65,19 @@ export const MyDocument = () => (
       <View break style={styles.section}>
         <Text style={styles.h1}>Förvaltningsberättelse</Text>
       </View>
-      <View fixed style={styles.footer} >
+      <View fixed style={styles.footer}>
         <View style={{ display: 'flex', flexDirection: 'column' }}>
-          <Text>{company?.company_info?.name}</Text>
-          <Text>{company?.company_info?.registration_number}</Text>
+          <Text>{company?.companyInfo?.name}</Text>
+          <Text>{company?.companyInfo?.registrationNumber}</Text>
         </View>
         <Text render={({ pageNumber, totalPages }) => (
           `sida ${pageNumber} av ${totalPages}`
-        )} />
+        )}
+        />
 
       </View>
     </Page>
   </Document>
 );
+
+export default MyDocument;

@@ -1,26 +1,13 @@
-import React from 'react';
-import styled from 'styled-components'
-import Page from '../components/Page'
-import DropArea from '../components/DropArea'
-import PreviewText from '../components/PreviewText'
-import { infoStore } from '../functions/infoStore';
+import { observer } from 'mobx-react-lite';
+import Page from '../components/Page';
+import DropArea from '../components/DropArea';
+import PreviewText from '../components/PreviewText';
 
+const LoadPage = observer(() => (
+  <Page>
+    <DropArea />
+    <PreviewText />
+  </Page>
+));
 
-
-
-
-const LoadPage = () => {
-  const [fileInfo, setFileInfo] = React.useState('')
-
-
-  return (
-    <Page>
-      <DropArea setFileInfo={setFileInfo} />
-      <PreviewText fileInfo={fileInfo} />
-    </Page>
-  )
-}
-
-
-
-export default LoadPage
+export default LoadPage;
