@@ -43,32 +43,23 @@ class SieStore {
       const text = await fileReader(file);
       const {
         companyName,
+        companyAddressInfo,
+        companyResult,
+        accounts,
       } = translateSie(text);
+
+      console.log({
+        companyName,
+        companyAddressInfo,
+        companyResult,
+        accounts,
+      });
+
       runInAction(() => {
         this.company.info.name = companyName;
         this.isReady = true;
       });
     }
-
-  // getAccountInfo() {
-  //   const accountNames = [];
-  //   const rest = [];
-
-  //   const rows = this.fileText.split('#');
-
-  //   const filteredResultReport = rows.filter((row) => row.startsWith('RES 0'));
-
-  // eslint-disable-next-line max-len
-  //   const accountNumbers = filteredResultReport.map((r) => accountNumber.push(r[6] + r[7] + r[8] + r[9]));
-
-  // eslint-disable-next-line max-len
-  //   rows.map((data) => accountNumber.some((k) => (k === data[6] + data[7] + data[8] + data[9] ? data.includes('KONTO') && accountNames.push(data) : false)));
-
-  //   accountNames.forEach((word) => {
-  //     const [, , ...last] = word.split(' ');
-  //     rest.push(last.join(' '));
-  //   });
-  // }
 }
 
 export default SieStore;
