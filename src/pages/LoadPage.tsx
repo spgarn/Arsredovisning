@@ -12,7 +12,7 @@ const LoadPage = observer(() => {
     <>
       {infoStore.isReady ? (
         <PDFViewer width="100%" height="1000px">
-          <Pdf />
+          <Pdf infoStore={infoStore} />
         </PDFViewer>
 
       )

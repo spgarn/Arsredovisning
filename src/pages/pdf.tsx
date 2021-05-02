@@ -1,10 +1,10 @@
 import {
   Page, Text, View, Document, StyleSheet, Font,
 } from '@react-pdf/renderer';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import * as info from '../info/info.json';
 import font from '../fonts/Comfortaa-Regular.ttf';
-import useStore from '../hooks/useStore';
+import type InfoStore from '../stores/InfoStore';
 
 Font.register({ family: 'Comfortaa', src: font });
 
@@ -48,9 +48,7 @@ const styles = StyleSheet.create({
   },
 });
 // Create Document Component
-const Pdf = observer(() => {
-  const { infoStore } = useStore();
-
+const Pdf = observer(({ infoStore }: { infoStore: InfoStore }) => {
   const { company } = infoStore;
 
   return (
