@@ -4,17 +4,26 @@ import {
 import { Company } from '../functions/interfaces';
 import fileReader from '../functions/fileReader';
 import type RootStore from './RootStore';
+import translateSie from '../functions/translateSie';
 
-class InfoStore {
+class SieStore {
     company: Company = {
-      companyInfo: {
-        name: '', address: '', fiscalYearLast: '', fiscalYearNow: '', registrationNumber: '',
+      info: {
+        name: '',
+        address: '',
+        fiscalYearLast: '',
+        fiscalYearNow: '',
+        registrationNumber: '',
       },
-      companyBalance: { activeBalance: [], activeBalanceLast: [] },
-      companyResults: { activeAccountsLast: [], activeAccounts: [] },
+      balance: {
+        activeBalance: [],
+        activeBalanceLast: [],
+      },
+      result: {
+        activeAccountsLast: [],
+        activeAccounts: [],
+      },
     } as Company
-
-    fileText: string;
 
     isReady: boolean = false;
 
@@ -23,10 +32,8 @@ class InfoStore {
     constructor(rootStore: RootStore) {
       makeObservable(this, {
         company: observable,
-        fileText: observable,
         isReady: observable,
         readFile: action,
-        getCompanyInfo: action,
         // getAccountInfo: action,
       });
       this.rootStore = rootStore;
@@ -34,21 +41,13 @@ class InfoStore {
 
     async readFile(file: File) {
       const text = await fileReader(file);
-      this.fileText = text;
+      const {
+        companyName,
+      } = translateSie(text);
       runInAction(() => {
-        this.fileText = text;
+        this.company.info.name = companyName;
+        this.isReady = true;
       });
-    }
-
-    getCompanyInfo() {
-      const rows = this.fileText.split('#');
-      const result = rows.map((r) => (r.startsWith('FNAMN') ? r : undefined));
-      const filteredResult = result.filter((k) => k !== undefined);
-      const nameWords = filteredResult[0].split(' ');
-      const name = nameWords.join(' ').match(/"(.*)"/)[1];
-      this.company.companyInfo.name = name;
-
-      this.isReady = true;
     }
 
   // getAccountInfo() {
@@ -72,4 +71,4 @@ class InfoStore {
   // }
 }
 
-export default InfoStore;
+export default SieStore;

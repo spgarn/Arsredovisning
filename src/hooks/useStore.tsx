@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { createContext, useContext } from 'react';
-import type InfoStore from '../stores/InfoStore';
+import type SieStore from '../stores/SieStore';
 import RootStore from '../stores/RootStore';
 
 let store: RootStore;
@@ -11,15 +11,14 @@ function StoreProvider({ children }: { children: ReactNode }) {
   return <StoreContext.Provider value={rootStore}>{children}</StoreContext.Provider>;
 }
 
-function useStore(): { infoStore: InfoStore} {
+function useStore(): { sieStore: SieStore} {
   const rootStore = useContext(StoreContext);
-  console.log('got rootStore', rootStore);
   if (!rootStore) {
     throw new Error('useStore must be used within a StoreProvider.');
   }
 
   return {
-    infoStore: rootStore.infoStore,
+    sieStore: rootStore.sieStore,
   };
 }
 

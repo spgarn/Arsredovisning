@@ -1,10 +1,10 @@
-import InfoStore from './InfoStore';
+import SieStore from './SieStore';
 
 class RootStore {
-  infoStore: InfoStore
+  sieStore: SieStore
 
   constructor() {
-    this.infoStore = new InfoStore(this);
+    this.sieStore = new SieStore(this);
   }
 }
 

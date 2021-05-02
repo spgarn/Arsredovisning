@@ -4,7 +4,7 @@ import {
 import { observer } from 'mobx-react-lite';
 import * as info from '../info/info.json';
 import font from '../fonts/Comfortaa-Regular.ttf';
-import type InfoStore from '../stores/InfoStore';
+import type SieStore from '../stores/SieStore';
 
 Font.register({ family: 'Comfortaa', src: font });
 
@@ -48,18 +48,18 @@ const styles = StyleSheet.create({
   },
 });
 // Create Document Component
-const Pdf = observer(({ infoStore }: { infoStore: InfoStore }) => {
-  const { company } = infoStore;
+const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
+  const { company } = sieStore;
 
   return (
 
     <Document language="sv">
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.h1}>{company?.companyInfo?.name}</Text>
-          <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.companyInfo?.registrationNumber}</Text>
+          <Text style={styles.h1}>{company?.info?.name}</Text>
+          <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.info?.registrationNumber}</Text>
           <Text style={styles.h2}>{info.fiscal_year_text}</Text>
-          <Text style={styles.h2}>{company?.companyInfo?.fiscalYearNow}</Text>
+          <Text style={styles.h2}>{company?.info?.fiscalYearNow}</Text>
           <Text style={styles.h3}>{info.presentation_ceo_text}</Text>
           <Text style={styles.h3}>{info.round_up_method}</Text>
           <Text style={{ marginTop: '24px', ...styles.h3 }}>{info.confirmation_certificate}</Text>
@@ -70,8 +70,8 @@ const Pdf = observer(({ infoStore }: { infoStore: InfoStore }) => {
         </View>
         <View fixed style={styles.footer}>
           <View style={{ display: 'flex', flexDirection: 'column' }}>
-            <Text>{company?.companyInfo?.name}</Text>
-            <Text>{company?.companyInfo?.registrationNumber}</Text>
+            <Text>{company?.info?.name}</Text>
+            <Text>{company?.info?.registrationNumber}</Text>
           </View>
           <Text render={({ pageNumber, totalPages }) => (
             `sida ${pageNumber} av ${totalPages}`

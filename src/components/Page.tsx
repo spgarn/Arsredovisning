@@ -8,7 +8,11 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Page = ({ children } : { children: ReactNode }) => (
+type Props = {
+  children: ReactNode
+}
+
+const Page = ({ children }: Props) => (
   <Container>
     {children}
   </Container>

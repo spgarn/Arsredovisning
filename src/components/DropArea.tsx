@@ -14,9 +14,9 @@ const DropArea = styled.div`
 `;
 
 const DropFile = observer(() => {
-  const { infoStore } = useStore();
+  const { sieStore } = useStore();
   const handleOnDrop = (acceptedFiles: File[]) => {
-    infoStore.readFile(acceptedFiles[0]);
+    sieStore.readFile(acceptedFiles[0]);
   };
 
   return (

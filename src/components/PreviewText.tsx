@@ -16,12 +16,10 @@ const TextArea = styled.div`
 `;
 
 const PreviewText = observer(() => {
-  const { infoStore } = useStore();
+  const { sieStore } = useStore();
   return (
     <>
-      <TextArea>{infoStore.fileText}</TextArea>
-      <TextArea>{infoStore?.company?.companyInfo?.name}</TextArea>
-      <button type="button" onClick={() => infoStore.getCompanyInfo()}>BIG TEXT</button>
+      <TextArea>{sieStore?.company?.info?.name}</TextArea>
     </>
   );
 });
