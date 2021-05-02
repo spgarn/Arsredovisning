@@ -53,7 +53,6 @@ const Pdf = observer(() => {
 
   const { company } = infoStore;
 
-  console.log('PDF', JSON.stringify(company));
   return (
 
     <Document language="sv">

@@ -4,7 +4,7 @@ import Page from '../components/Page';
 import DropArea from '../components/DropArea';
 import PreviewText from '../components/PreviewText';
 import Pdf from './pdf';
-import useStore, { StoreProvider } from '../hooks/useStore';
+import useStore from '../hooks/useStore';
 
 const LoadPage = observer(() => {
   const { infoStore } = useStore();
@@ -12,9 +12,7 @@ const LoadPage = observer(() => {
     <>
       {infoStore.isReady ? (
         <PDFViewer width="100%" height="1000px">
-          <StoreProvider>
-            <Pdf />
-          </StoreProvider>
+          <Pdf />
         </PDFViewer>
 
       )

@@ -21,7 +21,7 @@ const PreviewText = observer(() => {
     <>
       <TextArea>{infoStore.fileText}</TextArea>
       <TextArea>{infoStore?.company?.companyInfo?.name}</TextArea>
-      <button type="button" onClick={() => infoStore.getCompanyInfo()} />
+      <button type="button" onClick={() => infoStore.getCompanyInfo()}>BIG TEXT</button>
     </>
   );
 });
