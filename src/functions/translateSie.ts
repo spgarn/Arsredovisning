@@ -16,6 +16,14 @@ function getCompanyName(rows: string[]) {
   return getAllWords(row, true)[1];
 }
 
+// E.g. "#ORGNR 559207-6037"
+function getCompanyRegistrationNumber(rows: string[]) {
+  const row = rows.find((r) => r.startsWith('#ORGNR'));
+  if (!row) return 'unknown';
+
+  return getAllWords(row, true)[1];
+}
+
 // E.g. #ADRESS "Ivar Eriksson" "Storgatan 2" "21140 Malmö" "0739143211"
 function getCompanyAddressInfo(rows: string[]) {
   const row = rows.find((r) => r.startsWith('#ADRESS'));
@@ -28,6 +36,21 @@ function getCompanyAddressInfo(rows: string[]) {
     city: words[3].split(' ')[1],
     zipCode: words[3].split(' ')[0],
     phone: words[4],
+  };
+}
+
+// E.g. "#RAR 0 20200101 20201231", "#RAR -1 20190101 20191231"
+function getCompanyFiscalYears(rows: string[]) {
+  const filteredYearNow = rows.find((r) => r.startsWith('#RAR 0'));
+  const filteredYearLast = rows.find((r) => r.startsWith('#RAR -1'));
+  const [,, startNow, endNow] = getAllWords(filteredYearNow);
+  const [,, startLast, endLast] = getAllWords(filteredYearLast);
+
+  return {
+    fiscalYearNowStart: startNow,
+    fiscalYearNowEnd: endNow,
+    fiscalYearLastStart: startLast,
+    fiscalYearLastEnd: endLast,
   };
 }
 
@@ -59,7 +82,9 @@ function translateSie(sieString: string) {
     .split('\n');
   return {
     companyName: getCompanyName(rows),
+    companyRegistrationNumber: getCompanyRegistrationNumber(rows),
     companyAddressInfo: getCompanyAddressInfo(rows),
+    companyFiscalYears: getCompanyFiscalYears(rows),
     companyResult: getCompanyResult(rows),
     accounts: getAccounts(rows),
   };

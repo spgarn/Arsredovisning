@@ -8,13 +8,7 @@ import translateSie from '../functions/translateSie';
 
 class SieStore {
     company: Company = {
-      info: {
-        name: '',
-        address: '',
-        fiscalYearLast: '',
-        fiscalYearNow: '',
-        registrationNumber: '',
-      },
+      info: {},
       balance: {
         activeBalance: [],
         activeBalanceLast: [],
@@ -43,13 +37,16 @@ class SieStore {
       const text = await fileReader(file);
       const {
         companyName,
+        companyRegistrationNumber,
         companyAddressInfo,
+        companyFiscalYears,
         companyResult,
         accounts,
       } = translateSie(text);
 
       console.log({
         companyName,
+        companyFiscalYears,
         companyAddressInfo,
         companyResult,
         accounts,
@@ -57,6 +54,11 @@ class SieStore {
 
       runInAction(() => {
         this.company.info.name = companyName;
+        this.company.info.registrationNumber = companyRegistrationNumber;
+        this.company.info.fiscalYearNowStart = companyFiscalYears.fiscalYearNowStart;
+        this.company.info.fiscalYearNowEnd = companyFiscalYears.fiscalYearNowEnd;
+        this.company.info.fiscalYearLastStart = companyFiscalYears.fiscalYearLastStart;
+        this.company.info.fiscalYearLastEnd = companyFiscalYears.fiscalYearLastEnd;
         this.isReady = true;
       });
     }

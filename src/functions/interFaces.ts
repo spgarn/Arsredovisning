@@ -2,8 +2,10 @@ export interface CompanyInfo {
   name: string;
   address: string
   registrationNumber: string;
-  fiscalYearNow: string;
-  fiscalYearLast: string;
+  fiscalYearNowStart: string;
+  fiscalYearNowEnd: string;
+  fiscalYearLastStart: string;
+  fiscalYearLastEnd: string;
 }
 
 export interface CompanyResult {
