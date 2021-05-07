@@ -15,11 +15,24 @@ const TextArea = styled.div`
   flex-wrap: nowrap;
 `;
 
+const Test = styled.div`
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 50px;
+  `;
+
 const PreviewText = observer(() => {
   const { sieStore } = useStore();
   return (
     <>
       <TextArea>{sieStore?.company?.info?.name}</TextArea>
+      <Test>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+      </Test>
     </>
   );
 });

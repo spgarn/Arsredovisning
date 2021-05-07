@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import * as info from '../info/info.json';
 import font from '../fonts/Comfortaa-Regular.ttf';
 import type SieStore from '../stores/SieStore';
+import Line from './components/Line';
 
 Font.register({ family: 'Comfortaa', src: font });
 
@@ -64,30 +65,30 @@ const styles = StyleSheet.create({
     fontSize: '10px',
     padding: '8px 0px',
   },
-  AreaOne: {
+  areaOne: {
     minWidth: '40%',
     textAlign: 'left',
-    fontSize: '14px',
-  },
-  AreaTwo: {
-    width: '15%',
-    textAlign: 'right',
     fontSize: '10px',
   },
-  AreaThree: {
+  areaTwo: {
     width: '15%',
     textAlign: 'right',
-    fontSize: '10px',
+    fontSize: '8px',
   },
-  AreaFour: {
+  areaThree: {
     width: '15%',
     textAlign: 'right',
-    fontSize: '10px',
+    fontSize: '8px',
   },
-  AreaFive: {
+  areaFour: {
     width: '15%',
     textAlign: 'right',
-    fontSize: '10px',
+    fontSize: '8px',
+  },
+  areaFive: {
+    width: '15%',
+    textAlign: 'right',
+    fontSize: '8px',
   },
 });
 // Create Document Component
@@ -114,19 +115,55 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
           <Text style={styles.h4Bold}>Allmänt om verksamheten</Text>
           <Text style={styles.h4}>{info.year_text}</Text>
           <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Flerårsöversikt</Text>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <Text style={styles.AreaOne}>1</Text>
-            <Text style={styles.AreaTwo}>2</Text>
-            <Text style={styles.AreaThree}>3</Text>
-            <Text style={styles.AreaFour}>
-              {`${company.info.fiscalYearNowStart}
+
+          {/* Flerårsöversikt */}
+          {/* Years */}
+          <Line
+            areaFour={`${company.info.fiscalYearNowStart}
               -${company.info.fiscalYearNowEnd}`}
-            </Text>
-            <Text style={styles.AreaFive}>
-              {`${company.info.fiscalYearLastStart}
-              -${company.info.fiscalYearLastEnd}`}
-            </Text>
-          </div>
+            areaFive={`${company.info.fiscalYearLastStart}
+            -${company.info.fiscalYearLastEnd}`}
+            border
+          />
+
+          {/* Nettoomsättning */}
+          <Line areaOne="Nettoomsättning" areaFour="123 123" areaFive="0" />
+
+          {/* resultat efter finansiella poster */}
+          <Line areaOne="Resultat efter finansiella poster" areaFour="321 321" areaFive="1 214" />
+
+          {/* Soliditet */}
+          <Line areaOne="Soliditet (%)" areaFour="38" areaFive="7" />
+
+          {/* Description changes year -1 to 0 */}
+          <Text style={styles.h4}>
+            Bolaget har under 2020 ingått ett uppdragsavtal avseende redovisningstjänster vilket har påverkat omsättning starkt positivt.
+            Uppdragsavtalet motsvarar en heltidstjänst och fortlöpt under hela räkenskapsåret.
+          </Text>
+
+          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Förändringar i eget kapital</Text>
+
+          {/* Förändring i egent kapital */}
+          {/* aktiekapital */}
+          <Line
+            areaTwo="Aktiekapital"
+            areaThree={`Balanserat
+              resultat`}
+            areaFour={`Årets
+            resultat`}
+            areaFive="Totalt"
+            border
+          />
+
+          {/* vid årets ingång */}
+          <Line
+            areaOne="Vid årets ingång"
+            areaTwo="50 000"
+            areaThree="0"
+            areaFour="1 073"
+            areaFive="51 073"
+          />
+
         </View>
         <View fixed style={styles.footer}>
           <View style={{ display: 'flex', flexDirection: 'column' }}>
