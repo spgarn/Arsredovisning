@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 
   },
   section: {
-    marginTop: '50px',
+    marginTop: '10px',
     padding: '50px',
     flexGrow: 1,
     textAlign: 'left',
@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   h4: {
-    fontSize: '10px',
+    fontSize: '9px',
     marginTop: '10px',
-    color: 'gray',
+    color: '#808080',
   },
   footer: {
     display: 'flex',
@@ -114,9 +114,9 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
           <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Verksamheten</Text>
           <Text style={styles.h4Bold}>Allmänt om verksamheten</Text>
           <Text style={styles.h4}>{info.year_text}</Text>
-          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Flerårsöversikt</Text>
 
           {/* Flerårsöversikt */}
+          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Flerårsöversikt</Text>
           {/* Years */}
           <Line
             areaFour={`${company.info.fiscalYearNowStart}
@@ -141,9 +141,9 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
             Uppdragsavtalet motsvarar en heltidstjänst och fortlöpt under hela räkenskapsåret.
           </Text>
 
+          {/* Förändring i egent kapital */}
           <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Förändringar i eget kapital</Text>
 
-          {/* Förändring i egent kapital */}
           {/* aktiekapital */}
           <Line
             areaTwo="Aktiekapital"
@@ -164,7 +164,181 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
             areaFive="51 073"
           />
 
+          {/* Balanseras i en ny räkning */}
+          <Line
+            areaOne="Balanseras i en ny räkning"
+            areaThree="1 073"
+            areaFour="-1 073"
+            areaFive="0"
+          />
+
+          {/* Årets resultat */}
+          <Line
+            areaOne="Årets resultat"
+            areaFour="485 281"
+            areaFive="485 281"
+          />
+          {/* Vid årets utgång */}
+          <Line
+            areaOne="Vid årets ingång"
+            areaTwo="50 000"
+            areaThree="0"
+            areaFour="485 281"
+            areaFive="485 281"
+          />
+
+          {/* Resultatdispotions */}
+          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Resultatdispotion</Text>
+
+          {/* Stående medel */}
+          <Line
+            areaOne="Styrelsen och VD föreslår att till förfogande stående medel"
+          />
+
+          {/* Balanserat resultat */}
+          <Line
+            areaOne="Balanserat resultat"
+            areaFive="1 073"
+          />
+
+          {/* Årets resultat */}
+          <Line
+            areaOne="Årets resultat"
+            areaFive="485 281"
+          />
+
+          {/* Summa */}
+          <Line
+            areaOne="Summa"
+            areaFive="486 354"
+          />
+
+          {/* Disponeras */}
+          <Line
+            areaOne="Disponeras enligt följande"
+          />
+
+          {/* Utdelas */}
+          <Line
+            areaOne="Utdelas till aktieägare"
+            areaFive="177 100"
+          />
+
+          {/* Balanseras i ny räkning */}
+          <Line
+            areaOne="Balanseras i ny räkning"
+            areaFive="309 254"
+          />
+
+          {/* Summa */}
+          <Line
+            areaOne="Summa"
+            areaFive="486 354"
+          />
+
+          {/* Text regelverk */}
+          <Text style={styles.h4}>
+            Med hänvisning till ovanstående och vad som i övrigt kommit till styrelsens kännedom är det styrelsens bedömning att
+            utdelningen är försvarbar (enligt ABL 17 kap 3 §) med tanke på de krav som verksamhetens art och omfattning samt risker
+            ställer på storleken av bolagets egna kapital, konsolideringsbehov, likviditet och ställning i övrigt.
+          </Text>
+
         </View>
+        <View style={styles.section}>
+          {/* Resultaträkning */}
+          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Resultaträkning</Text>
+          <Line
+            areaThree={`not
+            1`}
+            areaFour={`${company.info.fiscalYearNowStart}
+            -${company.info.fiscalYearNowEnd}`}
+            areaFive={`${company.info.fiscalYearLastStart}
+            -${company.info.fiscalYearLastEnd}`}
+            border
+          />
+
+        </View>
+
+        <View break style={styles.section}>
+          {/* Balansräkning */}
+          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Balansräkning</Text>
+          <Line
+            areaThree={`not
+            1`}
+            areaFour={`${company.info.fiscalYearNowStart}
+            -${company.info.fiscalYearNowEnd}`}
+            areaFive={`${company.info.fiscalYearLastStart}
+            -${company.info.fiscalYearLastEnd}`}
+            border
+          />
+
+          {/* Tillgångar */}
+          <Line
+            areaOne="Tillgångar"
+          />
+          <Line
+            areaOne="Anläggningstillgångar"
+          />
+          <Line
+            areaOne="Finansiella anläggningstillgångar"
+          />
+
+        </View>
+        <View break style={styles.section}>
+          {/* Balansräkning */}
+          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Balansräkning</Text>
+          <Line
+            areaThree={`not
+            1`}
+            areaFour={`${company.info.fiscalYearNowStart}
+            -${company.info.fiscalYearNowEnd}`}
+            areaFive={`${company.info.fiscalYearLastStart}
+            -${company.info.fiscalYearLastEnd}`}
+            border
+          />
+
+          {/* Eget kapital och skulder */}
+          <Line
+            areaOne="Eget kapital och skulder"
+          />
+          <Line
+            areaOne="Eget kapital"
+          />
+          <Line
+            areaOne="Bundet eget kapital"
+          />
+
+        </View>
+
+        <View break style={styles.section}>
+          {/* Noter */}
+          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Noter</Text>
+          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Not 1 - Redovisningsprinciper</Text>
+          <Text style={styles.h4}>
+            {`Årsredovisningen är upprättad i enlighet med årsredovisningslagen och Bokföringsnämndens allmänna
+            råd (BFNAR 2016:10) om årsredovisning i mindre företag.
+            Nyckeltalsdefinitioner
+            Nettoomsättning
+            Rörelsens huvudintäkter, fakturerade kostnader, sidointäkter samt intäktskorrigeringar.
+            Resultat efter finansiella poster
+            Resultat efter finansiella intäkter och kostnader men före bokslutsdispositioner och skatter.
+            Soliditet
+            Justerat eget kapital (eget kapital och obeskattade reserver med avdrag för uppskjuten skatt) i procent av balansomslutningen.`}
+          </Text>
+
+        </View>
+
+        <View break style={styles.section}>
+          {/* Underskrifter */}
+          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Underskrifter</Text>
+          <Text style={styles.h4}>
+            {`
+            Årsredovisning för ${company.info.name}, ${company.info.registrationNumber}
+            Avseende räkenskapsåret ${company.info.fiscalYearNowStart} - ${company.info.fiscalYearNowEnd}`}
+          </Text>
+
+        </View>
+
         <View fixed style={styles.footer}>
           <View style={{ display: 'flex', flexDirection: 'column' }}>
             <Text>{company?.info?.name}</Text>
