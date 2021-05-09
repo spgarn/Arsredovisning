@@ -7,17 +7,7 @@ import type RootStore from './RootStore';
 import translateSie from '../functions/translateSie';
 
 class SieStore {
-    company: Company = {
-      info: {},
-      balance: {
-        activeBalance: [],
-        activeBalanceLast: [],
-      },
-      result: {
-        activeAccountsLast: [],
-        activeAccounts: [],
-      },
-    } as Company
+    company: Company = { result: {}, balance: {}, info: {} } as Company
 
     isReady: boolean = false;
 

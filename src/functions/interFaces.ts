@@ -9,8 +9,7 @@ export interface CompanyInfo {
 }
 
 export interface CompanyResult {
-  activeAccounts: { name: string, account: string }[]
-  activeAccountsLast: { name: string, account: string }[]
+  activeAccounts: { name: string, account: string, year:string, value:string }[]
 }
 
 export interface CompanyBalance {

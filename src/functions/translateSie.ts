@@ -59,8 +59,15 @@ function getCompanyResult(rows: string[]) {
   return rows
     .filter((row) => row.startsWith('#RES'))
     .map((row) => {
-      const [,, id, balance] = getAllWords(row);
-      return { id, balance };
+      const [, year, account, balance] = getAllWords(row);
+      const names = rows.filter((l) => l.startsWith(`#KONTO ${account}`));
+      const [,, name] = names.find((n) => n.includes(account)).replace(/"[^"]+"/g, (inQuotes) => inQuotes.replaceAll(' ', '{tempSpace}'))
+        .split(' ')
+        .map((word) => word.replaceAll('{tempSpace}', ' '))
+        .map((word) => word.replaceAll('"', ''));
+      return {
+        name, account, year, balance,
+      };
     });
 }
 
