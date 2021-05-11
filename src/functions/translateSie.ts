@@ -54,17 +54,20 @@ function getCompanyFiscalYears(rows: string[]) {
   };
 }
 
+// E.g. // E.g. #KONTO 1039 WANT THIS => {"Ackumulerade avskrivningar på patent"}
+function getAccountName(rows: string[], account:string) {
+  const row = rows.find((line) => line.startsWith(`#KONTO ${account}`));
+  const [,, name] = getAllWords(row, true);
+  return name;
+}
+
 // E.g. #RES 0 3041 -2258200 0
 function getCompanyResult(rows: string[]) {
   return rows
     .filter((row) => row.startsWith('#RES'))
     .map((row) => {
       const [, year, account, balance] = getAllWords(row);
-      const names = rows.filter((l) => l.startsWith(`#KONTO ${account}`));
-      const [,, name] = names.find((n) => n.includes(account)).replace(/"[^"]+"/g, (inQuotes) => inQuotes.replaceAll(' ', '{tempSpace}'))
-        .split(' ')
-        .map((word) => word.replaceAll('{tempSpace}', ' '))
-        .map((word) => word.replaceAll('"', ''));
+      const name = getAccountName(rows, account);
       return {
         name, account, year, balance,
       };

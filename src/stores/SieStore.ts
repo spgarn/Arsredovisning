@@ -43,6 +43,7 @@ class SieStore {
       });
 
       runInAction(() => {
+        this.company.result = [...companyResult];
         this.company.info.name = companyName;
         this.company.info.registrationNumber = companyRegistrationNumber;
         this.company.info.fiscalYearNowStart = companyFiscalYears.fiscalYearNowStart;

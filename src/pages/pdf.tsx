@@ -257,6 +257,11 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
             border
           />
 
+          {company.result
+            .slice()
+            .sort((a, b) => +a.account - +b.account)
+            .map((row) => <Line key={Math.random()} areaOne={`${row.name}`} areaFour={`${row.year === '0' ? row.balance : '0'}`} areaFive={`${row.year === '-1' ? row.balance : '0'}`} />)}
+
         </View>
 
         <View break style={styles.section}>
