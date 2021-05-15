@@ -1,7 +1,7 @@
 interface ResultSectionInterface {
   title: string
   sumTitle: string
-  results: {
+  children: {
     title: string
     accountRange: [number, number]
   }[]
@@ -19,7 +19,7 @@ const resultSections: ResultSectionsInterface = {
   operatingIncome: {
     title: 'Nettoomsättning',
     sumTitle: 'Summa rörelseintäkter, lagerförändringar m.m.',
-    results: [
+    children: [
       {
         title: 'Rörelsens intäkter',
         accountRange: [
@@ -32,7 +32,7 @@ const resultSections: ResultSectionsInterface = {
   operatingCosts: {
     title: 'Rörelsekostnader',
     sumTitle: 'Summa rörelsekostnader',
-    results: [
+    children: [
       {
         title: 'Råvaror och förnödenheter',
         accountRange: [
@@ -80,7 +80,7 @@ const resultSections: ResultSectionsInterface = {
   financialPosts: {
     title: 'Finansiella poster',
     sumTitle: 'Summa finansiella poster',
-    results: [
+    children: [
       {
         title: 'Resultat från andelar i koncernbolag',
         accountRange: [
@@ -121,7 +121,7 @@ const resultSections: ResultSectionsInterface = {
   yearEndDistribution: {
     title: 'Bokslutsdispositioner',
     sumTitle: 'Summa bokslutsdispositioner',
-    results: [
+    children: [
       {
         title: 'Bokslutsdispositioner',
         accountRange: [
@@ -134,7 +134,7 @@ const resultSections: ResultSectionsInterface = {
   taxes: {
     title: 'Skatter',
     sumTitle: '',
-    results: [
+    children: [
       {
         title: 'Skatte på årets resultat',
         accountRange: [

@@ -24,9 +24,20 @@ class CompanyStore {
         previousEnd: '',
       },
       accounts: {},
+      result: {
+        operatingIncome: { current: 0, previous: 0 },
+        operatingCosts: { current: 0, previous: 0 },
+        financialPosts: { current: 0, previous: 0 },
+        yearEndDistribution: { current: 0, previous: 0 },
+        taxes: { current: 0, previous: 0 },
+        operatingProfit: { current: 0, previous: 0 },
+        financialProfit: { current: 0, previous: 0 },
+        profitBeforeTaxes: { current: 0, previous: 0 },
+        yearResult: { current: 0, previous: 0 },
+      },
     }
 
-    isReady: boolean = false;
+    isReady = false;
 
     rootStore: RootStore
 
@@ -40,7 +51,7 @@ class CompanyStore {
       this.rootStore = rootStore;
     }
 
-    hydrate(company: Company) {
+    hydrate(company: Company): void {
       runInAction(() => {
         this.company = company;
         this.isReady = true;

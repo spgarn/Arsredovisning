@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useStore from '../hooks/useStore';
 import fileReader from '../functions/fileReader';
 import extractCompanyFromSie from '../functions/extractCompanyFromSie';
+import calculateResults from '../functions/calculateResults';
 
 const DropArea = styled.div`
   display: flex;
@@ -19,8 +20,9 @@ const DropFile = observer(() => {
   const { companyStore } = useStore();
   const handleOnDrop = async (acceptedFiles: File[]) => {
     const sieText = await fileReader(acceptedFiles[0]);
-    const companyData = extractCompanyFromSie(sieText);
-    companyStore.hydrate(companyData);
+    const company = extractCompanyFromSie(sieText);
+    company.result = calculateResults(company.accounts);
+    companyStore.hydrate(company);
   };
 
   return (

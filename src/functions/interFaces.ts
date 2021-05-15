@@ -1,3 +1,5 @@
+import type { ResultSectionsInterface } from '../info/resultSectionsData';
+
 export interface CompanyAddressInfo {
   name: string
   street: string
@@ -34,9 +36,24 @@ export interface CompanyBalance {
   activeBalanceLast: { name: string, account: string }[]
 }
 
+export interface Sum {
+  current: number
+  previous: number
+}
+
+export type Result = {
+  [section in keyof ResultSectionsInterface]: Sum
+} & {
+  operatingProfit: Sum
+  financialProfit: Sum
+  profitBeforeTaxes: Sum
+  yearResult: Sum
+}
+
 export interface Company {
   info: CompanyInfo
   fiscalYears: FiscalYears
   accounts: Accounts
+  result?: Result
   balance?: CompanyBalance
 }

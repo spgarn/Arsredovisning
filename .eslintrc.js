@@ -8,6 +8,8 @@ module.exports = {
     'plugin:react/recommended',
     'airbnb',
     'plugin:import/typescript',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -27,8 +29,9 @@ module.exports = {
     'jsx-a11y/control-has-associated-label': 'off',
     'import/extensions': 'off',
     'react/jsx-filename-extension': 'off',
-    'no-unused-vars': 1,
     'key-spacing': 2,
     'react/no-array-index-key': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
+    'no-unused-vars': 'off',
   },
 };
