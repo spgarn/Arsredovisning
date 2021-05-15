@@ -2,6 +2,8 @@ import { observer } from 'mobx-react-lite';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import useStore from '../hooks/useStore';
+import fileReader from '../functions/fileReader';
+import extractCompanyFromSie from '../functions/extractCompanyFromSie';
 
 const DropArea = styled.div`
   display: flex;
@@ -14,9 +16,11 @@ const DropArea = styled.div`
 `;
 
 const DropFile = observer(() => {
-  const { sieStore } = useStore();
-  const handleOnDrop = (acceptedFiles: File[]) => {
-    sieStore.readFile(acceptedFiles[0]);
+  const { companyStore } = useStore();
+  const handleOnDrop = async (acceptedFiles: File[]) => {
+    const sieText = await fileReader(acceptedFiles[0]);
+    const companyData = extractCompanyFromSie(sieText);
+    companyStore.hydrate(companyData);
   };
 
   return (

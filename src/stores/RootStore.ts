@@ -1,10 +1,10 @@
-import SieStore from './SieStore';
+import CompanyStore from './CompanyStore';
 
 class RootStore {
-  sieStore: SieStore
+  companyStore: CompanyStore
 
   constructor() {
-    this.sieStore = new SieStore(this);
+    this.companyStore = new CompanyStore(this);
   }
 }
 

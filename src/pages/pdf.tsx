@@ -4,9 +4,9 @@ import {
 import { observer } from 'mobx-react-lite';
 import * as info from '../info/info.json';
 import font from '../fonts/Comfortaa-Regular.ttf';
-import type SieStore from '../stores/SieStore';
+import type CompanyStore from '../stores/CompanyStore';
 import Line from './components/line';
-import { CompanyResult } from '../functions/interfaces';
+import { AccountBalance } from '../functions/interfaces';
 import Result from './Result';
 
 Font.register({ family: 'Comfortaa', src: font });
@@ -95,18 +95,18 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
-  const { company } = sieStore;
+const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
+  const { company } = companyStore;
 
   return (
 
     <Document language="sv">
       <Page size="A4" style={styles.page}>
         <View style={styles.front}>
-          <Text style={styles.h1}>{company?.info?.name}</Text>
+          <Text style={styles.h1}>{company.info.name}</Text>
           <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.info?.registrationNumber}</Text>
           <Text style={styles.h2}>{info.fiscal_year_text}</Text>
-          <Text style={styles.h2}>{`${company?.info?.fiscalYearNowStart} - ${company?.info?.fiscalYearNowEnd}`}</Text>
+          <Text style={styles.h2}>{`${company.fiscalYears.currentStart} - ${company.fiscalYears.currentEnd}`}</Text>
           <Text style={styles.h4}>{info.presentation_ceo_text}</Text>
           <Text style={styles.h4}>{info.round_up_method}</Text>
           <Text style={{ marginTop: '24px', ...styles.h4 }}>{info.confirmation_certificate}</Text>
@@ -122,10 +122,10 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
           <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Flerårsöversikt</Text>
           {/* Years */}
           <Line
-            areaFour={`${company.info.fiscalYearNowStart}
-              -${company.info.fiscalYearNowEnd}`}
-            areaFive={`${company.info.fiscalYearLastStart}
-            -${company.info.fiscalYearLastEnd}`}
+            areaFour={`${company.fiscalYears.currentStart}
+              -${company.fiscalYears.currentEnd}`}
+            areaFive={`${company.fiscalYears.previousStart}
+            -${company.fiscalYears.previousEnd}`}
             border
           />
 
@@ -140,7 +140,8 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
 
           {/* Description changes year -1 to 0 */}
           <Text style={styles.h4}>
-            Bolaget har under 2020 ingått ett uppdragsavtal avseende redovisningstjänster vilket har påverkat omsättning starkt positivt.
+            {'Bolaget har under 2020 ingått ett uppdragsavtal avseende redovisningstjänster'
+            + 'vilket har påverkat omsättning starkt positivt.'}
             Uppdragsavtalet motsvarar en heltidstjänst och fortlöpt under hela räkenskapsåret.
           </Text>
 
@@ -241,9 +242,10 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
 
           {/* Text regelverk */}
           <Text style={styles.h4}>
-            Med hänvisning till ovanstående och vad som i övrigt kommit till styrelsens kännedom är det styrelsens bedömning att
-            utdelningen är försvarbar (enligt ABL 17 kap 3 §) med tanke på de krav som verksamhetens art och omfattning samt risker
-            ställer på storleken av bolagets egna kapital, konsolideringsbehov, likviditet och ställning i övrigt.
+            Med hänvisning till ovanstående och vad som i övrigt kommit till styrelsens kännedom
+            är det styrelsens bedömning att utdelningen är försvarbar (enligt ABL 17 kap 3 §) med
+            tanke på de krav som verksamhetens art och omfattning samt risker ställer på storleken
+            av bolagets egna kapital, konsolideringsbehov, likviditet och ställning i övrigt.
           </Text>
 
         </View>
@@ -253,14 +255,14 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
           <Line
             areaThree={`not
             1`}
-            areaFour={`${company.info.fiscalYearNowStart}
-            -${company.info.fiscalYearNowEnd}`}
-            areaFive={`${company.info.fiscalYearLastStart}
-            -${company.info.fiscalYearLastEnd}`}
+            areaFour={`${company.fiscalYears.currentStart}
+            -${company.fiscalYears.currentEnd}`}
+            areaFive={`${company.fiscalYears.previousStart}
+            -${company.fiscalYears.previousEnd}`}
             border
           />
 
-          <Result results={company.result} />
+          <Result results={company.accounts} />
 
         </View>
 
@@ -270,10 +272,10 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
           <Line
             areaThree={`not
             1`}
-            areaFour={`${company.info.fiscalYearNowStart}
-            -${company.info.fiscalYearNowEnd}`}
-            areaFive={`${company.info.fiscalYearLastStart}
-            -${company.info.fiscalYearLastEnd}`}
+            areaFour={`${company.fiscalYears.currentStart}
+            -${company.fiscalYears.currentEnd}`}
+            areaFive={`${company.fiscalYears.previousStart}
+            -${company.fiscalYears.previousEnd}`}
             border
           />
 
@@ -295,10 +297,10 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
           <Line
             areaThree={`not
             1`}
-            areaFour={`${company.info.fiscalYearNowStart}
-            -${company.info.fiscalYearNowEnd}`}
-            areaFive={`${company.info.fiscalYearLastStart}
-            -${company.info.fiscalYearLastEnd}`}
+            areaFour={`${company.fiscalYears.currentStart}
+            -${company.fiscalYears.currentEnd}`}
+            areaFive={`${company.fiscalYears.previousStart}
+            -${company.fiscalYears.previousEnd}`}
             border
           />
 
@@ -339,15 +341,15 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
           <Text style={styles.h4}>
             {`
             Årsredovisning för ${company.info.name}, ${company.info.registrationNumber}
-            Avseende räkenskapsåret ${company.info.fiscalYearNowStart} - ${company.info.fiscalYearNowEnd}`}
+            Avseende räkenskapsåret ${company.fiscalYears.currentEnd} - ${company.fiscalYears.currentEnd}`}
           </Text>
 
         </View>
 
         <View fixed style={styles.footer}>
           <View style={{ display: 'flex', flexDirection: 'column' }}>
-            <Text>{company?.info?.name}</Text>
-            <Text>{company?.info?.registrationNumber}</Text>
+            <Text>{company.info.name}</Text>
+            <Text>{company.info.registrationNumber}</Text>
           </View>
           <Text render={({ pageNumber, totalPages }) => (
             `sida ${pageNumber} av ${totalPages}`

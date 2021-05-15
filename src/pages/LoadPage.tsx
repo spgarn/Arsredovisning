@@ -8,14 +8,14 @@ import Pdf from './pdf';
 import useStore from '../hooks/useStore';
 
 const LoadPage = observer(() => {
-  const { sieStore } = useStore();
+  const { companyStore } = useStore();
   const [generatePdf, setGeneratePdf] = useState(false);
 
   if (generatePdf) {
     return (
       <div style={{ height: '100vh' }}>
         <PDFViewer width="100%" height="100%">
-          <Pdf sieStore={sieStore} />
+          <Pdf companyStore={companyStore} />
         </PDFViewer>
       </div>
     );

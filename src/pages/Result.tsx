@@ -1,5 +1,5 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import type { CompanyResult, CompanyResults } from '../functions/interfaces';
+import type { AccountBalance, AccountBalances } from '../functions/interfaces';
 
 import resultSectionsData, { ResultSectionInterface } from '../info/resultSectionsData';
 import ResultLine from './components/resultLine';
@@ -11,7 +11,7 @@ interface ProfitState {
 
 interface ResultSectionProps {
   section: ResultSectionInterface
-  companyResults: CompanyResults
+  companyResults: AccountBalances
   // eslint-disable-next-line react/require-default-props
   updateProfit?: (current: number, previous: number) => void
 }
@@ -56,7 +56,7 @@ function ResultSection(
   );
 }
 
-function Result({ results }: { results: CompanyResults }) {
+function Result({ results }: { results: AccountBalances }) {
   const [
     operatingProfit, setOperatingProfit,
   ] = useState<ProfitState>({ current: 0, previous: 0 });

@@ -22,10 +22,10 @@ const Test = styled.div`
   `;
 
 const PreviewText = observer(() => {
-  const { sieStore } = useStore();
+  const { companyStore } = useStore();
   return (
     <>
-      <TextArea>{sieStore?.company?.info?.name}</TextArea>
+      <TextArea>{companyStore?.company?.info?.name}</TextArea>
       <Test>
         <div>1</div>
         <div>2</div>

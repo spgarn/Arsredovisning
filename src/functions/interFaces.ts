@@ -1,20 +1,32 @@
+export interface CompanyAddressInfo {
+  name: string
+  street: string
+  city: string
+  zipCode: string
+  phone: string
+}
+
 export interface CompanyInfo {
-  name: string;
-  address: string
-  registrationNumber: string;
-  fiscalYearNowStart: string;
-  fiscalYearNowEnd: string;
-  fiscalYearLastStart: string;
-  fiscalYearLastEnd: string;
+  name: string
+  registrationNumber: string
+  addressInfo: CompanyAddressInfo
 }
 
-export interface CompanyResult {
-  currentBalance: number
+export interface FiscalYears {
+  currentStart: string
+  currentEnd: string
+  previousStart: string
+  previousEnd: string
+}
+
+export interface Account {
+  name: string
   previousBalance: number
+  currentBalance: number
 }
 
-export interface CompanyResults {
-  [account: string]: CompanyResult
+export interface Accounts {
+  [accountId: string]: Account
 }
 
 export interface CompanyBalance {
@@ -24,6 +36,7 @@ export interface CompanyBalance {
 
 export interface Company {
   info: CompanyInfo
-  result: CompanyResults
-  balance: CompanyBalance
+  fiscalYears: FiscalYears
+  accounts: Accounts
+  balance?: CompanyBalance
 }
