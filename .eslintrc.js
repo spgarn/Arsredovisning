@@ -29,5 +29,6 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'no-unused-vars': 1,
     'key-spacing': 2,
+    'react/no-array-index-key': 'off',
   },
 };

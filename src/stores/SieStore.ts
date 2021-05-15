@@ -30,7 +30,7 @@ class SieStore {
         companyRegistrationNumber,
         companyAddressInfo,
         companyFiscalYears,
-        companyResult,
+        companyResults,
         accounts,
       } = translateSie(text);
 
@@ -38,12 +38,12 @@ class SieStore {
         companyName,
         companyFiscalYears,
         companyAddressInfo,
-        companyResult,
+        companyResults,
         accounts,
       });
 
       runInAction(() => {
-        this.company.result = [...companyResult];
+        this.company.result = companyResults;
         this.company.info.name = companyName;
         this.company.info.registrationNumber = companyRegistrationNumber;
         this.company.info.fiscalYearNowStart = companyFiscalYears.fiscalYearNowStart;

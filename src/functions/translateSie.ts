@@ -1,3 +1,5 @@
+import type { CompanyResult, CompanyResults } from './interfaces';
+
 function getAllWords(row: string, removeQuotes: boolean = false) {
   const words = row
     // Replaces all spaces within quotes with {tempSpace}
@@ -62,16 +64,17 @@ function getAccountName(rows: string[], account:string) {
 }
 
 // E.g. #RES 0 3041 -2258200 0
-function getCompanyResult(rows: string[]) {
-  return rows
-    .filter((row) => row.startsWith('#RES'))
-    .map((row) => {
-      const [, year, account, balance] = getAllWords(row);
-      const name = getAccountName(rows, account);
-      return {
-        name, account, year, balance,
-      };
-    });
+function getCompanyResults(rows: string[]) {
+  const companyResults: CompanyResults = {};
+  rows.forEach((row) => {
+    if (!row.startsWith('#RES')) return;
+    const [, year, account, balance] = getAllWords(row);
+    if (!companyResults[account]) companyResults[account] = { } as CompanyResult;
+    if (Number(year) === -1) companyResults[account].previousBalance = Number(balance);
+    else companyResults[account].currentBalance = Number(balance);
+  });
+
+  return companyResults;
 }
 
 // E.g. #KONTO 1039 "Ackumulerade avskrivningar på patent"
@@ -95,7 +98,7 @@ function translateSie(sieString: string) {
     companyRegistrationNumber: getCompanyRegistrationNumber(rows),
     companyAddressInfo: getCompanyAddressInfo(rows),
     companyFiscalYears: getCompanyFiscalYears(rows),
-    companyResult: getCompanyResult(rows),
+    companyResults: getCompanyResults(rows),
     accounts: getAccounts(rows),
   };
 }

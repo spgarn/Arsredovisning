@@ -9,7 +9,12 @@ export interface CompanyInfo {
 }
 
 export interface CompanyResult {
-   name: string, account: string, year:string, balance:string
+  currentBalance: number
+  previousBalance: number
+}
+
+export interface CompanyResults {
+  [account: string]: CompanyResult
 }
 
 export interface CompanyBalance {
@@ -19,6 +24,6 @@ export interface CompanyBalance {
 
 export interface Company {
   info: CompanyInfo
-  result: CompanyResult[]
+  result: CompanyResults
   balance: CompanyBalance
 }

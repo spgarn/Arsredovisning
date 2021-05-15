@@ -5,7 +5,9 @@ import { observer } from 'mobx-react-lite';
 import * as info from '../info/info.json';
 import font from '../fonts/Comfortaa-Regular.ttf';
 import type SieStore from '../stores/SieStore';
-import Line from './components/Line';
+import Line from './components/line';
+import { CompanyResult } from '../functions/interfaces';
+import Result from './Result';
 
 Font.register({ family: 'Comfortaa', src: font });
 
@@ -91,6 +93,7 @@ const styles = StyleSheet.create({
     fontSize: '8px',
   },
 });
+
 // Create Document Component
 const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
   const { company } = sieStore;
@@ -257,10 +260,7 @@ const Pdf = observer(({ sieStore }: { sieStore: SieStore }) => {
             border
           />
 
-          {company.result
-            .slice()
-            .sort((a, b) => +a.account - +b.account)
-            .map((row) => <Line key={Math.random()} areaOne={`${row.name}`} areaFour={`${row.year === '0' ? row.balance : '0'}`} areaFive={`${row.year === '-1' ? row.balance : '0'}`} />)}
+          <Result results={company.result} />
 
         </View>
 
