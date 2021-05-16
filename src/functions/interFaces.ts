@@ -42,12 +42,7 @@ export interface Sum {
 }
 
 export type Result = {
-  [section in keyof ResultSectionsInterface]: Sum
-} & {
-  operatingProfit: Sum
-  financialProfit: Sum
-  profitBeforeTaxes: Sum
-  yearResult: Sum
+  [section: string]: Sum
 }
 
 export interface Company {

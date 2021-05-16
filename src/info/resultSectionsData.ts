@@ -13,6 +13,10 @@ interface ResultSectionsInterface {
   financialPosts: ResultSectionInterface
   yearEndDistribution: ResultSectionInterface
   taxes: ResultSectionInterface
+  operatingProfit: ResultSectionInterface
+  financialProfit: ResultSectionInterface
+  profitBeforeTaxes: ResultSectionInterface
+  yearResult: ResultSectionInterface
 }
 
 const resultSections: ResultSectionsInterface = {
@@ -144,6 +148,27 @@ const resultSections: ResultSectionsInterface = {
       },
     ],
   },
+  operatingProfit: {
+    title: 'Rörelseresultat',
+    sumTitle: '',
+    children: [],
+  },
+  financialProfit: {
+    title: 'Resultat efter finansiella poster',
+    sumTitle: '',
+    children: [],
+  },
+  profitBeforeTaxes: {
+    title: 'Resultat före skatt',
+    sumTitle: '',
+    children: [],
+  },
+  yearResult: {
+    title: 'Årets resultat',
+    sumTitle: '',
+    children: [],
+  },
+
 };
 
 export type { ResultSectionInterface, ResultSectionsInterface };

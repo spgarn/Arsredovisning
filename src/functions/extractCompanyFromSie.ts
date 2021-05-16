@@ -2,7 +2,7 @@ import type {
   Company, CompanyAddressInfo, FiscalYears, Accounts,
 } from './interfaces';
 
-function splitWords(row: string, removeQuotes: boolean = false) {
+function splitWords(row: string, removeQuotes = false) {
   const words = row
     // Replaces all spaces within quotes with {tempSpace}
     .replace(/"[^"]+"/g, (inQuotes) => inQuotes.replaceAll(' ', '{tempSpace}'))
@@ -47,8 +47,8 @@ function getCompanyAddressInfo(rows: string[]): CompanyAddressInfo {
 function getFiscalYears(rows: string[]): FiscalYears {
   const currentYearRow = rows.find((r) => r.startsWith('#RAR 0'));
   const previousYearRow = rows.find((r) => r.startsWith('#RAR -1'));
-  const [,, currentStart, currentEnd] = splitWords(currentYearRow);
-  const [,, previousStart, previousEnd] = splitWords(previousYearRow);
+  const [,, currentStart, currentEnd] = currentYearRow ? splitWords(currentYearRow) : [];
+  const [,, previousStart, previousEnd] = previousYearRow ? splitWords(previousYearRow) : [];
 
   return {
     currentStart,
@@ -61,24 +61,26 @@ function getFiscalYears(rows: string[]): FiscalYears {
 // E.g. #KONTO 1039 "Ackumulerade avskrivningar på patent"
 // E.g. #RES 0 3041 -2258200 0
 function getAccounts(rows: string[]) {
+  const defaultAccount = () => ({ name: '', previousBalance: 0, currentBalance: 0 });
   return rows.reduce((accounts, row) => {
-    if (row.startsWith('#KONTO')) {
-      const [, id, name] = splitWords(row, true);
-      return {
-        ...accounts,
-        [id]: { ...accounts[id], name },
-      };
-    }
+    // if (row.startsWith('#KONTO')) {
+    //   const [, id, name] = splitWords(row, true);
+    //   return { ...accounts, [id]: { ...accounts[id], name } };
+    // }
 
     if (row.startsWith('#RES')) {
       const [, year, id, balance] = splitWords(row);
       const balanceKey = Number(year) === -1 ? 'previousBalance' : 'currentBalance';
-      return {
-        ...accounts,
-        [id]: { ...accounts[id], [balanceKey]: Number(balance) },
-      };
+      if (!accounts[id]) {
+        return {
+          ...accounts,
+          [id]: {
+            ...(accounts[id] ? accounts[id] : defaultAccount()),
+            [balanceKey]: Number(balance),
+          },
+        };
+      }
     }
-
     return accounts;
   }, {} as Accounts);
 }

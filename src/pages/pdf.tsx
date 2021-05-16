@@ -5,8 +5,7 @@ import { observer } from 'mobx-react-lite';
 import * as info from '../info/info.json';
 import font from '../fonts/Comfortaa-Regular.ttf';
 import type CompanyStore from '../stores/CompanyStore';
-import Line from './components/line';
-import { AccountBalance } from '../functions/interfaces';
+import Line from './components/Line';
 import Result from './Result';
 
 Font.register({ family: 'Comfortaa', src: font });
@@ -262,7 +261,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
             border
           />
 
-          <Result results={company.accounts} />
+          <Result result={company.result} />
 
         </View>
 
