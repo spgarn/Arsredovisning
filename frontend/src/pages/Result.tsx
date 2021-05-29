@@ -1,4 +1,5 @@
 import { FC, ReactElement } from 'react';
+import formatCurrency from '../functions/formatting';
 
 import type { Result as CompanyResult } from '../functions/interfaces';
 
@@ -18,8 +19,8 @@ const Result: FC<ResultProps> = ({ result }): ReactElement => (
       <ResultLine
         key={section}
         areaOne={sectionData.title}
-        areaFour={result[section].current.toFixed(2)}
-        areaFive={result[section].previous.toFixed(2)}
+        areaFour={formatCurrency(result[section].current.toFixed(2))}
+        areaFive={formatCurrency(result[section].previous.toFixed(2))}
       />
     ))}
   </>
