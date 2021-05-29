@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     minWidth: '40%',
     textAlign: 'left',
     fontSize: '10px',
+
   },
   areaTwo: {
     width: '15%',
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
 
 const Line = (p: Props) => (
   <div style={{
-    display: 'flex', flexDirection: 'row', marginTop: '8px', borderBottom: p.border && '1px black solid',
+    display: 'flex', flexDirection: 'row', marginTop: '8px', padding: '2px 0px', borderBottom: p.border && '1px black solid',
   }}
   >
     <Text style={styles.areaOne}>{p.areaOne}</Text>

@@ -13,6 +13,7 @@ interface Props {
 
 const styles = StyleSheet.create({
   areaOne: {
+    fontFamily: 'ComfortaaBold',
     minWidth: '55%',
     textAlign: 'left',
     fontSize: '10px',

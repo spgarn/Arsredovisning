@@ -3,12 +3,14 @@ import {
 } from '@react-pdf/renderer';
 import { observer } from 'mobx-react-lite';
 import * as info from '../info/info.json';
-import font from '../fonts/Comfortaa-Regular.ttf';
+import fontRegular from '../fonts/Comfortaa-Light.ttf';
+import fontBold from '../fonts/Comfortaa-Bold.ttf';
 import type CompanyStore from '../stores/CompanyStore';
 import Line from './components/Line';
 import Result from './Result';
 
-Font.register({ family: 'Comfortaa', src: font });
+Font.register({ family: 'ComfortaaRegular', src: fontRegular });
+Font.register({ family: 'ComfortaaBold', src: fontBold });
 
 // Create styles
 const styles = StyleSheet.create({
@@ -16,12 +18,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#FFF',
     justifyContent: 'center',
-    fontFamily: 'Comfortaa',
+    fontFamily: 'ComfortaaRegular',
+    color: '#191919',
 
   },
   section: {
     marginTop: '10px',
-    padding: '50px',
+    padding: '10px 30px',
     flexGrow: 1,
     textAlign: 'left',
     lineHeight: 1.4,
@@ -32,6 +35,17 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     textAlign: 'center',
     lineHeight: 1.4,
+  },
+  footer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    height: '50px',
+    borderTop: '1px black solid',
+    width: '80%',
+    fontSize: '10px',
+    padding: '4px 0px',
   },
   h1: {
     fontSize: '24px',
@@ -48,24 +62,15 @@ const styles = StyleSheet.create({
     fontSize: '11px',
     marginTop: '11px',
     fontWeight: 'bolder',
-    color: 'black',
+    fontFamily: 'ComfortaaBold',
+
   },
   h4: {
     fontSize: '9px',
     marginTop: '10px',
     color: '#808080',
   },
-  footer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignSelf: 'center',
-    height: '75px',
-    borderTop: '1px black solid',
-    width: '80%',
-    fontSize: '10px',
-    padding: '8px 0px',
-  },
+
   areaOne: {
     minWidth: '40%',
     textAlign: 'left',
@@ -113,12 +118,12 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
         </View>
         <View break style={styles.section}>
           <Text style={styles.h2}>Förvaltningsberättelse</Text>
-          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Verksamheten</Text>
+          <Text style={styles.h3}>Verksamheten</Text>
           <Text style={styles.h4Bold}>Allmänt om verksamheten</Text>
           <Text style={styles.h4}>{info.year_text}</Text>
 
           {/* Flerårsöversikt */}
-          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Flerårsöversikt</Text>
+          <Text style={styles.h3}>Flerårsöversikt</Text>
           {/* Years */}
           <Line
             areaFour={`${company.fiscalYears.currentStart}
@@ -145,7 +150,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           </Text>
 
           {/* Förändring i egent kapital */}
-          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Förändringar i eget kapital</Text>
+          <Text style={styles.h3}>Förändringar i eget kapital</Text>
 
           {/* aktiekapital */}
           <Line
@@ -191,7 +196,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           />
 
           {/* Resultatdispotions */}
-          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Resultatdispotion</Text>
+          <Text style={styles.h3}>Resultatdispotion</Text>
 
           {/* Stående medel */}
           <Line
@@ -248,9 +253,9 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           </Text>
 
         </View>
-        <View style={styles.section}>
+        <View break style={styles.section}>
           {/* Resultaträkning */}
-          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Resultaträkning</Text>
+          <Text style={styles.h2}>Resultaträkning</Text>
           <Line
             areaThree={`not
             1`}
@@ -267,7 +272,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
 
         <View break style={styles.section}>
           {/* Balansräkning */}
-          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Balansräkning</Text>
+          <Text style={styles.h2}>Balansräkning</Text>
           <Line
             areaThree={`not
             1`}
@@ -292,7 +297,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
         </View>
         <View break style={styles.section}>
           {/* Balansräkning */}
-          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Balansräkning</Text>
+          <Text style={styles.h2}>Balansräkning</Text>
           <Line
             areaThree={`not
             1`}
@@ -318,8 +323,8 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
 
         <View break style={styles.section}>
           {/* Noter */}
-          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Noter</Text>
-          <Text style={{ fontWeight: 'bold', ...styles.h3 }}>Not 1 - Redovisningsprinciper</Text>
+          <Text style={styles.h2}>Noter</Text>
+          <Text style={styles.h3}>Not 1 - Redovisningsprinciper</Text>
           <Text style={styles.h4}>
             {`Årsredovisningen är upprättad i enlighet med årsredovisningslagen och Bokföringsnämndens allmänna
             råd (BFNAR 2016:10) om årsredovisning i mindre företag.
@@ -336,7 +341,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
 
         <View break style={styles.section}>
           {/* Underskrifter */}
-          <Text style={{ fontWeight: 'bold', ...styles.h2 }}>Underskrifter</Text>
+          <Text style={styles.h2}>Underskrifter</Text>
           <Text style={styles.h4}>
             {`
             Årsredovisning för ${company.info.name}, ${company.info.registrationNumber}
