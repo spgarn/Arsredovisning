@@ -8,24 +8,39 @@ function sumSection(
   return Object.entries(accounts)
     .reduce((sum, [accountId, account]) => {
       const accountNumber = Number(accountId);
-      const isInRange = resultSections[section].children
-        .some(({ accountRange: [min, max] }) => {
+      const resultRow = Object.entries(resultSections[section].children)
+        .find(([, { accountRange: [min, max] }]) => {
           if (accountNumber >= min && accountNumber <= max) return true;
           return false;
         });
-      if (!isInRange) return sum;
+      if (!resultRow) return sum;
 
+      const resultRowIdentifier = resultRow[0];
+      const resultRowReference = sum.children[resultRowIdentifier];
       return {
         current: sum.current + account.currentBalance,
         previous: sum.previous + account.previousBalance,
+        children: {
+          ...sum.children,
+          [resultRowIdentifier]: {
+            current: resultRowReference.current + account.currentBalance,
+            previous: resultRowReference.previous + account.previousBalance,
+          },
+        },
       };
-    }, { current: 0, previous: 0 });
+    }, {
+      current: 0,
+      previous: 0,
+      children: Object.fromEntries(Object.keys(resultSections[section].children)
+        .map((title) => [title, { current: 0, previous: 0 }])),
+    });
 }
 
 function sumSums(sums: Sum[]): Sum {
   return sums.reduce((sum, { current, previous }) => ({
     current: current + sum.current,
     previous: previous + sum.previous,
+    children: {},
   }));
 }
 

@@ -22,6 +22,7 @@ const DropFile = observer(() => {
     const sieText = await fileReader(acceptedFiles[0]);
     const company = extractCompanyFromSie(sieText);
     company.result = calculateResults(company.accounts);
+    console.log(company);
     companyStore.hydrate(company);
   };
 

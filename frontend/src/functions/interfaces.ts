@@ -39,6 +39,12 @@ export interface CompanyBalance {
 export interface Sum {
   current: number
   previous: number
+  children: {
+    [resultRowIdentifier: string]: {
+      current: number
+      previous: number
+    }
+  }
 }
 
 export type Result = {
