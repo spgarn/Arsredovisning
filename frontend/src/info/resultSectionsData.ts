@@ -21,11 +21,11 @@ interface ResultSectionsInterface {
 
 const resultSections: ResultSectionsInterface = {
   operatingIncome: {
-    title: 'Nettoomsättning',
+    title: 'Rörelsens intäkter',
     sumTitle: 'Summa rörelseintäkter, lagerförändringar m.m.',
     children: [
       {
-        title: 'Rörelsens intäkter',
+        title: 'Nettoomsättning',
         accountRange: [
           3000,
           3999,
