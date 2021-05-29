@@ -8,6 +8,7 @@ import fontBold from '../fonts/Comfortaa-Bold.ttf';
 import type CompanyStore from '../stores/CompanyStore';
 import Line from './components/Line';
 import Result from './Result';
+import { formatDate } from '../functions/formatting';
 
 Font.register({ family: 'ComfortaaRegular', src: fontRegular });
 Font.register({ family: 'ComfortaaBold', src: fontBold });
@@ -276,10 +277,10 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Line
             areaThree={`not
             1`}
-            areaFour={`${company.fiscalYears.currentStart}
-            -${company.fiscalYears.currentEnd}`}
-            areaFive={`${company.fiscalYears.previousStart}
-            -${company.fiscalYears.previousEnd}`}
+            areaFour={`${formatDate(company.fiscalYears.currentStart)}
+            -${formatDate(company.fiscalYears.currentEnd)}`}
+            areaFive={`${formatDate(company.fiscalYears.previousStart)}
+            -${formatDate(company.fiscalYears.previousEnd)}`}
             border
           />
 

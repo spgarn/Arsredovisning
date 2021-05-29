@@ -1,8 +1,6 @@
 import { FC, ReactElement } from 'react';
-import formatCurrency from '../functions/formatting';
-
+import { formatCurrency } from '../functions/formatting';
 import type { Result as CompanyResult } from '../functions/interfaces';
-
 import resultSectionsData from '../info/resultSectionsData';
 import ResultLine from './components/resultLine';
 
