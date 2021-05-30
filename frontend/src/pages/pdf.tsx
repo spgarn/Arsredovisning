@@ -111,7 +111,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Text style={styles.h1}>{company.info.name}</Text>
           <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.info?.registrationNumber}</Text>
           <Text style={styles.h2}>{info.fiscal_year_text}</Text>
-          <Text style={styles.h2}>{`${company.fiscalYears.currentStart} - ${company.fiscalYears.currentEnd}`}</Text>
+          <Text style={styles.h2}>{`${formatDate(company.fiscalYears.currentStart)} - ${formatDate(company.fiscalYears.currentEnd)}`}</Text>
           <Text style={styles.h4}>{info.presentation_ceo_text}</Text>
           <Text style={styles.h4}>{info.round_up_method}</Text>
           <Text style={{ marginTop: '24px', ...styles.h4 }}>{info.confirmation_certificate}</Text>
@@ -127,10 +127,10 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Text style={styles.h3}>Flerårsöversikt</Text>
           {/* Years */}
           <Line
-            areaFour={`${company.fiscalYears.currentStart}
-              -${company.fiscalYears.currentEnd}`}
-            areaFive={`${company.fiscalYears.previousStart}
-            -${company.fiscalYears.previousEnd}`}
+            areaFour={`${formatDate(company.fiscalYears.currentStart)}
+              -${formatDate(company.fiscalYears.currentEnd)}`}
+            areaFive={`${formatDate(company.fiscalYears.previousStart)}
+            -${formatDate(company.fiscalYears.previousEnd)}`}
             border
           />
 
@@ -260,10 +260,10 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Line
             areaThree={`not
             1`}
-            areaFour={`${company.fiscalYears.currentStart}
-            -${company.fiscalYears.currentEnd}`}
-            areaFive={`${company.fiscalYears.previousStart}
-            -${company.fiscalYears.previousEnd}`}
+            areaFour={`${formatDate(company.fiscalYears.currentStart)}
+            -${formatDate(company.fiscalYears.currentEnd)}`}
+            areaFive={`${formatDate(company.fiscalYears.previousStart)}
+            -${formatDate(company.fiscalYears.previousEnd)}`}
             border
           />
 
@@ -302,10 +302,10 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Line
             areaThree={`not
             1`}
-            areaFour={`${company.fiscalYears.currentStart}
-            -${company.fiscalYears.currentEnd}`}
-            areaFive={`${company.fiscalYears.previousStart}
-            -${company.fiscalYears.previousEnd}`}
+            areaFour={`${formatDate(company.fiscalYears.currentStart)}
+            -${formatDate(company.fiscalYears.currentEnd)}`}
+            areaFive={`${formatDate(company.fiscalYears.previousStart)}
+            -${formatDate(company.fiscalYears.previousEnd)}`}
             border
           />
 
@@ -346,7 +346,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Text style={styles.h4}>
             {`
             Årsredovisning för ${company.info.name}, ${company.info.registrationNumber}
-            Avseende räkenskapsåret ${company.fiscalYears.currentEnd} - ${company.fiscalYears.currentEnd}`}
+            Avseende räkenskapsåret ${formatDate(company.fiscalYears.currentEnd)} - ${formatDate(company.fiscalYears.currentEnd)}`}
           </Text>
 
         </View>
