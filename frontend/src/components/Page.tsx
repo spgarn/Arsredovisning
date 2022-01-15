@@ -12,7 +12,7 @@ type Props = {
   children: ReactNode
 }
 
-const Page = ({ children }: Props) => (
+const Page:React.FC<Props> = ({ children }) => (
   <Container>
     {children}
   </Container>

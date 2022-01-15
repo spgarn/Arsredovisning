@@ -4,6 +4,6 @@ const formatCurrency = (amount: string, isShowingCurrency = false) => new Intl.N
   minimumFractionDigits: 0,
 }).format(+amount);
 
-const formatDate = (date:string) => date.split('').reduce((acc:string, value:string, i:number) => acc + (i === 3 || i === 5 ? `${value}-` : value));
+const formatDate = (date: string) => date.split('').reduce((acc: string, value: string, i: number) => acc + (i === 3 || i === 5 ? `${value}-` : value));
 
 export { formatCurrency, formatDate };

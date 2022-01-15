@@ -3,11 +3,11 @@ import {
 } from '@react-pdf/renderer';
 
 interface Props {
-  areaOne?:any;
-  areaTwo?:any;
-  areaThree?:any;
-  areaFour?:any;
-  areaFive?:any;
+  areaOne?:unknown;
+  areaTwo?:unknown;
+  areaThree?:unknown;
+  areaFour?:unknown;
+  areaFive?:unknown;
   border?:boolean
 }
 
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const resultLine = (p: Props) => (
+const resultLine:React.FC<Props> = (p) => (
   <div style={{
     display: 'flex', flexDirection: 'row', marginTop: '8px', borderBottom: p.border && '1px black solid',
   }}
