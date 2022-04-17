@@ -22,7 +22,8 @@ function getCompanyName(rows: string[]) {
 
 // E.g. "#ORGNR 559207-6037"
 function getCompanyRegistrationNumber(rows: string[]) {
-  const row = rows.find((r) => r.startsWith('#ORGNR'));
+  const row = rows.find((r) => r.startsWith('#ORGNR')).replace(/(\d{6})(\d{4})/, '$1-$2');
+
   if (!row) return 'unknown';
 
   return splitWords(row, true)[1];
@@ -47,8 +48,8 @@ function getCompanyAddressInfo(rows: string[]): CompanyAddressInfo {
 function getFiscalYears(rows: string[]): FiscalYears {
   const currentYearRow = rows.find((r) => r.startsWith('#RAR 0'));
   const previousYearRow = rows.find((r) => r.startsWith('#RAR -1'));
-  const [,, currentStart, currentEnd] = currentYearRow ? splitWords(currentYearRow) : [];
-  const [,, previousStart, previousEnd] = previousYearRow ? splitWords(previousYearRow) : [];
+  const [, , currentStart, currentEnd] = currentYearRow ? splitWords(currentYearRow) : [];
+  const [, , previousStart, previousEnd] = previousYearRow ? splitWords(previousYearRow) : [];
 
   return {
     currentStart,
