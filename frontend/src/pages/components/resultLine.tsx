@@ -3,11 +3,11 @@ import {
 } from '@react-pdf/renderer';
 
 interface Props {
-  areaOne?:unknown;
-  areaTwo?:unknown;
-  areaThree?:unknown;
-  areaFour?:unknown;
-  areaFive?:unknown;
+  areaOne?:any;
+  areaTwo?:any;
+  areaThree?:any;
+  areaFour?:any;
+  areaFive?:any;
   border?:boolean
 }
 

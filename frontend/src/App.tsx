@@ -1,12 +1,12 @@
 import './App.css';
 import { StoreProvider } from './hooks/useStore';
-import LoadPage from './pages/LoadPage';
+import Navigation from './navigation/navigation';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function App() {
   return (
     <StoreProvider>
-      <LoadPage />
+      <Navigation />
     </StoreProvider>
   );
 }
