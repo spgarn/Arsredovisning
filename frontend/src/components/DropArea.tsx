@@ -10,9 +10,9 @@ const DropArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 25vh;
+  height: 30vh;
   text-align: center;
-  background-color:#c2e9fb;
+  background-color:#918686;
   border-radius: 8px;
 `;
 
@@ -22,7 +22,6 @@ const DropFile = observer(() => {
     const sieText = await fileReader(acceptedFiles[0]);
     const company = extractCompanyFromSie(sieText);
     company.result = calculateResults(company.accounts);
-    console.log(company);
     companyStore.hydrate(company);
   };
 
@@ -32,7 +31,7 @@ const DropFile = observer(() => {
 
         <DropArea {...getRootProps()}>
           <input {...getInputProps()} />
-          <p>Släpp din SIE-fil här så laddas det in en preview på din årsredovisning i PDF</p>
+          <p>Släpp din SIE-fil här för att ladda upp filen.</p>
         </DropArea>
 
       )}

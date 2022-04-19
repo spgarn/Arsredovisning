@@ -1,4 +1,5 @@
 // import { NavLink } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import Page from '../../components/Page';
 import useStore from '../../hooks/useStore';
 
@@ -8,10 +9,9 @@ const SignPage = () => {
     <Page>
       <h5>Befattningshavare</h5>
       {companyStore.company.fiscalYears.currentEnd}
-      {/* <NavLink to="/balance-sheet">
-        <button type="button">Fortsätt</button>
-      </NavLink> */}
-      Generera PDF
+      <Button>
+        Generera PDF
+      </Button>
     </Page>
   );
 };

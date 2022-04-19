@@ -1,0 +1,30 @@
+import styled from 'styled-components';
+
+interface Props {
+  title:string;
+}
+
+const Field = styled.div`
+margin-left: 2rem;
+`;
+
+const Input = styled.div`
+
+`;
+
+const Wrapper = styled.div`
+display: flex;
+flex-direction: row;
+margin: 1rem;
+justify-content: space-between;
+align-items: center;
+`;
+
+const InputField:React.FC<Props> = ({ title, children }) => (
+  <Wrapper>
+    <Field>{title}</Field>
+    <Input>{children}</Input>
+  </Wrapper>
+);
+
+export default InputField;

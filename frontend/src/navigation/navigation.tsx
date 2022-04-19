@@ -1,6 +1,5 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import BalanceSheetPage from '../pages/BalanceSheetPage/BalanceSheetPage';
-import CheckCompanyInfo from '../pages/CheckCompanyInfoPage/CheckCompanyInfoPage';
 import CompanyInfoPage from '../pages/CompanyInfoPage/CompanyInfoPage';
 import FiscalYearPage from '../pages/FiscalYearPage/FiscalYearPage';
 import LoadSie from '../pages/LoadSiePage/LoadSiePage';
@@ -16,7 +15,6 @@ const Navigation = () => (
       {/* Siefil */}
       <Route path="/" element={<LoadSie />} />
       {/* Kontrollera uppgifter */}
-      <Route path="/check-info" element={<CheckCompanyInfo />} />
       {/* Välj räkenskapsår */}
       <Route path="/fiscal-year" element={<FiscalYearPage />} />
       {/* Företagsuppgifter */}
