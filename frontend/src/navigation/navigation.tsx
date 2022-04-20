@@ -14,7 +14,6 @@ const Navigation = () => (
     <Routes>
       {/* Siefil */}
       <Route path="/" element={<LoadSie />} />
-      {/* Kontrollera uppgifter */}
       {/* Välj räkenskapsår */}
       <Route path="/fiscal-year" element={<FiscalYearPage />} />
       {/* Företagsuppgifter */}

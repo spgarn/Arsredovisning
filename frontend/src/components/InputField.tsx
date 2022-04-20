@@ -9,7 +9,9 @@ margin-left: 2rem;
 `;
 
 const Input = styled.div`
-
+display: flex;
+gap: 1rem;
+flex-direction: row;
 `;
 
 const Wrapper = styled.div`

@@ -1,6 +1,6 @@
 import {
   Button,
-  Card, FormControl, MenuItem, Select, SelectChangeEvent, styled, Typography,
+  Card, FormControl, MenuItem, Select, SelectChangeEvent, styled, Switch, Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import InputField from '../../components/InputField';
@@ -34,22 +34,41 @@ const CompanyInfoPage = () => {
           </Typography>
         </InputField>
         <InputField title="Antal tidigare räkenskapsår">
-          <Typography variant="h6">
-            <FormControl sx={{ minWidth: '120px' }} size="small">
+          <FormControl sx={{ minWidth: '120px' }} size="small">
 
-              <Select
-                value={amount}
-                onChange={handleChange}
-              >
-                <MenuItem value={0}>0</MenuItem>
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-              </Select>
-            </FormControl>
-          </Typography>
+            <Select
+              value={amount}
+              onChange={handleChange}
+            >
+              <MenuItem value={0}>0</MenuItem>
+              <MenuItem value={1}>1</MenuItem>
+              <MenuItem value={2}>2</MenuItem>
+            </Select>
+          </FormControl>
         </InputField>
+        <Typography variant="h5">
+          Övriga uppgifter
+        </Typography>
+        <InputField title="Koncernförhållande">
+          <FormControl sx={{ minWidth: '120px' }} size="small">
 
-        <StyledNavLink to="/company-info">
+            <Select
+              value={amount}
+              onChange={handleChange}
+            >
+              <MenuItem value="none">Bolaget ingår i en koncern</MenuItem>
+              <MenuItem value="mother">Bolaget är modern i en koncern</MenuItem>
+              <MenuItem value="daugther">Bolaget är dottern i en koncern</MenuItem>
+            </Select>
+          </FormControl>
+        </InputField>
+        <Typography variant="h5">
+          Revisor
+        </Typography>
+        <InputField title="Har bolaget revisor?">
+          <Switch />
+        </InputField>
+        <StyledNavLink to="/result-sheet">
           <Button variant="contained">Fortsätt</Button>
         </StyledNavLink>
       </StyledCard>
