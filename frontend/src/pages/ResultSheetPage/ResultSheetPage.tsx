@@ -1,17 +1,11 @@
 import {
-  Button, Card, styled, TextField, Typography,
+  Box,
+  Button, Grid, TextField, Typography
 } from '@mui/material';
 import { useFormik } from 'formik';
-import InputField from '../../components/InputField';
+import Card from '../../components/Card';
 import Page from '../../components/Page';
-import StyledNavLink from '../../components/StyledNavLink';
 import useStore from '../../hooks/useStore';
-
-const StyledCard = styled(Card)`
-gap: 2rem;
-margin-top: 2rem;
-padding:1rem;
-`;
 
 const ResultSheetPage = () => {
   const { companyStore } = useStore();
@@ -27,38 +21,55 @@ const ResultSheetPage = () => {
   });
   return (
     <Page>
-      <StyledCard>
-        <Typography variant="h5">Resultaträkning</Typography>
+      <Card>
         <form onSubmit={formik.handleSubmit}>
-          <InputField title="Nettoomsättning">
-
-            <TextField
-              fullWidth
-              id="thisYear"
-              name="thisYear"
-              label="ThisYear"
-              value={formik.values.thisYear}
-              onChange={formik.handleChange}
-              helperText={formik.touched.thisYear && formik.errors.thisYear}
-            />
-            <TextField
-              fullWidth
-              id="lastYear"
-              name="lastYear"
-              label="LastYear"
-              type="lastYear"
-              value={formik.values.lastYear}
-              onChange={formik.handleChange}
-              helperText={formik.touched.lastYear && formik.errors.lastYear}
-            />
-          </InputField>
-
-          <StyledNavLink to="/result-sheet">
-            <Button variant="contained">Fortsätt</Button>
-          </StyledNavLink>
+          <Grid container spacing={8} direction="column">
+            <Grid item>
+              <Typography variant="h5">Resultaträkning</Typography>
+            </Grid>
+            <Grid item>
+              <Box ml={16}>
+                <Grid container justifyContent="space-between" >
+                  <Grid item alignSelf="center">
+                    <Typography >Nettoomsättning</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Grid container spacing={8}>
+                      <Grid item>
+                        <TextField
+                          fullWidth
+                          id="thisYear"
+                          name="thisYear"
+                          label="This year"
+                          value={formik.values.thisYear}
+                          onChange={formik.handleChange}
+                          helperText={formik.touched.thisYear && formik.errors.thisYear}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <TextField
+                          fullWidth
+                          id="lastYear"
+                          name="lastYear"
+                          label="Last year"
+                          type="lastYear"
+                          value={formik.values.lastYear}
+                          onChange={formik.handleChange}
+                          helperText={formik.touched.lastYear && formik.errors.lastYear}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+            <Grid item alignSelf="center">
+              <Button type="submit" variant="contained">Fortsätt</Button>
+            </Grid>
+          </Grid>
         </form>
-      </StyledCard>
-    </Page>
+      </Card >
+    </Page >
   );
 };
 
