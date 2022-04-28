@@ -12,9 +12,16 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Comfortaa',
-    fontSize: 14,
+    fontSize: 11,
   },
   components: {
+    MuiCard: {
+      defaultProps: {
+        elevation: 5,
+      },
+
+    },
+
     MuiButton: {
       styleOverrides: {
         contained: {

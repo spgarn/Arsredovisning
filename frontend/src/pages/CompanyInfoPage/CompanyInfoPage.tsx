@@ -6,6 +6,7 @@ import { useState } from 'react';
 import InputField from '../../components/InputField';
 import Page from '../../components/Page';
 import StyledNavLink from '../../components/StyledNavLink';
+import { formatDate } from '../../functions/formatting';
 import useStore from '../../hooks/useStore';
 
 const StyledCard = styled(Card)`
@@ -30,7 +31,7 @@ const CompanyInfoPage = () => {
         </Typography>
         <InputField title="Aktuellt räkenskapsår">
           <Typography variant="h6">
-            {companyStore.isReady && `${companyStore.company.fiscalYears.currentStart} - ${companyStore.company.fiscalYears.currentEnd}`}
+            {companyStore.isReady && `${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)}`}
           </Typography>
         </InputField>
         <InputField title="Antal tidigare räkenskapsår">

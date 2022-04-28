@@ -48,6 +48,9 @@ function getCompanyAddressInfo(rows: string[]): CompanyAddressInfo {
 function getFiscalYears(rows: string[]): FiscalYears {
   const currentYearRow = rows.find((r) => r.startsWith('#RAR 0'));
   const previousYearRow = rows.find((r) => r.startsWith('#RAR -1'));
+  console.log(currentYearRow);
+  console.log(previousYearRow);
+
   const [, , currentStart, currentEnd] = currentYearRow ? splitWords(currentYearRow) : [];
   const [, , previousStart, previousEnd] = previousYearRow ? splitWords(previousYearRow) : [];
 

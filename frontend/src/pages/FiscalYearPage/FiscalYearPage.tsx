@@ -3,6 +3,7 @@ import {
 } from '@mui/material';
 import Page from '../../components/Page';
 import StyledNavLink from '../../components/StyledNavLink';
+import { formatDate } from '../../functions/formatting';
 import useStore from '../../hooks/useStore';
 
 const StyledCard = styled(Card)`
@@ -28,7 +29,7 @@ const FiscalYearPage = () => {
         </Typography>
         <Typography variant="h5">
           <Checkbox />
-          {companyStore.isReady && `${companyStore.company.fiscalYears.currentStart} - ${companyStore.company.fiscalYears.currentEnd}`}
+          {companyStore.isReady && `${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)}`}
         </Typography>
         <StyledNavLink to="/company-info">
           <Button variant="contained">Fortsätt</Button>
