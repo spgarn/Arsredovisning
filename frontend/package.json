@@ -1,7 +1,7 @@
 {
   "name": "arsredovisning",
   "version": "0.1.0",
-  "homepage": "https://spgarn.github.io/Arsredovisning",
+  "homepage": "https://spgarn.github.io/Arsredovisning/public",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
