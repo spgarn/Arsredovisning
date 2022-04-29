@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Arsredovisning/static/css/main.1b6f667f.chunk.css",
+    "main.js": "/Arsredovisning/static/js/main.32e57bfa.chunk.js",
+    "main.js.map": "/Arsredovisning/static/js/main.32e57bfa.chunk.js.map",
+    "runtime-main.js": "/Arsredovisning/static/js/runtime-main.4738c3d3.js",
+    "runtime-main.js.map": "/Arsredovisning/static/js/runtime-main.4738c3d3.js.map",
+    "static/js/2.0f72d985.chunk.js": "/Arsredovisning/static/js/2.0f72d985.chunk.js",
+    "static/js/2.0f72d985.chunk.js.map": "/Arsredovisning/static/js/2.0f72d985.chunk.js.map",
+    "index.html": "/Arsredovisning/index.html",
+    "static/css/main.1b6f667f.chunk.css.map": "/Arsredovisning/static/css/main.1b6f667f.chunk.css.map",
+    "static/js/2.0f72d985.chunk.js.LICENSE.txt": "/Arsredovisning/static/js/2.0f72d985.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4738c3d3.js",
+    "static/js/2.0f72d985.chunk.js",
+    "static/css/main.1b6f667f.chunk.css",
+    "static/js/main.32e57bfa.chunk.js"
+  ]
+}
