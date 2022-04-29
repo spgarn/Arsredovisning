@@ -19,7 +19,7 @@ const Navigation = () => {
     <BrowserRouter>
       <Routes>
         {/* Siefil */}
-        <Route path="/" element={<LoadSie />} />
+        <Route path="/Arsredovisning" element={<LoadSie />} />
         {/* Välj räkenskapsår */}
         <Route path="/fiscal-year" element={<FiscalYearPage />} />
         {/* Företagsuppgifter */}
