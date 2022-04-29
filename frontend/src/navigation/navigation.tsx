@@ -12,7 +12,9 @@ import YearStoryPage from '../pages/YearStoryPage/YearStoryPage';
 
 const Navigation = () => {
   const { companyStore } = useStore();
-  companyStore.hydrate(JSON.parse(localStorage.getItem('companyInfo')));
+  const companyInfo = JSON.parse(localStorage.getItem('companyInfo'));
+  if (companyInfo) companyStore.hydrate(companyInfo);
+
   return (
     <BrowserRouter>
       <Routes>
