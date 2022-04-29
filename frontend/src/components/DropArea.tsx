@@ -23,6 +23,7 @@ const DropFile = observer(() => {
     const company = extractCompanyFromSie(sieText);
     company.result = calculateResults(company.accounts);
     companyStore.hydrate(company);
+    localStorage.setItem('companyInfo', JSON.stringify(company));
   };
 
   return (
