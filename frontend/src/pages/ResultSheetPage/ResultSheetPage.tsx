@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC, Fragment } from 'react';
 import {
   Button, Grid, TextField, Typography,
 } from '@mui/material';
@@ -46,7 +46,7 @@ const ResultSheetPage:FC = () => {
               <Typography variant="h6">{`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}</Typography>
             </SubTitle>
             {Object.entries(resultSectionsData).map(([section, sectionData], i) => (
-              <React.Fragment key={i}>
+              <Fragment key={i}>
 
                 {Object.entries(sectionData.children as Child).map(([child, childData]) => (
                   <SingleRow subTitle={childData?.title}>
@@ -64,7 +64,7 @@ const ResultSheetPage:FC = () => {
                 <SingleRow isSum isBold subTitle={sectionData.sumTitle || sectionData.title}>
                   {formatCurrency(result[section].current.toFixed(2), true)}
                 </SingleRow>
-              </React.Fragment>
+              </Fragment>
             ))}
 
             <Grid item alignSelf="center">
