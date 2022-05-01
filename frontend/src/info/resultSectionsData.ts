@@ -33,6 +33,20 @@ const resultSections: ResultSectionsInterface = {
           3999,
         ],
       },
+      changedInventory: {
+        title: 'Förändring av lager',
+        accountRange: [
+          3800,
+          3899,
+        ],
+      },
+      otherIncomes: {
+        title: 'Övriga rörelseintäkter',
+        accountRange: [
+          3900,
+          3999,
+        ],
+      },
     },
   },
   operatingCosts: {

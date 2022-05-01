@@ -32,7 +32,7 @@ const Navigation = () => {
           top={70}
           right={25}
         >
-          <Button onClick={() => setIsGeneratePdf(!isGeneratePdf)} disabled={!companyStore.isReady} variant="contained">{isGeneratePdf ? 'Avbryt' : 'Förhandsgranska'}</Button>
+          <Button onClick={() => setIsGeneratePdf(!isGeneratePdf)} disabled={!companyStore.isReady} variant="contained">Avbryt</Button>
         </Grid>
         <PDFViewer width="100%" height="100%">
           <Pdf companyStore={companyStore} />
@@ -45,7 +45,7 @@ const Navigation = () => {
         container
         justifyContent="flex-end"
       >
-        <Button onClick={() => setIsGeneratePdf(!isGeneratePdf)} disabled={!companyStore.isReady} variant="contained">Förhandsgranska</Button>
+        <Button onClick={() => setIsGeneratePdf(!isGeneratePdf)} variant="contained">Förhandsgranska</Button>
       </Grid>
       <Routes>
         {/* Siefil */}

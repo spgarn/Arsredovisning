@@ -13,7 +13,6 @@ const SubTitle:React.FC<Props> = ({ subTitle, children }) => (
     </Grid>
     <Grid item xs={3}>
       <Typography variant="h6">{children}</Typography>
-
     </Grid>
   </Grid>
 );
