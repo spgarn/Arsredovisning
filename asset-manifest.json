@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/Arsredovisning/static/css/main.1b6f667f.chunk.css",
-    "main.js": "/Arsredovisning/static/js/main.dd8b2ac4.chunk.js",
-    "main.js.map": "/Arsredovisning/static/js/main.dd8b2ac4.chunk.js.map",
+    "main.js": "/Arsredovisning/static/js/main.b184714f.chunk.js",
+    "main.js.map": "/Arsredovisning/static/js/main.b184714f.chunk.js.map",
     "runtime-main.js": "/Arsredovisning/static/js/runtime-main.4738c3d3.js",
     "runtime-main.js.map": "/Arsredovisning/static/js/runtime-main.4738c3d3.js.map",
-    "static/js/2.e5de5648.chunk.js": "/Arsredovisning/static/js/2.e5de5648.chunk.js",
-    "static/js/2.e5de5648.chunk.js.map": "/Arsredovisning/static/js/2.e5de5648.chunk.js.map",
+    "static/js/2.139b80a2.chunk.js": "/Arsredovisning/static/js/2.139b80a2.chunk.js",
+    "static/js/2.139b80a2.chunk.js.map": "/Arsredovisning/static/js/2.139b80a2.chunk.js.map",
     "index.html": "/Arsredovisning/index.html",
     "static/css/main.1b6f667f.chunk.css.map": "/Arsredovisning/static/css/main.1b6f667f.chunk.css.map",
-    "static/js/2.e5de5648.chunk.js.LICENSE.txt": "/Arsredovisning/static/js/2.e5de5648.chunk.js.LICENSE.txt",
+    "static/js/2.139b80a2.chunk.js.LICENSE.txt": "/Arsredovisning/static/js/2.139b80a2.chunk.js.LICENSE.txt",
     "static/media/Comfortaa-Bold.c7cb6106.ttf": "/Arsredovisning/static/media/Comfortaa-Bold.c7cb6106.ttf",
     "static/media/Comfortaa-Light.a5389d8a.ttf": "/Arsredovisning/static/media/Comfortaa-Light.a5389d8a.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.4738c3d3.js",
-    "static/js/2.e5de5648.chunk.js",
+    "static/js/2.139b80a2.chunk.js",
     "static/css/main.1b6f667f.chunk.css",
-    "static/js/main.dd8b2ac4.chunk.js"
+    "static/js/main.b184714f.chunk.js"
   ]
 }
