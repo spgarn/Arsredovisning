@@ -1,17 +1,86 @@
-import { NavLink } from 'react-router-dom';
+import { FC, Fragment } from 'react';
+import {
+  Button, Grid, TextField,
+} from '@mui/material';
+import { Field, Form, Formik } from 'formik';
+import Card from '../../components/Card';
 import Page from '../../components/Page';
+import SingleRow from '../../components/SingleRow';
+import SubTitle from '../../components/SubTitle';
+import { formatDate, formatCurrency } from '../../functions/formatting';
 import useStore from '../../hooks/useStore';
+import { Company } from '../../functions/interfaces';
+import calculateInputResults from '../../functions/calculateInputResults';
+import balanceSections from '../../info/balanceSectionsData';
 
-const BalanceSheetPage = () => {
+interface Child
+  {
+    [resultRowIdentifier: string]: {
+      title: string
+      accountRange: [number, number]
+    }
+  }
+
+const BalanceSheetPage:FC = () => {
   const { companyStore } = useStore();
+
+  const { balance } = companyStore.company;
+
+  console.log(JSON.parse(JSON.stringify(balance)));
+
+  // eslint-disable-next-line
+  const entries = Object.entries as <T>(o: T) => [Extract<keyof T, string>, T[keyof T]][];
+
+  const handleSubmit = (company:Company) => {
+    calculateInputResults(company);
+    companyStore.hydrate(company);
+  };
+
   return (
-    <Page>
-      <h5>Balansräkning</h5>
-      {companyStore.company.info.name}
-      <NavLink to="/result-disposition">
-        <button type="button">Fortsätt</button>
-      </NavLink>
-    </Page>
+    <Formik
+      onSubmit={(e) => handleSubmit(e)}
+      initialValues={companyStore.company}
+    >
+      {() => (
+        <Form>
+          <Page>
+            <Card>
+              <Grid container direction="column">
+                <SubTitle subTitle="Balansräkning">
+                  {`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}
+                </SubTitle>
+                {Object.entries(balanceSections).map(([section, sectionData], i) => (
+                  <Fragment key={i}>
+                    {sectionData.title && <SingleRow isSum isBold subTitle={sectionData.title} />}
+                    {Object.entries(sectionData.children as Child).map(([child, childData], id) => (
+                      <SingleRow key={id} subTitle={childData?.title}>
+                        <Field
+                          type="number"
+                          label={childData?.title}
+                          name={`balance.${[section]}.children.${[child]}.current`}
+                          as={TextField}
+                          setField
+                          fullWidth
+                        />
+                      </SingleRow>
+                    ))}
+
+                    <SingleRow isSum isBold subTitle={sectionData.sumTitle || sectionData.title}>
+                      {formatCurrency(balance[section]?.current?.toFixed(2), true)}
+                    </SingleRow>
+                  </Fragment>
+                ))}
+
+                <Grid item alignSelf="center">
+                  <Button type="submit" variant="contained">Fortsätt</Button>
+                </Grid>
+              </Grid>
+            </Card>
+          </Page>
+        </Form>
+      )}
+
+    </Formik>
   );
 };
 

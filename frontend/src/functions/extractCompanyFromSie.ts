@@ -48,8 +48,6 @@ function getCompanyAddressInfo(rows: string[]): CompanyAddressInfo {
 function getFiscalYears(rows: string[]): FiscalYears {
   const currentYearRow = rows.find((r) => r.startsWith('#RAR 0'));
   const previousYearRow = rows.find((r) => r.startsWith('#RAR -1'));
-  console.log(currentYearRow);
-  console.log(previousYearRow);
 
   const [, , currentStart, currentEnd] = currentYearRow ? splitWords(currentYearRow) : [];
   const [, , previousStart, previousEnd] = previousYearRow ? splitWords(previousYearRow) : [];
@@ -64,6 +62,7 @@ function getFiscalYears(rows: string[]): FiscalYears {
 
 // E.g. #KONTO 1039 "Ackumulerade avskrivningar på patent"
 // E.g. #RES 0 3041 -2258200 0
+// E.g. #IB 0 1930 150000 0
 function getAccounts(rows: string[]) {
   const defaultAccount = () => ({ name: '', previousBalance: 0, currentBalance: 0 });
   return rows.reduce((accounts, row) => {
@@ -71,6 +70,20 @@ function getAccounts(rows: string[]) {
     //   const [, id, name] = splitWords(row, true);
     //   return { ...accounts, [id]: { ...accounts[id], name } };
     // }
+
+    if (row.startsWith('#UB')) {
+      const [, year, id, balance] = splitWords(row);
+      const balanceKey = Number(year) === -1 ? 'previousBalance' : 'currentBalance';
+      if (!accounts[id]) {
+        return {
+          ...accounts,
+          [id]: {
+            ...(accounts[id] ? accounts[id] : defaultAccount()),
+            [balanceKey]: Number(balance),
+          },
+        };
+      }
+    }
 
     if (row.startsWith('#RES')) {
       const [, year, id, balance] = splitWords(row);

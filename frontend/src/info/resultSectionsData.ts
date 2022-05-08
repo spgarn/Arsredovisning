@@ -30,7 +30,7 @@ const resultSections: ResultSectionsInterface = {
         title: 'Nettoomsättning',
         accountRange: [
           3000,
-          3999,
+          3799,
         ],
       },
       changedInventory: {

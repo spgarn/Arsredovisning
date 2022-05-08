@@ -11,15 +11,14 @@ const SingleRow:React.FC<Props> = ({
   subTitle, isBold, isSum, children,
 }) => (
   <Grid mb={12} container justifyContent="space-between">
-    <Grid ml={!isSum && 12} xs={3} item alignSelf="center">
-      <Typography fontWeight={isBold && 900}>{subTitle}</Typography>
+    <Grid pt={12} ml={!isSum && 12} xs={3} item alignSelf="center">
+      <Typography alignSelf="center" fontWeight={isBold && 900}>{subTitle}</Typography>
     </Grid>
-    <Grid item xs={3}>
-      <Grid pt={12} borderTop={isSum && '1px solid gray'} container>
-        {children}
-      </Grid>
 
+    <Grid pt={12} item xs={3} borderTop={isSum && '1px solid gray'} container>
+      {children}
     </Grid>
+
   </Grid>
 );
 

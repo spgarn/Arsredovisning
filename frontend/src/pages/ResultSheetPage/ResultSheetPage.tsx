@@ -1,8 +1,9 @@
 import { FC, Fragment } from 'react';
 import {
-  Button, Grid, TextField, Typography,
+  Button, Grid, TextField,
 } from '@mui/material';
-import { useFormik } from 'formik';
+import { Field, Form, Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import Page from '../../components/Page';
 import SingleRow from '../../components/SingleRow';
@@ -10,6 +11,8 @@ import SubTitle from '../../components/SubTitle';
 import { formatDate, formatCurrency } from '../../functions/formatting';
 import useStore from '../../hooks/useStore';
 import resultSectionsData from '../../info/resultSectionsData';
+import { Company } from '../../functions/interfaces';
+import calculateInputResults from '../../functions/calculateInputResults';
 
 interface Child
   {
@@ -24,56 +27,61 @@ const ResultSheetPage:FC = () => {
 
   const { result } = companyStore.company;
 
-  const formik = useFormik({
-    initialValues: {
-      netIncome: companyStore.company.result.operatingIncome.children.netSales.current,
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-
   // eslint-disable-next-line
   const entries = Object.entries as <T>(o: T) => [Extract<keyof T, string>, T[keyof T]][];
 
+  const navigate = useNavigate();
+
+  const handleSubmit = (company:Company) => {
+    calculateInputResults(company);
+    companyStore.hydrate(company);
+    navigate('/balance-sheet');
+  };
+
   return (
-    <Page>
-      <Card>
-        <form onSubmit={formik.handleSubmit}>
-          <Grid container direction="column">
+    <Formik
+      onSubmit={(e) => handleSubmit(e)}
+      initialValues={companyStore.company}
+    >
+      {() => (
+        <Form>
+          <Page>
+            <Card>
+              <Grid container direction="column">
+                <SubTitle subTitle="Resultaträkning">
+                  {`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}
+                </SubTitle>
+                {Object.entries(resultSectionsData).map(([section, sectionData], i) => (
+                  <Fragment key={i}>
+                    {Object.entries(sectionData.children as Child).map(([child, childData], id) => (
+                      <SingleRow key={id} subTitle={childData?.title}>
+                        <Field
+                          type="number"
+                          label={childData?.title}
+                          name={`result.${[section]}.children.${[child]}.current`}
+                          as={TextField}
+                          setField
+                          fullWidth
+                        />
+                      </SingleRow>
+                    ))}
 
-            <SubTitle subTitle="Resultaträkning">
-              <Typography variant="h6">{`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}</Typography>
-            </SubTitle>
-            {Object.entries(resultSectionsData).map(([section, sectionData], i) => (
-              <Fragment key={i}>
-
-                {Object.entries(sectionData.children as Child).map(([child, childData]) => (
-                  <SingleRow subTitle={childData?.title}>
-                    <TextField
-                      fullWidth
-                      id="netIncome"
-                      name="netIncome"
-                      value={formatCurrency(result[section]?.children[child]?.current.toFixed(2) || '0', true)}
-                      onChange={formik.handleChange}
-                      helperText={formik.touched.netIncome && formik.errors.netIncome}
-                    />
-                  </SingleRow>
+                    <SingleRow isSum isBold subTitle={sectionData.sumTitle || sectionData.title}>
+                      {formatCurrency(result[section].current.toFixed(2), true)}
+                    </SingleRow>
+                  </Fragment>
                 ))}
 
-                <SingleRow isSum isBold subTitle={sectionData.sumTitle || sectionData.title}>
-                  {formatCurrency(result[section].current.toFixed(2), true)}
-                </SingleRow>
-              </Fragment>
-            ))}
+                <Grid item alignSelf="center">
+                  <Button type="submit" variant="contained">Fortsätt</Button>
+                </Grid>
+              </Grid>
+            </Card>
+          </Page>
+        </Form>
+      )}
 
-            <Grid item alignSelf="center">
-              <Button type="submit" variant="contained">Fortsätt</Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Card>
-    </Page>
+    </Formik>
   );
 };
 

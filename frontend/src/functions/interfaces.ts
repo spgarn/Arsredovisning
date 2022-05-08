@@ -1,5 +1,3 @@
-import type { ResultSectionsInterface } from '../info/resultSectionsData';
-
 export interface CompanyAddressInfo {
   name: string
   street: string
@@ -31,11 +29,6 @@ export interface Accounts {
   [accountId: string]: Account
 }
 
-export interface CompanyBalance {
-  activeBalance: { name: string, account: string }[]
-  activeBalanceLast: { name: string, account: string }[]
-}
-
 export interface Sum {
   current: number
   previous: number
@@ -45,6 +38,10 @@ export interface Sum {
       previous: number
     }
   }
+}
+
+export interface CompanyBalance {
+  [section: string]: Sum
 }
 
 export type Result = {
