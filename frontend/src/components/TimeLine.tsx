@@ -5,7 +5,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { StepIconProps } from '@mui/material/StepIcon';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -66,7 +66,9 @@ function ativeState(area:string) {
 }
 
 function ColorlibStepIcon(props: StepIconProps) {
-  const { active, completed, className } = props;
+  const {
+    active, completed, className, icon,
+  } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
     1: <div>1</div>,
@@ -79,7 +81,7 @@ function ColorlibStepIcon(props: StepIconProps) {
 
   return (
     <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
-      {icons[String(props.icon)]}
+      {icons[String(icon)]}
     </ColorlibStepIconRoot>
   );
 }

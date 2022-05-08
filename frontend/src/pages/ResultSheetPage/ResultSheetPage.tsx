@@ -57,19 +57,20 @@ const ResultSheetPage:FC = () => {
                   />
                   {Object.entries(resultSectionsData).map(([section, sectionData], i) => (
                     <Fragment key={i}>
-                      {Object.entries(sectionData.children as Child).map(([child, childData], id) => (
-                        <SingleRow
-                          current={(
-                            <Field
-                              type="number"
-                              label={childData?.title}
-                              name={`result.${[section]}.children.${[child]}.current`}
-                              as={TextField}
-                              setField
-                              fullWidth
-                            />
+                      {Object.entries(sectionData.children as Child)
+                        .map(([child, childData], id) => (
+                          <SingleRow
+                            current={(
+                              <Field
+                                type="number"
+                                label={childData?.title}
+                                name={`result.${[section]}.children.${[child]}.current`}
+                                as={TextField}
+                                setField
+                                fullWidth
+                              />
 )}
-                          previous={
+                            previous={
                           companyStore.company.fiscalYears.previousStart && (
                           <Field
                             type="number"
@@ -81,10 +82,10 @@ const ResultSheetPage:FC = () => {
                           />
                           )
 }
-                          key={id}
-                          subTitle={childData?.title}
-                        />
-                      ))}
+                            key={id}
+                            subTitle={childData?.title}
+                          />
+                        ))}
 
                       <SingleRow
                         current={formatCurrency(result[section]?.current?.toFixed(2), true)}
