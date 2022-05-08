@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import { PDFViewer } from '@react-pdf/renderer';
 import { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import TimeLine from '../components/TimeLine';
 import useStore from '../hooks/useStore';
 import BalanceSheetPage from '../pages/BalanceSheetPage/BalanceSheetPage';
 import CompanyInfoPage from '../pages/CompanyInfoPage/CompanyInfoPage';
@@ -47,6 +48,7 @@ const Navigation = () => {
       >
         <Button onClick={() => setIsGeneratePdf(!isGeneratePdf)} variant="contained">Förhandsgranska</Button>
       </Grid>
+      <TimeLine />
       <Routes>
         {/* Siefil */}
         <Route path="/Arsredovisning" element={<LoadSie />} />

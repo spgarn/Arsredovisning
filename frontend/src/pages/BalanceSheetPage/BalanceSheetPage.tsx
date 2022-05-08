@@ -46,28 +46,50 @@ const BalanceSheetPage:FC = () => {
           <Page>
             <Card>
               <Grid container direction="column">
-                <SubTitle subTitle="Balansräkning">
-                  {`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}
-                </SubTitle>
+                <SubTitle
+                  current={`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}
+                  previous={companyStore.company.fiscalYears.previousStart && `${formatDate(companyStore.company.fiscalYears.previousStart)} - ${formatDate(companyStore.company.fiscalYears.previousEnd)}`}
+                  subTitle="Balansräkning"
+                />
                 {Object.entries(balanceSections).map(([section, sectionData], i) => (
                   <Fragment key={i}>
                     {sectionData.title && <SingleRow isSum isBold subTitle={sectionData.title} />}
                     {Object.entries(sectionData.children as Child).map(([child, childData], id) => (
-                      <SingleRow key={id} subTitle={childData?.title}>
-                        <Field
-                          type="number"
-                          label={childData?.title}
-                          name={`balance.${[section]}.children.${[child]}.current`}
-                          as={TextField}
-                          setField
-                          fullWidth
-                        />
-                      </SingleRow>
+                      <SingleRow
+                        current={(
+                          <Field
+                            type="number"
+                            label={childData?.title}
+                            name={`balance.${[section]}.children.${[child]}.current`}
+                            as={TextField}
+                            setField
+                            fullWidth
+                          />
+)}
+                        previous={(
+                          companyStore.company.fiscalYears.previousStart && (
+                          <Field
+                            type="number"
+                            label={childData?.title}
+                            name={`balance.${[section]}.children.${[child]}.previous`}
+                            as={TextField}
+                            setField
+                            fullWidth
+                          />
+                          )
+)}
+                        key={id}
+                        subTitle={childData?.title}
+                      />
                     ))}
 
-                    <SingleRow isSum isBold subTitle={sectionData.sumTitle || sectionData.title}>
-                      {formatCurrency(balance[section]?.current?.toFixed(2), true)}
-                    </SingleRow>
+                    <SingleRow
+                      current={formatCurrency(balance[section]?.current?.toFixed(2), true)}
+                      previous={formatCurrency(balance[section]?.previous?.toFixed(2), true)}
+                      isSum
+                      isBold
+                      subTitle={sectionData.sumTitle || sectionData.title}
+                    />
                   </Fragment>
                 ))}
 

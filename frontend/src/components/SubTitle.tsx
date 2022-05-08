@@ -3,17 +3,27 @@ import Typography from '@mui/material/Typography';
 
 type Props = {
   subTitle:string
+  current:string
+  previous?:string
 }
 
-const SubTitle:React.FC<Props> = ({ subTitle, children }) => (
+const SubTitle:React.FC<Props> = ({
+  subTitle, children, current, previous,
+}) => (
 
-  <Grid pb={12} container justifyContent="space-between" direction="row">
-    <Grid item xs={3}>
+  <Grid mb={12} container columnGap={50}>
+    <Grid pt={12} xs={3} item alignSelf="center">
       <Typography variant="h5">{subTitle}</Typography>
     </Grid>
-    <Grid item xs={3}>
-      <Typography variant="h6">{children}</Typography>
+    <Grid pt={12} item xs={3} container>
+      <Typography variant="h6">{current || children}</Typography>
     </Grid>
+    {previous && (
+    <Grid pt={12} item xs={3} container>
+      <Typography variant="h6">{previous}</Typography>
+    </Grid>
+    )}
+
   </Grid>
 );
 

@@ -13,6 +13,7 @@ import useStore from '../../hooks/useStore';
 import resultSectionsData from '../../info/resultSectionsData';
 import { Company } from '../../functions/interfaces';
 import calculateInputResults from '../../functions/calculateInputResults';
+import StyledNavLink from '../../components/StyledNavLink';
 
 interface Child
   {
@@ -39,49 +40,76 @@ const ResultSheetPage:FC = () => {
   };
 
   return (
-    <Formik
-      onSubmit={(e) => handleSubmit(e)}
-      initialValues={companyStore.company}
-    >
-      {() => (
-        <Form>
-          <Page>
-            <Card>
-              <Grid container direction="column">
-                <SubTitle subTitle="Resultaträkning">
-                  {`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}
-                </SubTitle>
-                {Object.entries(resultSectionsData).map(([section, sectionData], i) => (
-                  <Fragment key={i}>
-                    {Object.entries(sectionData.children as Child).map(([child, childData], id) => (
-                      <SingleRow key={id} subTitle={childData?.title}>
-                        <Field
-                          type="number"
-                          label={childData?.title}
-                          name={`result.${[section]}.children.${[child]}.current`}
-                          as={TextField}
-                          setField
-                          fullWidth
+    <>
+      <Formik
+        onSubmit={(e) => handleSubmit(e)}
+        initialValues={companyStore.company}
+      >
+        {() => (
+          <Form>
+            <Page>
+              <Card>
+                <Grid container direction="column">
+                  <SubTitle
+                    current={`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}
+                    previous={companyStore.company.fiscalYears.previousStart && `${formatDate(companyStore.company.fiscalYears.previousStart)} - ${formatDate(companyStore.company.fiscalYears.previousEnd)}`}
+                    subTitle="Resultaträkning"
+                  />
+                  {Object.entries(resultSectionsData).map(([section, sectionData], i) => (
+                    <Fragment key={i}>
+                      {Object.entries(sectionData.children as Child).map(([child, childData], id) => (
+                        <SingleRow
+                          current={(
+                            <Field
+                              type="number"
+                              label={childData?.title}
+                              name={`result.${[section]}.children.${[child]}.current`}
+                              as={TextField}
+                              setField
+                              fullWidth
+                            />
+)}
+                          previous={
+                          companyStore.company.fiscalYears.previousStart && (
+                          <Field
+                            type="number"
+                            label={childData?.title}
+                            name={`result.${[section]}.children.${[child]}.previous`}
+                            as={TextField}
+                            setField
+                            fullWidth
+                          />
+                          )
+}
+                          key={id}
+                          subTitle={childData?.title}
                         />
-                      </SingleRow>
-                    ))}
+                      ))}
 
-                    <SingleRow isSum isBold subTitle={sectionData.sumTitle || sectionData.title}>
-                      {formatCurrency(result[section].current.toFixed(2), true)}
-                    </SingleRow>
-                  </Fragment>
-                ))}
+                      <SingleRow
+                        current={formatCurrency(result[section]?.current?.toFixed(2), true)}
+                        previous={formatCurrency(result[section]?.previous?.toFixed(2), true)}
+                        isSum
+                        isBold
+                        subTitle={sectionData.sumTitle || sectionData.title}
+                      />
+                    </Fragment>
+                  ))}
 
-                <Grid item alignSelf="center">
-                  <Button type="submit" variant="contained">Fortsätt</Button>
+                  <Grid item alignSelf="center">
+                    <Button type="submit" variant="contained">spara</Button>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Card>
-          </Page>
-        </Form>
-      )}
+              </Card>
+            </Page>
+          </Form>
+        )}
 
-    </Formik>
+      </Formik>
+      <StyledNavLink disabled={!companyStore.isReady} to="/balance-sheet">
+        <Button disabled={!companyStore.isReady} variant="contained">Fortsätt</Button>
+      </StyledNavLink>
+    </>
   );
 };
 
