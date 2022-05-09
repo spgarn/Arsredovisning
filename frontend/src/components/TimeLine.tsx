@@ -56,7 +56,6 @@ const ColorlibStepIconRoot = styled('div')<{
 }));
 
 function ativeState(area:string) {
-  console.log(area);
   if (area === '/result-sheet') return 1;
   if (area === '/balance-sheet') return 2;
   if (area === '/result-disposition') return 3;
@@ -77,6 +76,7 @@ function ColorlibStepIcon(props: StepIconProps) {
     4: <div>4</div>,
     5: <div>5</div>,
     6: <div>6</div>,
+    7: <div>7</div>,
   };
 
   return (
@@ -88,11 +88,10 @@ function ColorlibStepIcon(props: StepIconProps) {
 
 const steps = ['Företagsuppgifter', 'Resultaträkning', 'Balansräkning', 'Resultatdisposition', 'Noter', 'Förvaltningsberättelse', 'Befattningshavare'];
 
-export default function CustomizedSteppers() {
+export default function CustomizedSteppers():JSX.Element {
   const activeArea = useLocation();
   return (
     <Stack sx={{ width: '100%' }} mt={18} spacing={4}>
-      {console.log(ativeState(activeArea.pathname))}
       <Stepper
         alternativeLabel
         activeStep={ativeState(activeArea.pathname)}
