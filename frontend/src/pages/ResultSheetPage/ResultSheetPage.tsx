@@ -3,7 +3,6 @@ import {
   Button, Grid, TextField,
 } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import Page from '../../components/Page';
 import MultiRow from '../../components/MultiRow';
@@ -31,12 +30,9 @@ const ResultSheetPage:FC = () => {
   // eslint-disable-next-line
   const entries = Object.entries as <T>(o: T) => [Extract<keyof T, string>, T[keyof T]][];
 
-  const navigate = useNavigate();
-
   const handleSubmit = (company:Company) => {
     calculateInputResults(company);
     companyStore.hydrate(company);
-    navigate('/balance-sheet');
   };
 
   return (

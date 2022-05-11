@@ -62,7 +62,7 @@ function getFiscalYears(rows: string[]): FiscalYears {
 
 // E.g. #KONTO 1039 "Ackumulerade avskrivningar på patent"
 // E.g. #RES 0 3041 -2258200 0
-// E.g. #IB 0 1930 150000 0
+// E.g. #UB 0 1930 150000 0
 function getAccounts(rows: string[]) {
   const defaultAccount = () => ({ name: '', previousBalance: 0, currentBalance: 0 });
   return rows.reduce((accounts, row) => {
