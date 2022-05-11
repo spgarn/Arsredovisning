@@ -6,7 +6,7 @@ import { Field, Form, Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import Page from '../../components/Page';
-import SingleRow from '../../components/SingleRow';
+import MultiRow from '../../components/MultiRow';
 import SubTitle from '../../components/SubTitle';
 import { formatDate, formatCurrency } from '../../functions/formatting';
 import useStore from '../../hooks/useStore';
@@ -59,7 +59,7 @@ const ResultSheetPage:FC = () => {
                     <Fragment key={i}>
                       {Object.entries(sectionData.children as Child)
                         .map(([child, childData], id) => (
-                          <SingleRow
+                          <MultiRow
                             current={(
                               <Field
                                 type="number"
@@ -87,9 +87,10 @@ const ResultSheetPage:FC = () => {
                           />
                         ))}
 
-                      <SingleRow
+                      <MultiRow
                         current={formatCurrency(result[section]?.current?.toFixed(2), true)}
-                        previous={formatCurrency(result[section]?.previous?.toFixed(2), true)}
+                        previous={companyStore.company.fiscalYears.previousStart
+                          && formatCurrency(result[section]?.previous?.toFixed(2), true)}
                         isSum
                         isBold
                         subTitle={sectionData.sumTitle || sectionData.title}

@@ -5,7 +5,7 @@ import {
 import { Field, Form, Formik } from 'formik';
 import Card from '../../components/Card';
 import Page from '../../components/Page';
-import SingleRow from '../../components/SingleRow';
+import MultiRow from '../../components/MultiRow';
 import SubTitle from '../../components/SubTitle';
 import { formatDate, formatCurrency } from '../../functions/formatting';
 import useStore from '../../hooks/useStore';
@@ -25,8 +25,6 @@ const BalanceSheetPage:FC = () => {
   const { companyStore } = useStore();
 
   const { balance } = companyStore.company;
-
-  console.log(JSON.parse(JSON.stringify(balance)));
 
   // eslint-disable-next-line
   const entries = Object.entries as <T>(o: T) => [Extract<keyof T, string>, T[keyof T]][];
@@ -53,9 +51,16 @@ const BalanceSheetPage:FC = () => {
                 />
                 {Object.entries(balanceSections).map(([section, sectionData], i) => (
                   <Fragment key={i}>
-                    {sectionData.title && <SingleRow isSum isBold subTitle={sectionData.title} />}
+                    {sectionData.title && (
+                    <MultiRow
+                      isNoBorder
+                      isSum
+                      isBold
+                      subTitle={sectionData.title}
+                    />
+                    )}
                     {Object.entries(sectionData.children as Child).map(([child, childData], id) => (
-                      <SingleRow
+                      <MultiRow
                         current={(
                           <Field
                             type="number"
@@ -83,9 +88,10 @@ const BalanceSheetPage:FC = () => {
                       />
                     ))}
 
-                    <SingleRow
+                    <MultiRow
                       current={formatCurrency(balance[section]?.current?.toFixed(2), true)}
-                      previous={formatCurrency(balance[section]?.previous?.toFixed(2), true)}
+                      previous={companyStore.company.fiscalYears.previousStart
+                        && formatCurrency(balance[section]?.previous?.toFixed(2), true)}
                       isSum
                       isBold
                       subTitle={sectionData.sumTitle || sectionData.title}
