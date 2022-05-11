@@ -74,29 +74,27 @@ function getAccounts(rows: string[]) {
     if (row.startsWith('#UB')) {
       const [, year, id, balance] = splitWords(row);
       const balanceKey = Number(year) === -1 ? 'previousBalance' : 'currentBalance';
-      if (!accounts[id]) {
-        return {
-          ...accounts,
-          [id]: {
-            ...(accounts[id] ? accounts[id] : defaultAccount()),
-            [balanceKey]: Number(balance),
-          },
-        };
-      }
+
+      return {
+        ...accounts,
+        [id]: {
+          ...(accounts[id] ? accounts[id] : defaultAccount()),
+          [balanceKey]: Number(balance),
+        },
+      };
     }
 
     if (row.startsWith('#RES')) {
       const [, year, id, balance] = splitWords(row);
       const balanceKey = Number(year) === -1 ? 'previousBalance' : 'currentBalance';
-      if (!accounts[id]) {
-        return {
-          ...accounts,
-          [id]: {
-            ...(accounts[id] ? accounts[id] : defaultAccount()),
-            [balanceKey]: Number(balance),
-          },
-        };
-      }
+      return {
+        ...accounts,
+        [id]: {
+          ...(accounts[id] ? accounts[id] : defaultAccount()),
+          [balanceKey]: Number(balance),
+        },
+
+      };
     }
     return accounts;
   }, {} as Accounts);

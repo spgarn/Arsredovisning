@@ -2,6 +2,7 @@ import { FC, Fragment } from 'react';
 import {
   Button, Grid, TextField,
 } from '@mui/material';
+import { observer } from 'mobx-react-lite';
 import { Field, Form, Formik } from 'formik';
 import Card from '../../components/Card';
 import Page from '../../components/Page';
@@ -22,7 +23,7 @@ interface Child
     }
   }
 
-const ResultSheetPage:FC = () => {
+const ResultSheetPage:FC = observer(() => {
   const { companyStore } = useStore();
 
   const { result } = companyStore.company;
@@ -109,6 +110,6 @@ const ResultSheetPage:FC = () => {
       </StyledNavLink>
     </>
   );
-};
+});
 
 export default ResultSheetPage;
