@@ -6,6 +6,12 @@ import StepLabel from '@mui/material/StepLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { StepIconProps } from '@mui/material/StepIcon';
 import { useLocation } from 'react-router-dom';
+import StyledNavLink from './StyledNavLink';
+
+const NavLink = styled(StyledNavLink)({
+  padding: '20px',
+  color: 'white',
+});
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -14,13 +20,13 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,rgb(111, 18, 205) 0%,rgb(111, 80, 206) 50%,rgb(111, 153, 206) 100%)',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,rgb(111, 18, 205) 0%,rgb(111, 80, 206) 50%,rgb(111, 153, 206) 100%)',
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -46,21 +52,22 @@ const ColorlibStepIconRoot = styled('div')<{
   alignItems: 'center',
   ...(ownerState.active && {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient( 136deg, rgb(111, 18, 205) 0%, rgb(111, 80, 206) 50%, rgb(111, 153, 206) 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient( 136deg, rgb(111, 18, 205) 0%, rgb(111, 80, 206) 50%, rgb(111, 153, 206) 100%)',
   }),
 }));
 
 function ativeState(area:string) {
-  if (area === '/result-sheet') return 1;
-  if (area === '/balance-sheet') return 2;
-  if (area === '/result-disposition') return 3;
-  if (area === '/notes') return 4;
-  if (area === '/year-story') return 5;
+  if (area === '/company-info') return 1;
+  if (area === '/result-sheet') return 2;
+  if (area === '/balance-sheet') return 3;
+  if (area === '/result-disposition') return 4;
+  if (area === '/notes') return 5;
+  if (area === '/year-story') return 6;
   return 0;
 }
 
@@ -70,13 +77,15 @@ function ColorlibStepIcon(props: StepIconProps) {
   } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
-    1: <div>1</div>,
-    2: <div>2</div>,
-    3: <div>3</div>,
-    4: <div>4</div>,
-    5: <div>5</div>,
-    6: <div>6</div>,
-    7: <div>7</div>,
+    1: <NavLink to="/Arsredovisning">1</NavLink>,
+    2: <NavLink to="/company-info">2</NavLink>,
+    3: <NavLink to="/result-sheet">3</NavLink>,
+    4: <NavLink to="/balance-sheet">4</NavLink>,
+    5: <NavLink to="/result-disposition">5</NavLink>,
+    6: <NavLink to="/notes">6</NavLink>,
+    7: <NavLink to="/year-story">7</NavLink>,
+    8: <NavLink to="/sign">8</NavLink>,
+
   };
 
   return (
@@ -86,7 +95,7 @@ function ColorlibStepIcon(props: StepIconProps) {
   );
 }
 
-const steps = ['Företagsuppgifter', 'Resultaträkning', 'Balansräkning', 'Resultatdisposition', 'Noter', 'Förvaltningsberättelse', 'Befattningshavare'];
+const steps = ['Sie-fil', 'Företagsuppgifter', 'Resultaträkning', 'Balansräkning', 'Resultatdisposition', 'Noter', 'Förvaltningsberättelse', 'Befattningshavare'];
 
 export default function CustomizedSteppers():JSX.Element {
   const activeArea = useLocation();

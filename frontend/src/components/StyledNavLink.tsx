@@ -14,12 +14,13 @@ const StyledLink = styled(NavLink)<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
+  width:'100%';
 `;
 
 const StyledNavLink:React.FC<Props> = ({
-  to, children, margin, disabled,
+  to, children, margin, disabled, ...rest
 }) => (
-  <StyledLink disabled={disabled} margin={margin} to={to}>
+  <StyledLink {...rest} disabled={disabled} margin={margin} to={to}>
     {children}
   </StyledLink>
 );
