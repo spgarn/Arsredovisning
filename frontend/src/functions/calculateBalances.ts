@@ -49,7 +49,8 @@ function calculateBalance(accounts: Accounts): Result {
   const accountsReceivable = sumSection(accounts, 'accountsReceivable');
   const financialFixedAssets = sumSection(accounts, 'financialFixedAssets');
   const ipFixedAssets = sumSection(accounts, 'ipFixedAssets');
-  const liabilitiesAndEquity = sumSection(accounts, 'liabilitiesAndEquity');
+  const liabilities = sumSection(accounts, 'liabilities');
+  const equity = sumSection(accounts, 'equity');
   const materialFixedAssets = sumSection(accounts, 'materialFixedAssets');
   const otherShortClaims = sumSection(accounts, 'otherShortClaims');
   const prepaidCostsAndDelayedIncome = sumSection(accounts, 'prepaidCostsAndDelayedIncome');
@@ -66,8 +67,8 @@ function calculateBalance(accounts: Accounts): Result {
   const totalAssts = sumSums([fixedAssets, currentAssets]);
 
   const estimatedResult = ({
-    current: totalAssts.current + liabilitiesAndEquity.current,
-    previous: totalAssts.previous + liabilitiesAndEquity.previous,
+    current: totalAssts.current + liabilities.current + equity.current,
+    previous: totalAssts.previous + liabilities.previous + equity.previous,
     children: {},
   });
 
@@ -79,7 +80,8 @@ function calculateBalance(accounts: Accounts): Result {
     prepaidCostsAndDelayedIncome,
     otherShortClaims,
     materialFixedAssets,
-    liabilitiesAndEquity,
+    liabilities,
+    equity,
     ipFixedAssets,
     financialFixedAssets,
     accountsReceivable,

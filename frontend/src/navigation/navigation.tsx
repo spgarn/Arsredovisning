@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import TimeLine from '../components/TimeLine';
 import useStore from '../hooks/useStore';
-import BalanceSheetPage from '../pages/BalanceSheetPage/BalanceSheetPage';
 import CompanyInfoPage from '../pages/CompanyInfoPage/CompanyInfoPage';
 import FiscalYearPage from '../pages/FiscalYearPage/FiscalYearPage';
 import LoadSie from '../pages/LoadSiePage/LoadSiePage';
@@ -15,6 +14,7 @@ import ResultDispositionPage from '../pages/ResultDispositionPage/ResultDisposit
 import ResultSheetPage from '../pages/ResultSheetPage/ResultSheetPage';
 import SignPage from '../pages/SignPage/SignPage';
 import YearStoryPage from '../pages/YearStoryPage/YearStoryPage';
+import BalanceSheetPage from '../pages/BalanceSheetPage/BalanceSheetPage';
 
 const Navigation = () => {
   const { companyStore } = useStore();

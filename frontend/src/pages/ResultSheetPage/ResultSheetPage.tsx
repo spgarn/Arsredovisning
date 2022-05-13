@@ -12,7 +12,7 @@ import { formatDate, formatCurrency } from '../../functions/formatting';
 import useStore from '../../hooks/useStore';
 import resultSectionsData from '../../info/resultSectionsData';
 import { Company } from '../../functions/interfaces';
-import calculateInputResults from '../../functions/calculateInputResults';
+import calculateInputResults, { sumInputResults } from '../../functions/calculateInputResults';
 import StyledNavLink from '../../components/StyledNavLink';
 
 interface Child
@@ -33,6 +33,7 @@ const ResultSheetPage:FC = observer(() => {
 
   const handleSubmit = (company:Company) => {
     calculateInputResults(company);
+    sumInputResults(company);
     companyStore.hydrate(company);
   };
 
