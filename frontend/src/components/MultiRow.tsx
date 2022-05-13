@@ -19,7 +19,7 @@ const MultiRow:React.FC<Props> = ({
       <Typography alignSelf="center" fontWeight={isBold && 900}>{subTitle}</Typography>
     </Grid>
 
-    <Grid pt={12} item xs={3} borderTop={isSum && !isNoBorder && '1px solid gray'} container>
+    <Grid pt={12} alignSelf="center" item xs={3} borderTop={isSum && !isNoBorder && '1px solid gray'} container>
       {current || children }
     </Grid>
     {previous
