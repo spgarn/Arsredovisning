@@ -68,6 +68,7 @@ function ativeState(area:string) {
   if (area === '/result-disposition') return 4;
   if (area === '/notes') return 5;
   if (area === '/year-story') return 6;
+  if (area === '/sign') return 7;
   return 0;
 }
 

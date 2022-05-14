@@ -1,6 +1,9 @@
-import { Switch, TextareaAutosize, TextField } from '@mui/material';
+import {
+  Button, Switch, TextareaAutosize, TextField,
+} from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import Card from '../../components/Card';
 import MultiRow from '../../components/MultiRow';
 import Note from '../../components/Notes';
@@ -63,9 +66,11 @@ const NotesPage = observer(() => {
 
         </Note>
 
-        {/* <NavLink to="/year-story">
-          <button type="button">Fortsätt</button>
-        </NavLink> */}
+        <NavLink to="/year-story">
+          <div style={{ display: 'grid', justifyContent: 'center', marginTop: 12 }}>
+            <Button variant="contained">Fortsätt</Button>
+          </div>
+        </NavLink>
       </Card>
     </Page>
   );
