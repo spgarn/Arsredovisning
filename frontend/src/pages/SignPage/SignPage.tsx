@@ -12,7 +12,6 @@ import useStore from '../../hooks/useStore';
 import SignRow from './components/SignRow';
 
 const SignPage = () => {
-  const { companyStore } = useStore();
   const [value, setValue] = useState<Date | null>(new Date());
   return (
     <Page>
