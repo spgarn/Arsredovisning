@@ -8,7 +8,6 @@ import Card from '../../components/Card';
 import MultiRow from '../../components/MultiRow';
 import Page from '../../components/Page';
 import SubTitle from '../../components/SubTitle';
-import useStore from '../../hooks/useStore';
 import SignRow from './components/SignRow';
 
 const SignPage = () => {
