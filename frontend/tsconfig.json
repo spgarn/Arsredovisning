@@ -21,7 +21,7 @@
     "composite": true,
     "strictNullChecks": false,
     "experimentalDecorators": true,
-    "strict": true,
+    "strict": false,
     "checkJs": false,
   },
   "include": [

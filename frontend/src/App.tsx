@@ -35,8 +35,7 @@ const theme = createTheme({
   },
 });
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function App() {
+function App():JSX.Element {
   return (
     <StoreProvider>
       <ThemeProvider theme={theme}>

@@ -2,7 +2,9 @@ import { FC, Fragment } from 'react';
 import {
   Button, Grid, TextField,
 } from '@mui/material';
-import { Field, Form, Formik } from 'formik';
+import {
+  FastField, Form, Formik,
+} from 'formik';
 import Card from '../../components/Card';
 import Page from '../../components/Page';
 import MultiRow from '../../components/MultiRow';
@@ -18,6 +20,8 @@ interface Child
     [resultRowIdentifier: string]: {
       title: string
       accountRange: [number, number]
+      current?:number
+      previous?:number
     }
   }
 
@@ -59,21 +63,23 @@ const BalanceSheetPage:FC = () => {
                       subTitle={sectionData.title}
                     />
                     )}
-                    {Object.entries(sectionData.children as Child).map(([child, childData], id) => (
-                      <MultiRow
-                        current={(
-                          <Field
-                            type="number"
-                            label={childData?.title}
-                            name={`balance.${[section]}.children.${[child]}.current`}
-                            as={TextField}
-                            setField
-                            fullWidth
-                          />
+                    {Object.entries(sectionData.children as Child)
+                      .filter(([child]) => balance[section].children[child].current > 0 || balance[section].children[child].previous > 0)
+                      .map(([child, childData], id) => (
+                        <MultiRow
+                          current={(
+                            <FastField
+                              type="number"
+                              label={childData?.title}
+                              name={`balance.${[section]}.children.${[child]}.current`}
+                              as={TextField}
+                              setField
+                              fullWidth
+                            />
 )}
-                        previous={(
+                          previous={(
                           companyStore.company.fiscalYears.previousStart && (
-                          <Field
+                          <FastField
                             type="number"
                             label={childData?.title}
                             name={`balance.${[section]}.children.${[child]}.previous`}
@@ -83,10 +89,10 @@ const BalanceSheetPage:FC = () => {
                           />
                           )
 )}
-                        key={id}
-                        subTitle={childData?.title}
-                      />
-                    ))}
+                          key={id}
+                          subTitle={childData?.title}
+                        />
+                      ))}
 
                     <MultiRow
                       current={formatCurrency(balance[section]?.current?.toFixed(2), true)}

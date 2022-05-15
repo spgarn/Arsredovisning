@@ -3,7 +3,7 @@ import {
   Button, Grid, TextField,
 } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-import { Field, Form, Formik } from 'formik';
+import { FastField, Form, Formik } from 'formik';
 import Card from '../../components/Card';
 import Page from '../../components/Page';
 import MultiRow from '../../components/MultiRow';
@@ -59,7 +59,7 @@ const ResultSheetPage:FC = observer(() => {
                         .map(([child, childData], id) => (
                           <MultiRow
                             current={(
-                              <Field
+                              <FastField
                                 type="number"
                                 label={childData?.title}
                                 name={`result.${[section]}.children.${[child]}.current`}
@@ -70,7 +70,7 @@ const ResultSheetPage:FC = observer(() => {
 )}
                             previous={
                           companyStore.company.fiscalYears.previousStart && (
-                          <Field
+                          <FastField
                             type="number"
                             label={childData?.title}
                             name={`result.${[section]}.children.${[child]}.previous`}

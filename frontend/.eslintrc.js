@@ -33,5 +33,6 @@ module.exports = {
     'react/no-array-index-key': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     'no-unused-vars': 'off',
+    'max-len': [2, 400, 4, { ignoreUrls: true }],
   },
 };
