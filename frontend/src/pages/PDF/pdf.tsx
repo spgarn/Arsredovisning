@@ -2,13 +2,14 @@ import {
   Page, Text, View, Document, StyleSheet, Font,
 } from '@react-pdf/renderer';
 import { observer } from 'mobx-react-lite';
-import * as info from '../info/info.json';
-import fontRegular from '../fonts/Comfortaa-Light.ttf';
-import fontBold from '../fonts/Comfortaa-Bold.ttf';
-import type CompanyStore from '../stores/CompanyStore';
-import Line from './components/Line';
+import * as info from '../../info/info.json';
+import fontRegular from '../../fonts/Comfortaa-Light.ttf';
+import fontBold from '../../fonts/Comfortaa-Bold.ttf';
+import type CompanyStore from '../../stores/CompanyStore';
+import Line from '../components/Line';
 import Result from './Result';
-import { formatDate } from '../functions/formatting';
+import { formatDate } from '../../functions/formatting';
+import Balance from './Balance';
 
 Font.register({ family: 'ComfortaaRegular', src: fontRegular });
 Font.register({ family: 'ComfortaaBold', src: fontBold });
@@ -284,16 +285,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
             border
           />
 
-          {/* Tillgångar */}
-          <Line
-            areaOne="Tillgångar"
-          />
-          <Line
-            areaOne="Anläggningstillgångar"
-          />
-          <Line
-            areaOne="Finansiella anläggningstillgångar"
-          />
+          <Balance balance={company.balance?.assets} />
 
         </View>
         <View break style={styles.section}>
@@ -310,16 +302,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           />
 
           {/* Eget kapital och skulder */}
-          <Line
-            areaOne="Eget kapital och skulder"
-          />
-          <Line
-            areaOne="Eget kapital"
-          />
-          <Line
-            areaOne="Bundet eget kapital"
-          />
-
+          <Balance balance={company.balance?.equity} />
         </View>
 
         <View break style={styles.section}>

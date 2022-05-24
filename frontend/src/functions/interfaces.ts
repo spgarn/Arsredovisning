@@ -40,7 +40,7 @@ export interface Sum {
   }
 }
 
-export interface CompanyBalance {
+export interface Balance {
   [section: string]: Sum
 }
 
@@ -53,5 +53,5 @@ export interface Company {
   fiscalYears: FiscalYears
   accounts: Accounts
   result?: Result
-  balance?: CompanyBalance
+  balance?: { equity: Balance, assets: Balance }
 }

@@ -599,8 +599,8 @@ const balanceSections: BalanceSectionsInterface = {
     },
   },
   liabilities: {
-    title: 'Eget kapital',
-    sumTitle: 'Beräknat eget kapital',
+    title: 'Skulder',
+    sumTitle: 'Summa skulder',
     children: {
       obligationLoan: {
         title: 'Obligationslån',

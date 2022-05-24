@@ -5,7 +5,7 @@ import useStore from '../hooks/useStore';
 import fileReader from '../functions/fileReader';
 import extractCompanyFromSie from '../functions/extractCompanyFromSie';
 import calculateResults from '../functions/calculateResults';
-import calculateBalance from '../functions/calculateBalances';
+import calculateBalanceAssets, { calculateBalanceEquity } from '../functions/calculateBalances';
 
 const DropArea = styled.div`
   display: flex;
@@ -23,7 +23,8 @@ const DropFile = observer(() => {
     const sieText = await fileReader(acceptedFiles[0]);
     const company = extractCompanyFromSie(sieText);
     company.result = calculateResults(company.accounts);
-    company.balance = calculateBalance(company.accounts);
+    company.balance.assets = calculateBalanceAssets(company.accounts);
+    company.balance.equity = calculateBalanceEquity(company.accounts);
     companyStore.hydrate(company);
     localStorage.setItem('companyInfo', JSON.stringify(company));
   };

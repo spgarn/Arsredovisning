@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Page from '../components/Page';
 import DropArea from '../components/DropArea';
 import PreviewText from '../components/PreviewText';
-import Pdf from './pdf';
+import Pdf from './PDF/pdf';
 import useStore from '../hooks/useStore';
 
 const LoadPage = observer(() => {

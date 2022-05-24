@@ -9,7 +9,7 @@ import CompanyInfoPage from '../pages/CompanyInfoPage/CompanyInfoPage';
 import FiscalYearPage from '../pages/FiscalYearPage/FiscalYearPage';
 import LoadSie from '../pages/LoadSiePage/LoadSiePage';
 import NotesPage from '../pages/NotesPage/NotesPage';
-import Pdf from '../pages/pdf';
+import Pdf from '../pages/PDF/pdf';
 import ResultDispositionPage from '../pages/ResultDispositionPage/ResultDispositionPage';
 import ResultSheetPage from '../pages/ResultSheetPage/ResultSheetPage';
 import SignPage from '../pages/SignPage/SignPage';

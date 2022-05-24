@@ -74,14 +74,14 @@ function getAccounts(rows: string[]) {
     if (row.startsWith('#UB')) {
       const [, year, id, balance] = splitWords(row);
       const balanceKey = Number(year) === -1 ? 'previousBalance' : 'currentBalance';
-
-      return {
+      const r = {
         ...accounts,
         [id]: {
           ...(accounts[id] ? accounts[id] : defaultAccount()),
           [balanceKey]: Number(balance),
         },
       };
+      return r;
     }
 
     if (row.startsWith('#RES')) {
@@ -113,6 +113,7 @@ function extractCompanyFromSie(sieString: string): Company {
     },
     fiscalYears: getFiscalYears(rows),
     accounts: getAccounts(rows),
+    balance: { assets: {}, equity: {} },
   };
 }
 

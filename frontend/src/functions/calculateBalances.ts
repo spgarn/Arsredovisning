@@ -44,13 +44,11 @@ function sumSums(sums: Sum[]): Sum {
   }));
 }
 
-function calculateBalance(accounts: Accounts): Result {
+function calculateBalanceAssets(accounts: Accounts): Result {
   const CashAndBankBalances = sumSection(accounts, 'CashAndBankBalances');
   const accountsReceivable = sumSection(accounts, 'accountsReceivable');
   const financialFixedAssets = sumSection(accounts, 'financialFixedAssets');
   const ipFixedAssets = sumSection(accounts, 'ipFixedAssets');
-  const liabilities = sumSection(accounts, 'liabilities');
-  const equity = sumSection(accounts, 'equity');
   const materialFixedAssets = sumSection(accounts, 'materialFixedAssets');
   const otherShortClaims = sumSection(accounts, 'otherShortClaims');
   const prepaidCostsAndDelayedIncome = sumSection(accounts, 'prepaidCostsAndDelayedIncome');
@@ -66,12 +64,6 @@ function calculateBalance(accounts: Accounts): Result {
 
   const totalAssts = sumSums([fixedAssets, currentAssets]);
 
-  const estimatedResult = ({
-    current: totalAssts.current + liabilities.current + equity.current,
-    previous: totalAssts.previous + liabilities.previous + equity.previous,
-    children: {},
-  });
-
   return {
     fixedAssets,
     currentAssets,
@@ -80,15 +72,22 @@ function calculateBalance(accounts: Accounts): Result {
     prepaidCostsAndDelayedIncome,
     otherShortClaims,
     materialFixedAssets,
-    liabilities,
-    equity,
     ipFixedAssets,
     financialFixedAssets,
     accountsReceivable,
     CashAndBankBalances,
     totalAssts,
-    estimatedResult,
   };
 }
 
-export default calculateBalance;
+function calculateBalanceEquity(accounts: Accounts): Result {
+  const liabilities = sumSection(accounts, 'liabilities');
+  const equity = sumSection(accounts, 'equity');
+
+  return {
+    liabilities,
+    equity,
+  };
+}
+
+export { calculateBalanceEquity, calculateBalanceAssets as default };
