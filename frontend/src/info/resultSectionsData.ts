@@ -101,7 +101,8 @@ const resultSections: ResultSectionsInterface = {
     sumTitle: 'Summa bokslutsdispositioner',
     children: {
       changeInAccruals: {
-        title: 'Förändring av periodiseringsfonder för juridisk person och enskild näringsidkare',
+        title:
+          'Förändring av periodiseringsfonder för juridisk person och enskild näringsidkare',
         accountRange: [8810, 8819],
       },
       appropriationsAllCompanyForms: {

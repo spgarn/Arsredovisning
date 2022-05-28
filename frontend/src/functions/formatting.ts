@@ -8,6 +8,10 @@ const formatCurrency = (amount: string | number, isShowingCurrency = false) =>
 const formatDate = (date: string) =>
   date
     ?.split('')
-    .reduce((acc: string, value: string, i: number) => acc + (i === 3 || i === 5 ? `${value}-` : value), '');
+    .reduce(
+      (acc: string, value: string, i: number) =>
+        acc + (i === 3 || i === 5 ? `${value}-` : value),
+      ''
+    );
 
 export { formatCurrency, formatDate };

@@ -71,7 +71,8 @@ const balanceSections: BalanceSectionsInterface = {
         accountRange: [1130, 1179],
       },
       activeOrPrepaidProperties: {
-        title: 'Pågående nyanläggningar och förskott avseende materiella anläggningstillgångar',
+        title:
+          'Pågående nyanläggningar och förskott avseende materiella anläggningstillgångar',
         accountRange: [1180, 1189],
       },
       buildingsAndProperties3: {

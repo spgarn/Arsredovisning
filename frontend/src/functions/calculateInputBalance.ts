@@ -1,30 +1,31 @@
 import { Company } from './interfaces';
 
-const sumAreas = ['operatingProfit', 'profitBeforeTaxes', 'yearResult', 'financialProfit'];
+const sumAreas = [
+  'operatingProfit',
+  'profitBeforeTaxes',
+  'yearResult',
+  'financialProfit',
+];
 // reCalculate sections from inputs. Exlude sums.
 function calculateInputBalance(company: Company): void {
   return Object.entries(company.balance).forEach(([section, data]) => {
     if (sumAreas.includes(section)) return;
     // eslint-disable-next-line no-param-reassign
-    company.balance.assets[section].current = Object.values(data.children).reduce(
-      (total, { current }) => total + current,
-      0
-    );
+    company.balance.assets[section].current = Object.values(
+      data.children
+    ).reduce((total, { current }) => total + current, 0);
     // eslint-disable-next-line no-param-reassign
-    company.balance.assets[section].previous = Object.values(data.children).reduce(
-      (total, { previous }) => total + previous,
-      0
-    );
+    company.balance.assets[section].previous = Object.values(
+      data.children
+    ).reduce((total, { previous }) => total + previous, 0);
     // eslint-disable-next-line no-param-reassign
-    company.balance.equity[section].current = Object.values(data.children).reduce(
-      (total, { current }) => total + current,
-      0
-    );
+    company.balance.equity[section].current = Object.values(
+      data.children
+    ).reduce((total, { current }) => total + current, 0);
     // eslint-disable-next-line no-param-reassign
-    company.balance.equity[section].previous = Object.values(data.children).reduce(
-      (total, { previous }) => total + previous,
-      0
-    );
+    company.balance.equity[section].previous = Object.values(
+      data.children
+    ).reduce((total, { previous }) => total + previous, 0);
   });
 }
 // Just put in subSummed values to the sums.

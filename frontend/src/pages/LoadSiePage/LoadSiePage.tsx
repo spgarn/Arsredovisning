@@ -27,8 +27,12 @@ const LoadSie = observer(() => {
       <StyledCard>
         {companyStore.isReady && (
           <>
-            <Typography variant="h3">{companyStore.company.info.name}</Typography>
-            <Typography variant="h4">{companyStore.company.info.registrationNumber}</Typography>
+            <Typography variant="h3">
+              {companyStore.company.info.name}
+            </Typography>
+            <Typography variant="h4">
+              {companyStore.company.info.registrationNumber}
+            </Typography>
           </>
         )}
         <StyledNavLink disabled={!companyStore.isReady} to="/fiscal-year">

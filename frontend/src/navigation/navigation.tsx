@@ -26,8 +26,18 @@ const Navigation = () => {
   if (isGeneratePdf) {
     return (
       <div style={{ height: '100vh' }}>
-        <Grid container justifyContent="flex-end" position="absolute" top={70} right={25}>
-          <Button onClick={() => setIsGeneratePdf(!isGeneratePdf)} disabled={!companyStore.isReady} variant="contained">
+        <Grid
+          container
+          justifyContent="flex-end"
+          position="absolute"
+          top={70}
+          right={25}
+        >
+          <Button
+            onClick={() => setIsGeneratePdf(!isGeneratePdf)}
+            disabled={!companyStore.isReady}
+            variant="contained"
+          >
             Avbryt
           </Button>
         </Grid>
@@ -40,7 +50,10 @@ const Navigation = () => {
   return (
     <BrowserRouter>
       <Grid container justifyContent="flex-end">
-        <Button onClick={() => setIsGeneratePdf(!isGeneratePdf)} variant="contained">
+        <Button
+          onClick={() => setIsGeneratePdf(!isGeneratePdf)}
+          variant="contained"
+        >
           Förhandsgranska
         </Button>
       </Grid>

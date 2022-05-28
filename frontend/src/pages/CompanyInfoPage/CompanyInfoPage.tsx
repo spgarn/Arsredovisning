@@ -37,9 +37,9 @@ const CompanyInfoPage = () => {
         <InputField title="Aktuellt räkenskapsår">
           <Typography variant="h6">
             {companyStore.isReady &&
-              `${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(
-                companyStore.company.fiscalYears.currentEnd
-              )}`}
+              `${formatDate(
+                companyStore.company.fiscalYears.currentStart
+              )} - ${formatDate(companyStore.company.fiscalYears.currentEnd)}`}
           </Typography>
         </InputField>
         <InputField title="Antal tidigare räkenskapsår">
@@ -57,7 +57,9 @@ const CompanyInfoPage = () => {
             <Select value={amount} onChange={handleChange}>
               <MenuItem value="none">Bolaget ingår i en koncern</MenuItem>
               <MenuItem value="mother">Bolaget är modern i en koncern</MenuItem>
-              <MenuItem value="daugther">Bolaget är dottern i en koncern</MenuItem>
+              <MenuItem value="daugther">
+                Bolaget är dottern i en koncern
+              </MenuItem>
             </Select>
           </FormControl>
         </InputField>

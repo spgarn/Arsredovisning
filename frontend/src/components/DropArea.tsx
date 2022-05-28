@@ -5,7 +5,9 @@ import useStore from '../hooks/useStore';
 import fileReader from '../functions/fileReader';
 import extractCompanyFromSie from '../functions/extractCompanyFromSie';
 import calculateResults from '../functions/calculateResults';
-import calculateBalanceAssets, { calculateBalanceEquity } from '../functions/calculateBalances';
+import calculateBalanceAssets, {
+  calculateBalanceEquity,
+} from '../functions/calculateBalances';
 
 const DropArea = styled.div`
   display: flex;

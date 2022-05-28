@@ -1,4 +1,11 @@
-import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Font,
+} from '@react-pdf/renderer';
 import { observer } from 'mobx-react-lite';
 import * as info from '../../info/info.json';
 import fontRegular from '../../fonts/Comfortaa-Light.ttf';
@@ -105,15 +112,21 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
       <Page size="A4" style={styles.page}>
         <View style={styles.front}>
           <Text style={styles.h1}>{company.info.name}</Text>
-          <Text style={{ marginBottom: '50px', ...styles.h2 }}>{company?.info?.registrationNumber}</Text>
+          <Text style={{ marginBottom: '50px', ...styles.h2 }}>
+            {company?.info?.registrationNumber}
+          </Text>
           <Text style={styles.h2}>{info.fiscal_year_text}</Text>
-          <Text style={styles.h2}>{`${formatDate(company.fiscalYears.currentStart)} - ${formatDate(
-            company.fiscalYears.currentEnd
-          )}`}</Text>
+          <Text style={styles.h2}>{`${formatDate(
+            company.fiscalYears.currentStart
+          )} - ${formatDate(company.fiscalYears.currentEnd)}`}</Text>
           <Text style={styles.h4}>{info.presentation_ceo_text}</Text>
           <Text style={styles.h4}>{info.round_up_method}</Text>
-          <Text style={{ marginTop: '24px', ...styles.h4 }}>{info.confirmation_certificate}</Text>
-          <Text style={{ marginTop: '24px', ...styles.h4 }}>{info.director_approve_text}</Text>
+          <Text style={{ marginTop: '24px', ...styles.h4 }}>
+            {info.confirmation_certificate}
+          </Text>
+          <Text style={{ marginTop: '24px', ...styles.h4 }}>
+            {info.director_approve_text}
+          </Text>
         </View>
         <View break style={styles.section}>
           <Text style={styles.h2}>Förvaltningsberättelse</Text>
@@ -136,7 +149,11 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Line areaOne="Nettoomsättning" areaFour="123 123" areaFive="0" />
 
           {/* resultat efter finansiella poster */}
-          <Line areaOne="Resultat efter finansiella poster" areaFour="321 321" areaFive="1 214" />
+          <Line
+            areaOne="Resultat efter finansiella poster"
+            areaFour="321 321"
+            areaFive="1 214"
+          />
 
           {/* Soliditet */}
           <Line areaOne="Soliditet (%)" areaFour="38" areaFive="7" />
@@ -145,7 +162,8 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Text style={styles.h4}>
             {'Bolaget har under 2020 ingått ett uppdragsavtal avseende redovisningstjänster' +
               'vilket har påverkat omsättning starkt positivt.'}
-            Uppdragsavtalet motsvarar en heltidstjänst och fortlöpt under hela räkenskapsåret.
+            Uppdragsavtalet motsvarar en heltidstjänst och fortlöpt under hela
+            räkenskapsåret.
           </Text>
 
           {/* Förändring i egent kapital */}
@@ -163,15 +181,36 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           />
 
           {/* vid årets ingång */}
-          <Line areaOne="Vid årets ingång" areaTwo="50 000" areaThree="0" areaFour="1 073" areaFive="51 073" />
+          <Line
+            areaOne="Vid årets ingång"
+            areaTwo="50 000"
+            areaThree="0"
+            areaFour="1 073"
+            areaFive="51 073"
+          />
 
           {/* Balanseras i en ny räkning */}
-          <Line areaOne="Balanseras i en ny räkning" areaThree="1 073" areaFour="-1 073" areaFive="0" />
+          <Line
+            areaOne="Balanseras i en ny räkning"
+            areaThree="1 073"
+            areaFour="-1 073"
+            areaFive="0"
+          />
 
           {/* Årets resultat */}
-          <Line areaOne="Årets resultat" areaFour="485 281" areaFive="485 281" />
+          <Line
+            areaOne="Årets resultat"
+            areaFour="485 281"
+            areaFive="485 281"
+          />
           {/* Vid årets utgång */}
-          <Line areaOne="Vid årets ingång" areaTwo="50 000" areaThree="0" areaFour="485 281" areaFive="485 281" />
+          <Line
+            areaOne="Vid årets ingång"
+            areaTwo="50 000"
+            areaThree="0"
+            areaFour="485 281"
+            areaFive="485 281"
+          />
 
           {/* Resultatdispotions */}
           <Text style={styles.h3}>Resultatdispotion</Text>
@@ -202,10 +241,12 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
 
           {/* Text regelverk */}
           <Text style={styles.h4}>
-            Med hänvisning till ovanstående och vad som i övrigt kommit till styrelsens kännedom är det styrelsens
-            bedömning att utdelningen är försvarbar (enligt ABL 17 kap 3 §) med tanke på de krav som verksamhetens art
-            och omfattning samt risker ställer på storleken av bolagets egna kapital, konsolideringsbehov, likviditet
-            och ställning i övrigt.
+            Med hänvisning till ovanstående och vad som i övrigt kommit till
+            styrelsens kännedom är det styrelsens bedömning att utdelningen är
+            försvarbar (enligt ABL 17 kap 3 §) med tanke på de krav som
+            verksamhetens art och omfattning samt risker ställer på storleken av
+            bolagets egna kapital, konsolideringsbehov, likviditet och ställning
+            i övrigt.
           </Text>
         </View>
         <View break style={styles.section}>
@@ -278,10 +319,12 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           <Text style={styles.h2}>Underskrifter</Text>
           <Text style={styles.h4}>
             {`
-            Årsredovisning för ${company.info.name}, ${company.info.registrationNumber}
-            Avseende räkenskapsåret ${formatDate(company.fiscalYears.currentEnd)} - ${formatDate(
+            Årsredovisning för ${company.info.name}, ${
+              company.info.registrationNumber
+            }
+            Avseende räkenskapsåret ${formatDate(
               company.fiscalYears.currentEnd
-            )}`}
+            )} - ${formatDate(company.fiscalYears.currentEnd)}`}
           </Text>
         </View>
 
@@ -290,7 +333,11 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
             <Text>{company.info.name}</Text>
             <Text>{company.info.registrationNumber}</Text>
           </View>
-          <Text render={({ pageNumber, totalPages }) => `sida ${pageNumber} av ${totalPages}`} />
+          <Text
+            render={({ pageNumber, totalPages }) =>
+              `sida ${pageNumber} av ${totalPages}`
+            }
+          />
         </View>
       </Page>
     </Document>

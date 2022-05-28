@@ -37,7 +37,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const Line = ({ border, areaOne, areaTwo, areaThree, areaFour, areaFive }: IProps) => {
+const Line = ({
+  border,
+  areaOne,
+  areaTwo,
+  areaThree,
+  areaFour,
+  areaFive,
+}: IProps) => {
   return (
     <div
       style={{

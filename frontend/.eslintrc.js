@@ -35,7 +35,7 @@ module.exports = {
       'error',
       {
         semi: true,
-        printWidth: 120,
+        printWidth: 80,
         singleQuote: true,
       },
     ],

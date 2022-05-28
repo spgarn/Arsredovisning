@@ -30,9 +30,9 @@ const FiscalYearPage = () => {
         <Typography variant="h5">
           <Checkbox />
           {companyStore.isReady &&
-            `${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(
-              companyStore.company.fiscalYears.currentEnd
-            )}`}
+            `${formatDate(
+              companyStore.company.fiscalYears.currentStart
+            )} - ${formatDate(companyStore.company.fiscalYears.currentEnd)}`}
         </Typography>
         <StyledNavLink to="/company-info">
           <Button variant="contained">Fortsätt</Button>

@@ -1,7 +1,12 @@
-import resultSections, { ResultSectionsInterface } from '../info/resultSectionsData';
+import resultSections, {
+  ResultSectionsInterface,
+} from '../info/resultSectionsData';
 import type { Accounts, Result, Sum } from './interfaces';
 
-function sumSection(accounts: Accounts, section: keyof ResultSectionsInterface): Sum {
+function sumSection(
+  accounts: Accounts,
+  section: keyof ResultSectionsInterface
+): Sum {
   return Object.entries(accounts).reduce(
     (sum, [accountId, account]) => {
       const accountNumber = Number(accountId);
@@ -36,7 +41,10 @@ function sumSection(accounts: Accounts, section: keyof ResultSectionsInterface):
       current: 0,
       previous: 0,
       children: Object.fromEntries(
-        Object.keys(resultSections[section].children).map((title) => [title, { current: 0, previous: 0 }])
+        Object.keys(resultSections[section].children).map((title) => [
+          title,
+          { current: 0, previous: 0 },
+        ])
       ),
     }
   );

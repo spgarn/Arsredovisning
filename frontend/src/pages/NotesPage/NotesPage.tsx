@@ -25,7 +25,13 @@ const NotesPage = observer(() => {
             subTitle="Regelverk"
             current={<TextareaAutosize cols={50} minRows={5} minLength={200} />}
           />
-          <MultiRow isBig isBold isSum isNoBorder subTitle="Tjänste- och entreprenaduppdrag" />
+          <MultiRow
+            isBig
+            isBold
+            isSum
+            isNoBorder
+            subTitle="Tjänste- och entreprenaduppdrag"
+          />
           <MultiRow
             isBold
             isSum
@@ -33,17 +39,32 @@ const NotesPage = observer(() => {
             subTitle="Utför företaget tjänste- och/eller entreprenaduppdrag till fast pris?"
             current={<Switch />}
           />
-          <MultiRow isBig isBold isSum isNoBorder subTitle="Egentillverkade varor" />
-          <MultiRow isBold isSum isNoBorder subTitle="Tillverkar företaget egna varor?" current={<Switch />} />
+          <MultiRow
+            isBig
+            isBold
+            isSum
+            isNoBorder
+            subTitle="Egentillverkade varor"
+          />
+          <MultiRow
+            isBold
+            isSum
+            isNoBorder
+            subTitle="Tillverkar företaget egna varor?"
+            current={<Switch />}
+          />
         </Note>
         <Note title="Medelantal anställda">
           <MultiRow
             subTitle=""
-            current={`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(
-              companyStore.company.fiscalYears.currentEnd
-            )}`}
+            current={`${formatDate(
+              companyStore.company.fiscalYears.currentStart
+            )} - ${formatDate(companyStore.company.fiscalYears.currentEnd)}`}
           />
-          <MultiRow subTitle="Medelantal anställda under året" current={<TextField label="Måste anges" />} />
+          <MultiRow
+            subTitle="Medelantal anställda under året"
+            current={<TextField label="Måste anges" />}
+          />
         </Note>
         <Note title="Ställda säkerheter">
           <MultiRow
@@ -107,7 +128,9 @@ const NotesPage = observer(() => {
         </Note>
 
         <NavLink to="/year-story">
-          <div style={{ display: 'grid', justifyContent: 'center', marginTop: 12 }}>
+          <div
+            style={{ display: 'grid', justifyContent: 'center', marginTop: 12 }}
+          >
             <Button variant="contained">Fortsätt</Button>
           </div>
         </NavLink>

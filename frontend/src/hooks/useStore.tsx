@@ -8,7 +8,9 @@ const StoreContext = createContext<RootStore | undefined>(undefined);
 function StoreProvider({ children }: { children: ReactNode }) {
   const rootStore = store ?? new RootStore();
 
-  return <StoreContext.Provider value={rootStore}>{children}</StoreContext.Provider>;
+  return (
+    <StoreContext.Provider value={rootStore}>{children}</StoreContext.Provider>
+  );
 }
 
 function useStore(): { companyStore: CompanyStore } {

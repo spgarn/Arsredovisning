@@ -34,73 +34,101 @@ const BalanceSheetPage: FC = () => {
   };
 
   return (
-    <Formik onSubmit={(e) => handleSubmit(e)} initialValues={companyStore.company}>
+    <Formik
+      onSubmit={(e) => handleSubmit(e)}
+      initialValues={companyStore.company}
+    >
       {() => (
         <Form>
           <Page>
             <Card>
               <Grid container direction="column">
                 <SubTitle
-                  current={`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(
+                  current={`${formatDate(
+                    companyStore.company.fiscalYears.currentStart
+                  )} - ${formatDate(
                     companyStore.company.fiscalYears.currentEnd
                   )} `}
                   previous={
                     companyStore.company.fiscalYears.previousStart &&
-                    `${formatDate(companyStore.company.fiscalYears.previousStart)} - ${formatDate(
+                    `${formatDate(
+                      companyStore.company.fiscalYears.previousStart
+                    )} - ${formatDate(
                       companyStore.company.fiscalYears.previousEnd
                     )}`
                   }
                   subTitle="Balansräkning"
                 />
-                {Object.entries(balanceSections).map(([section, sectionData], i) => (
-                  <Fragment key={i}>
-                    {sectionData.title && <MultiRow isNoBorder isSum isBold subTitle={sectionData.title} />}
-                    {Object.entries(sectionData.children as Child)
-                      .filter(
-                        ([child]) =>
-                          balance[section].children[child].current > 0 || balance[section].children[child].previous > 0
-                      )
-                      .map(([child, childData], id) => (
+                {Object.entries(balanceSections).map(
+                  ([section, sectionData], i) => (
+                    <Fragment key={i}>
+                      {sectionData.title && (
                         <MultiRow
-                          current={
-                            <FastField
-                              type="number"
-                              label={childData?.title}
-                              name={`balance.${[section]}.children.${[child]}.current`}
-                              as={TextField}
-                              setField
-                              fullWidth
-                            />
-                          }
-                          previous={
-                            companyStore.company.fiscalYears.previousStart && (
+                          isNoBorder
+                          isSum
+                          isBold
+                          subTitle={sectionData.title}
+                        />
+                      )}
+                      {Object.entries(sectionData.children as Child)
+                        .filter(
+                          ([child]) =>
+                            balance[section].children[child].current > 0 ||
+                            balance[section].children[child].previous > 0
+                        )
+                        .map(([child, childData], id) => (
+                          <MultiRow
+                            current={
                               <FastField
                                 type="number"
                                 label={childData?.title}
-                                name={`balance.${[section]}.children.${[child]}.previous`}
+                                name={`balance.${[section]}.children.${[
+                                  child,
+                                ]}.current`}
                                 as={TextField}
                                 setField
                                 fullWidth
                               />
-                            )
-                          }
-                          key={id}
-                          subTitle={childData?.title}
-                        />
-                      ))}
+                            }
+                            previous={
+                              companyStore.company.fiscalYears
+                                .previousStart && (
+                                <FastField
+                                  type="number"
+                                  label={childData?.title}
+                                  name={`balance.${[section]}.children.${[
+                                    child,
+                                  ]}.previous`}
+                                  as={TextField}
+                                  setField
+                                  fullWidth
+                                />
+                              )
+                            }
+                            key={id}
+                            subTitle={childData?.title}
+                          />
+                        ))}
 
-                    <MultiRow
-                      current={formatCurrency(balance[section]?.current?.toFixed(2), true)}
-                      previous={
-                        companyStore.company.fiscalYears.previousStart &&
-                        formatCurrency(balance[section]?.previous?.toFixed(2), true)
-                      }
-                      isSum
-                      isBold
-                      subTitle={sectionData.sumTitle || sectionData.title}
-                    />
-                  </Fragment>
-                ))}
+                      <MultiRow
+                        current={formatCurrency(
+                          balance[section]?.current?.toFixed(2),
+                          true
+                        )}
+                        previous={
+                          companyStore.company.fiscalYears.previousStart &&
+                          formatCurrency(
+                            balance[section]?.previous?.toFixed(2),
+                            true
+                          )
+                        }
+                        isSum
+                        isBold
+                        subTitle={sectionData.sumTitle || sectionData.title}
+                      />
+                    </Fragment>
+                  )
+                )}
 
                 <Grid item alignSelf="center">
                   <Button type="submit" variant="contained">

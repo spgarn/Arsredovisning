@@ -1,7 +1,12 @@
-import balanceSections, { BalanceSectionsInterface } from '../info/balanceSectionsData';
+import balanceSections, {
+  BalanceSectionsInterface,
+} from '../info/balanceSectionsData';
 import type { Accounts, Result, Sum } from './interfaces';
 
-function sumSection(accounts: Accounts, section: keyof BalanceSectionsInterface): Sum {
+function sumSection(
+  accounts: Accounts,
+  section: keyof BalanceSectionsInterface
+): Sum {
   return Object.entries(accounts).reduce(
     (sum, [accountId, account]) => {
       const accountNumber = Number(accountId);
@@ -36,7 +41,10 @@ function sumSection(accounts: Accounts, section: keyof BalanceSectionsInterface)
       current: 0,
       previous: 0,
       children: Object.fromEntries(
-        Object.keys(balanceSections[section].children).map((title) => [title, { current: 0, previous: 0 }])
+        Object.keys(balanceSections[section].children).map((title) => [
+          title,
+          { current: 0, previous: 0 },
+        ])
       ),
     }
   );
@@ -57,11 +65,18 @@ function calculateBalanceAssets(accounts: Accounts): Result {
   const ipFixedAssets = sumSection(accounts, 'ipFixedAssets');
   const materialFixedAssets = sumSection(accounts, 'materialFixedAssets');
   const otherShortClaims = sumSection(accounts, 'otherShortClaims');
-  const prepaidCostsAndDelayedIncome = sumSection(accounts, 'prepaidCostsAndDelayedIncome');
+  const prepaidCostsAndDelayedIncome = sumSection(
+    accounts,
+    'prepaidCostsAndDelayedIncome'
+  );
   const productStock = sumSection(accounts, 'productStock');
   const shortPlacements = sumSection(accounts, 'shortPlacements');
 
-  const fixedAssets = sumSums([financialFixedAssets, ipFixedAssets, materialFixedAssets]);
+  const fixedAssets = sumSums([
+    financialFixedAssets,
+    ipFixedAssets,
+    materialFixedAssets,
+  ]);
 
   const currentAssets = sumSums([
     CashAndBankBalances,
