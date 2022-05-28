@@ -11,7 +11,7 @@ function StoreProvider({ children }: { children: ReactNode }) {
   return <StoreContext.Provider value={rootStore}>{children}</StoreContext.Provider>;
 }
 
-function useStore(): { companyStore: CompanyStore} {
+function useStore(): { companyStore: CompanyStore } {
   const rootStore = useContext(StoreContext);
   if (!rootStore) {
     throw new Error('useStore must be used within a StoreProvider.');

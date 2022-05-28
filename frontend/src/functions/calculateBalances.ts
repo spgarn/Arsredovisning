@@ -1,18 +1,21 @@
 import balanceSections, { BalanceSectionsInterface } from '../info/balanceSectionsData';
 import type { Accounts, Result, Sum } from './interfaces';
 
-function sumSection(
-  accounts: Accounts,
-  section: keyof BalanceSectionsInterface,
-): Sum {
-  return Object.entries(accounts)
-    .reduce((sum, [accountId, account]) => {
+function sumSection(accounts: Accounts, section: keyof BalanceSectionsInterface): Sum {
+  return Object.entries(accounts).reduce(
+    (sum, [accountId, account]) => {
       const accountNumber = Number(accountId);
-      const balanceRow = Object.entries(balanceSections[section].children)
-        .find(([, { accountRange: [min, max] }]) => {
+      const balanceRow = Object.entries(balanceSections[section].children).find(
+        ([
+          ,
+          {
+            accountRange: [min, max],
+          },
+        ]) => {
           if (accountNumber >= min && accountNumber <= max) return true;
           return false;
-        });
+        }
+      );
       if (!balanceRow) return sum;
 
       const balanceRowIdentifier = balanceRow[0];
@@ -28,12 +31,15 @@ function sumSection(
           },
         },
       };
-    }, {
+    },
+    {
       current: 0,
       previous: 0,
-      children: Object.fromEntries(Object.keys(balanceSections[section].children)
-        .map((title) => [title, { current: 0, previous: 0 }])),
-    });
+      children: Object.fromEntries(
+        Object.keys(balanceSections[section].children).map((title) => [title, { current: 0, previous: 0 }])
+      ),
+    }
+  );
 }
 
 function sumSums(sums: Sum[]): Sum {
@@ -57,10 +63,14 @@ function calculateBalanceAssets(accounts: Accounts): Result {
 
   const fixedAssets = sumSums([financialFixedAssets, ipFixedAssets, materialFixedAssets]);
 
-  const currentAssets = sumSums([CashAndBankBalances,
-    accountsReceivable, otherShortClaims,
+  const currentAssets = sumSums([
+    CashAndBankBalances,
+    accountsReceivable,
+    otherShortClaims,
     prepaidCostsAndDelayedIncome,
-    productStock, shortPlacements]);
+    productStock,
+    shortPlacements,
+  ]);
 
   const totalAssts = sumSums([fixedAssets, currentAssets]);
 

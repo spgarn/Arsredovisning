@@ -1,6 +1,4 @@
-import {
-  action, makeObservable, observable, runInAction,
-} from 'mobx';
+import { action, makeObservable, observable, runInAction } from 'mobx';
 import merge from 'lodash.merge';
 import { Company } from '../functions/interfaces';
 import type RootStore from './RootStore';
@@ -52,13 +50,16 @@ class CompanyStore {
         currentAssets: { current: 0, previous: 0, children: {} },
         totalAssts: { current: 0, previous: 0, children: {} },
       },
-      equity: { liabilites: { current: 0, previous: 0, children: {} }, equity: { current: 0, previous: 0, children: {} } },
+      equity: {
+        liabilites: { current: 0, previous: 0, children: {} },
+        equity: { current: 0, previous: 0, children: {} },
+      },
     },
-  }
+  };
 
   isReady = false;
 
-  rootStore: RootStore
+  rootStore: RootStore;
 
   constructor(rootStore: RootStore) {
     makeObservable(this, {
@@ -73,7 +74,11 @@ class CompanyStore {
   hydrate(company: Company): void {
     runInAction(() => {
       this.company = {
-        info: {}, fiscalYears: {}, balance: {}, result: {}, accounts: {},
+        info: {},
+        fiscalYears: {},
+        balance: {},
+        result: {},
+        accounts: {},
       } as Company;
       this.company = merge(this.company, company);
       this.isReady = true;

@@ -19,21 +19,18 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        'linear-gradient( 95deg,rgb(111, 18, 205) 0%,rgb(111, 80, 206) 50%,rgb(111, 153, 206) 100%)',
+      backgroundImage: 'linear-gradient( 95deg,rgb(111, 18, 205) 0%,rgb(111, 80, 206) 50%,rgb(111, 153, 206) 100%)',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        'linear-gradient( 95deg,rgb(111, 18, 205) 0%,rgb(111, 80, 206) 50%,rgb(111, 153, 206) 100%)',
+      backgroundImage: 'linear-gradient( 95deg,rgb(111, 18, 205) 0%,rgb(111, 80, 206) 50%,rgb(111, 153, 206) 100%)',
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
     height: 3,
     border: 0,
-    backgroundColor:
-      theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
     borderRadius: 1,
   },
 }));
@@ -51,17 +48,15 @@ const ColorlibStepIconRoot = styled('div')<{
   justifyContent: 'center',
   alignItems: 'center',
   ...(ownerState.active && {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(111, 18, 205) 0%, rgb(111, 80, 206) 50%, rgb(111, 153, 206) 100%)',
+    backgroundImage: 'linear-gradient( 136deg, rgb(111, 18, 205) 0%, rgb(111, 80, 206) 50%, rgb(111, 153, 206) 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
-    backgroundImage:
-      'linear-gradient( 136deg, rgb(111, 18, 205) 0%, rgb(111, 80, 206) 50%, rgb(111, 153, 206) 100%)',
+    backgroundImage: 'linear-gradient( 136deg, rgb(111, 18, 205) 0%, rgb(111, 80, 206) 50%, rgb(111, 153, 206) 100%)',
   }),
 }));
 
-function ativeState(area:string) {
+function ativeState(area: string) {
   if (area === '/company-info') return 1;
   if (area === '/result-sheet') return 2;
   if (area === '/balance-sheet') return 3;
@@ -73,9 +68,7 @@ function ativeState(area:string) {
 }
 
 function ColorlibStepIcon(props: StepIconProps) {
-  const {
-    active, completed, className, icon,
-  } = props;
+  const { active, completed, className, icon } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
     1: <NavLink to="/Arsredovisning">1</NavLink>,
@@ -86,7 +79,6 @@ function ColorlibStepIcon(props: StepIconProps) {
     6: <NavLink to="/notes">6</NavLink>,
     7: <NavLink to="/year-story">7</NavLink>,
     8: <NavLink to="/sign">8</NavLink>,
-
   };
 
   return (
@@ -96,17 +88,22 @@ function ColorlibStepIcon(props: StepIconProps) {
   );
 }
 
-const steps = ['Sie-fil', 'Företagsuppgifter', 'Resultaträkning', 'Balansräkning', 'Resultatdisposition', 'Noter', 'Förvaltningsberättelse', 'Befattningshavare'];
+const steps = [
+  'Sie-fil',
+  'Företagsuppgifter',
+  'Resultaträkning',
+  'Balansräkning',
+  'Resultatdisposition',
+  'Noter',
+  'Förvaltningsberättelse',
+  'Befattningshavare',
+];
 
-export default function CustomizedSteppers():JSX.Element {
+export default function CustomizedSteppers(): JSX.Element {
   const activeArea = useLocation();
   return (
     <Stack sx={{ width: '100%' }} mt={18} spacing={4}>
-      <Stepper
-        alternativeLabel
-        activeStep={ativeState(activeArea.pathname)}
-        connector={<ColorlibConnector />}
-      >
+      <Stepper alternativeLabel activeStep={ativeState(activeArea.pathname)} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>

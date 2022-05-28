@@ -5,10 +5,7 @@ function readFile(file: File): Promise<string> {
   reader.readAsArrayBuffer(file);
   return new Promise((resolve) => {
     reader.onload = (e) => {
-      const text = legacy.decode(
-        Buffer.from(e.target.result as ArrayBuffer),
-        'cp437',
-      );
+      const text = legacy.decode(Buffer.from(e.target.result as ArrayBuffer), 'cp437');
       resolve(text);
     };
   });

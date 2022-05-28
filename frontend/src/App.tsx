@@ -19,7 +19,6 @@ const theme = createTheme({
       defaultProps: {
         elevation: 5,
       },
-
     },
 
     MuiButton: {
@@ -35,7 +34,7 @@ const theme = createTheme({
   },
 });
 
-function App():JSX.Element {
+function App(): JSX.Element {
   return (
     <StoreProvider>
       <ThemeProvider theme={theme}>

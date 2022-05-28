@@ -8,14 +8,10 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-type Props = {
-  children: ReactNode
+interface IProps {
+  children: ReactNode;
 }
 
-const Page: React.FC<Props> = ({ children }) => (
-  <Container>
-    {children}
-  </Container>
-);
+const Page = ({ children }: IProps) => <Container>{children}</Container>;
 
 export default Page;

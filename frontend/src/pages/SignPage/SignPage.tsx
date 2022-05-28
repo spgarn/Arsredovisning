@@ -15,21 +15,18 @@ const SignPage = () => {
   return (
     <Page>
       <Card>
-
         <SubTitle subTitle="Befattningshavare" />
         <Typography variant="h5">Styrelseledamöter och vd</Typography>
         <Typography>
           <p style={{ marginTop: 8, marginBottom: 1 }}>
-            Observera att endast ordinarie styrelseledamöter
-            ska anges tillsammans med en eventuell VD.
+            Observera att endast ordinarie styrelseledamöter ska anges tillsammans med en eventuell VD.
           </p>
           <p style={{ marginTop: 1, marginBottom: 1 }}>
-            Suppleanter ska bara tas med om
-            de ska ersätta en ordinarie ledamot vid underskrift av årsredovisning.
+            Suppleanter ska bara tas med om de ska ersätta en ordinarie ledamot vid underskrift av årsredovisning.
           </p>
           <p style={{ marginTop: 1, marginBottom: 1 }}>
-            Om du vill ha en annan rollbeskrivning än någon av de förvalda
-            går det att skriva en egen beskrivning direkt i fältet.
+            Om du vill ha en annan rollbeskrivning än någon av de förvalda går det att skriva en egen beskrivning direkt
+            i fältet.
           </p>
         </Typography>
         <Grid xs={12} container flexDirection="row" mt={12} ml={105} gap={50}>
@@ -38,20 +35,25 @@ const SignPage = () => {
           <Typography width="172px">Personnummer</Typography>
           <Typography width="172px">Roll</Typography>
         </Grid>
-        <SignRow first="Företrädare 1" second={<TextField name="" />} third={<TextField name="" />} fourth={<TextField name="" />} fifth={<TextField name="" />} />
+        <SignRow
+          first="Företrädare 1"
+          second={<TextField name="" />}
+          third={<TextField name="" />}
+          fourth={<TextField name="" />}
+          fifth={<TextField name="" />}
+        />
 
         <Typography variant="h5">Ort och datum för underskrift av årsredovisning</Typography>
         <Typography mb={12}>
           <p style={{ marginTop: 8, marginBottom: 1 }}>
-            Här kan du fylla i när och var årsredovisningen skrivs under
-            och då fylls det i automatiskt i årsredovisningen.
+            Här kan du fylla i när och var årsredovisningen skrivs under och då fylls det i automatiskt i
+            årsredovisningen.
           </p>
-
         </Typography>
         <MultiRow
           isBold
           subTitle="Datum då årsredovisningen skrivs under"
-          current={(
+          current={
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DesktopDatePicker
                 label="For desktop"
@@ -63,11 +65,10 @@ const SignPage = () => {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-)}
+          }
         />
         <MultiRow isBold subTitle="Ort där årsredovisningen skrivs under" current={<TextField name="" />} />
       </Card>
-
     </Page>
   );
 };

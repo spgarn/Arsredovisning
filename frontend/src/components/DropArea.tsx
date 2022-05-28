@@ -13,7 +13,7 @@ const DropArea = styled.div`
   align-items: center;
   height: 30vh;
   text-align: center;
-  background-color:#918686;
+  background-color: #918686;
   border-radius: 8px;
 `;
 
@@ -32,15 +32,12 @@ const DropFile = observer(() => {
   return (
     <Dropzone onDrop={handleOnDrop}>
       {({ getRootProps, getInputProps }) => (
-
         <DropArea {...getRootProps()}>
           <input {...getInputProps()} />
           <p>Släpp din SIE-fil här för att ladda upp filen.</p>
         </DropArea>
-
       )}
     </Dropzone>
-
   );
 });
 

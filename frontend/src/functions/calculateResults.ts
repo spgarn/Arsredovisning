@@ -1,18 +1,21 @@
 import resultSections, { ResultSectionsInterface } from '../info/resultSectionsData';
 import type { Accounts, Result, Sum } from './interfaces';
 
-function sumSection(
-  accounts: Accounts,
-  section: keyof ResultSectionsInterface,
-): Sum {
-  return Object.entries(accounts)
-    .reduce((sum, [accountId, account]) => {
+function sumSection(accounts: Accounts, section: keyof ResultSectionsInterface): Sum {
+  return Object.entries(accounts).reduce(
+    (sum, [accountId, account]) => {
       const accountNumber = Number(accountId);
-      const resultRow = Object.entries(resultSections[section].children)
-        .find(([, { accountRange: [min, max] }]) => {
+      const resultRow = Object.entries(resultSections[section].children).find(
+        ([
+          ,
+          {
+            accountRange: [min, max],
+          },
+        ]) => {
           if (accountNumber >= min && accountNumber <= max) return true;
           return false;
-        });
+        }
+      );
       if (!resultRow) return sum;
 
       const resultRowIdentifier = resultRow[0];
@@ -28,12 +31,15 @@ function sumSection(
           },
         },
       };
-    }, {
+    },
+    {
       current: 0,
       previous: 0,
-      children: Object.fromEntries(Object.keys(resultSections[section].children)
-        .map((title) => [title, { current: 0, previous: 0 }])),
-    });
+      children: Object.fromEntries(
+        Object.keys(resultSections[section].children).map((title) => [title, { current: 0, previous: 0 }])
+      ),
+    }
+  );
 }
 
 function sumSums(sums: Sum[]): Sum {

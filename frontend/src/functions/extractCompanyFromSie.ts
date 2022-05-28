@@ -1,6 +1,4 @@
-import type {
-  Company, CompanyAddressInfo, FiscalYears, Accounts,
-} from './interfaces';
+import type { Company, CompanyAddressInfo, FiscalYears, Accounts } from './interfaces';
 
 function splitWords(row: string, removeQuotes = false) {
   const words = row
@@ -64,7 +62,11 @@ function getFiscalYears(rows: string[]): FiscalYears {
 // E.g. #RES 0 3041 -2258200 0
 // E.g. #UB 0 1930 150000 0
 function getAccounts(rows: string[]) {
-  const defaultAccount = () => ({ name: '', previousBalance: 0, currentBalance: 0 });
+  const defaultAccount = () => ({
+    name: '',
+    previousBalance: 0,
+    currentBalance: 0,
+  });
   return rows.reduce((accounts, row) => {
     // if (row.startsWith('#KONTO')) {
     //   const [, id, name] = splitWords(row, true);
@@ -93,7 +95,6 @@ function getAccounts(rows: string[]) {
           ...(accounts[id] ? accounts[id] : defaultAccount()),
           [balanceKey]: Number(balance),
         },
-
       };
     }
     return accounts;
@@ -101,9 +102,7 @@ function getAccounts(rows: string[]) {
 }
 
 function extractCompanyFromSie(sieString: string): Company {
-  const rows = sieString
-    .replaceAll('\r', '')
-    .split('\n');
+  const rows = sieString.replaceAll('\r', '').split('\n');
 
   return {
     info: {
