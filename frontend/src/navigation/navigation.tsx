@@ -14,7 +14,8 @@ import ResultDispositionPage from '../pages/ResultDispositionPage/ResultDisposit
 import ResultSheetPage from '../pages/ResultSheetPage/ResultSheetPage';
 import SignPage from '../pages/SignPage/SignPage';
 import YearStoryPage from '../pages/YearStoryPage/YearStoryPage';
-import BalanceSheetPage from '../pages/BalanceSheetPage/BalanceSheetPage';
+import BalanceSheetEquityPage from '../pages/BalanceSheetPage/BalanceSheetEquityPage';
+import BalanceSheetAssetsPage from '../pages/BalanceSheetPage/BalanceSheetAssetsPage';
 
 const Navigation = () => {
   const { companyStore } = useStore();
@@ -59,7 +60,8 @@ const Navigation = () => {
         {/* Resultaträkning */}
         <Route path="/result-sheet" element={<ResultSheetPage />} />
         {/* Balansräkning */}
-        <Route path="/balance-sheet" element={<BalanceSheetPage />} />
+        <Route path="/balance-sheet-assets" element={<BalanceSheetAssetsPage />} />
+        <Route path="/balance-sheet-equity" element={<BalanceSheetEquityPage />} />
         {/* Resultatdisposition */}
         <Route path="/result-disposition" element={<ResultDispositionPage />} />
         {/* Noter */}
