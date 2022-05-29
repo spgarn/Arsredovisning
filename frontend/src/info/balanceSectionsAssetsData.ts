@@ -1,27 +1,27 @@
 interface BalanceSectionInterface {
-  title: string
-  sumTitle: string
+  title: string;
+  sumTitle: string;
   children: {
     [resultRowIdentifier: string]: {
-      title: string
-      accountRange: [number, number]
-    }
-  }
+      title: string;
+      accountRange: [number, number];
+    };
+  };
 }
 
 interface BalanceAssetsSectionsInterface {
-  ipFixedAssets: BalanceSectionInterface
-  materialFixedAssets: BalanceSectionInterface
-  financialFixedAssets: BalanceSectionInterface
-  productStock: BalanceSectionInterface
-  accountsReceivable: BalanceSectionInterface
-  otherShortClaims: BalanceSectionInterface
-  prepaidCostsAndDelayedIncome: BalanceSectionInterface
-  shortPlacements: BalanceSectionInterface
-  CashAndBankBalances: BalanceSectionInterface
-  fixedAssets: BalanceSectionInterface
-  currentAssets: BalanceSectionInterface
-  totalAssts: BalanceSectionInterface
+  ipFixedAssets: BalanceSectionInterface;
+  materialFixedAssets: BalanceSectionInterface;
+  financialFixedAssets: BalanceSectionInterface;
+  productStock: BalanceSectionInterface;
+  accountsReceivable: BalanceSectionInterface;
+  otherShortClaims: BalanceSectionInterface;
+  prepaidCostsAndDelayedIncome: BalanceSectionInterface;
+  shortPlacements: BalanceSectionInterface;
+  CashAndBankBalances: BalanceSectionInterface;
+  fixedAssets: BalanceSectionInterface;
+  currentAssets: BalanceSectionInterface;
+  totalAssts: BalanceSectionInterface;
 }
 
 const balanceAssetsSections: BalanceAssetsSectionsInterface = {
@@ -31,38 +31,23 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       patents: {
         title: 'Patent och Licenser',
-        accountRange: [
-          1020,
-          1059,
-        ],
+        accountRange: [1020, 1059],
       },
       tenancy: {
         title: 'Hyresrätt och liknande rättigheter',
-        accountRange: [
-          1060,
-          1069,
-        ],
+        accountRange: [1060, 1069],
       },
       goodwill: {
         title: 'Hyresrätt och liknande rättigheter',
-        accountRange: [
-          1070,
-          1079,
-        ],
+        accountRange: [1070, 1079],
       },
       fees: {
         title: 'Patent och Licenser',
-        accountRange: [
-          1080,
-          1087,
-        ],
+        accountRange: [1080, 1087],
       },
       prepaidPatentFees: {
         title: 'Förskott avseende immateriella anläggningstillgångar',
-        accountRange: [
-          1088,
-          1088,
-        ],
+        accountRange: [1088, 1088],
       },
     },
   },
@@ -72,66 +57,40 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       buildingsAndProperties: {
         title: 'Byggnader och mark',
-        accountRange: [
-          1100,
-          1119,
-        ],
+        accountRange: [1100, 1119],
       },
       costOnOthersProperty: {
         title: 'Förbättringsutgifter på annans fastighet',
-        accountRange: [
-          1120,
-          1129,
-        ],
+        accountRange: [1120, 1129],
       },
       buildingsAndProperties2: {
         title: 'Byggnader och mark',
-        accountRange: [
-          1130,
-          1179,
-        ],
+        accountRange: [1130, 1179],
       },
       activeOrPrepaidProperties: {
-        title: 'Pågående nyanläggningar och förskott avseende materiella anläggningstillgångar',
-        accountRange: [
-          1180,
-          1189,
-        ],
+        title:
+          'Pågående nyanläggningar och förskott avseende materiella anläggningstillgångar',
+        accountRange: [1180, 1189],
       },
       buildingsAndProperties3: {
         title: 'Byggnader och mark',
-        accountRange: [
-          1190,
-          1199,
-        ],
+        accountRange: [1190, 1199],
       },
       machines: {
         title: 'Maskiner och andra tekniska anläggningar',
-        accountRange: [
-          1210,
-          1219,
-        ],
+        accountRange: [1210, 1219],
       },
       inventoryAndTools: {
         title: 'Inventarier, verktyg och installationer',
-        accountRange: [
-          1220,
-          1259,
-        ],
+        accountRange: [1220, 1259],
       },
       inventoryAndTools2: {
         title: 'Inventarier, verktyg och installationer',
-        accountRange: [
-          1261,
-          1279,
-        ],
+        accountRange: [1261, 1279],
       },
       otherFixedAssets: {
         title: 'Övriga materiella anläggningstillgångar',
-        accountRange: [
-          1290,
-          1299,
-        ],
+        accountRange: [1290, 1299],
       },
     },
   },
@@ -141,80 +100,47 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       groupStocks: {
         title: 'Andelar i koncernföretag',
-        accountRange: [
-          1310,
-          1319,
-        ],
+        accountRange: [1310, 1319],
       },
       claimGroupCompany: {
         title: 'Fordringar hos koncernföretag',
-        accountRange: [
-          1320,
-          1329,
-        ],
+        accountRange: [1320, 1329],
       },
       stockCompanyOfInterest: {
         title: 'Andelar i intresseföretag och gemensamt styrda företag',
-        accountRange: [
-          1330,
-          1335,
-        ],
+        accountRange: [1330, 1335],
       },
       interetsInOtherCompanies: {
         title: 'Ägarintressen i övriga företag',
-        accountRange: [
-          1336,
-          1337,
-        ],
+        accountRange: [1336, 1337],
       },
       stocksCompanyOfInterest2: {
         title: 'Andelar i intresseföretag och gemensamt styrda företag',
-        accountRange: [
-          1338,
-          1339,
-        ],
+        accountRange: [1338, 1339],
       },
       claimInteretsCompany: {
         title: 'Fordringar hos intresseföretag och gemensamt styrda företag',
-        accountRange: [
-          1340,
-          1345,
-        ],
+        accountRange: [1340, 1345],
       },
       claimOtherCompaniesOfInterest: {
         title: 'Fordringar hos övriga företag som det finns ett ägarintresse',
-        accountRange: [
-          1346,
-          1347,
-        ],
+        accountRange: [1346, 1347],
       },
       claimInteretsCompany2: {
         title: 'Fordringar hos intresseföretag och gemensamt styrda företag',
-        accountRange: [
-          1348,
-          1349,
-        ],
+        accountRange: [1348, 1349],
       },
       otherLongSecurities: {
         title: 'Andra långfristiga värdepappersinnehav',
-        accountRange: [
-          1350,
-          1359,
-        ],
+        accountRange: [1350, 1359],
       },
       loanToOwner: {
         title: 'Lån till delägare eller närstående',
-        accountRange: [
-          1360,
-          1369,
-        ],
+        accountRange: [1360, 1369],
       },
       otherLongClaims: {
         title: 'Andra långfristiga fordringar',
-        accountRange: [
-          1380,
-          1389,
-        ],
+        accountRange: [1380, 1389],
       },
     },
   },
@@ -229,59 +155,35 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       rawMaterials: {
         title: 'Råvaror och förnödenheter',
-        accountRange: [
-          1410,
-          1431,
-        ],
+        accountRange: [1410, 1431],
       },
       materialsUnderManufacturing: {
         title: 'Varor under tillverkning',
-        accountRange: [
-          1432,
-          1437,
-        ],
+        accountRange: [1432, 1437],
       },
       rawMaterials2: {
         title: 'Råvaror och förnödenheter',
-        accountRange: [
-          1438,
-          1438,
-        ],
+        accountRange: [1438, 1438],
       },
       materialsUnderManufacturing2: {
         title: 'Varor under tillverkning',
-        accountRange: [
-          1439,
-          1449,
-        ],
+        accountRange: [1439, 1449],
       },
       doneMaterials: {
         title: 'Färdiga varor och handelsvaror',
-        accountRange: [
-          1450,
-          1469,
-        ],
+        accountRange: [1450, 1469],
       },
       activeWorkForOthers: {
         title: 'Pågående arbete för annans räkning',
-        accountRange: [
-          1470,
-          1479,
-        ],
+        accountRange: [1470, 1479],
       },
       prepaidInvoice: {
         title: 'Förskott till leverantörer',
-        accountRange: [
-          1480,
-          1489,
-        ],
+        accountRange: [1480, 1489],
       },
       otherStockAssets: {
         title: 'Övriga lagertillgångar',
-        accountRange: [
-          1490,
-          1499,
-        ],
+        accountRange: [1490, 1499],
       },
     },
   },
@@ -292,87 +194,51 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       accountsReceivable: {
         title: 'Kundfordringar',
-        accountRange: [
-          1500,
-          1559,
-        ],
+        accountRange: [1500, 1559],
       },
       claimGroupCompany: {
         title: 'Fordringar hos koncernföretag',
-        accountRange: [
-          1560,
-          1569,
-        ],
+        accountRange: [1560, 1569],
       },
       claimGroupCompany2: {
         title: 'Fordringar hos koncernföretag',
-        accountRange: [
-          1660,
-          1669,
-        ],
+        accountRange: [1660, 1669],
       },
       claimCompanyOfInterest: {
         title: 'Fordringar hos intresseföretag och gemensamt styrda företag',
-        accountRange: [
-          1570,
-          1572,
-        ],
+        accountRange: [1570, 1572],
       },
       claimCompanyOfInterest2: {
         title: 'Fordringar hos intresseföretag och gemensamt styrda företag',
-        accountRange: [
-          1670,
-          1672,
-        ],
+        accountRange: [1670, 1672],
       },
       claimOtherCompanies: {
         title: 'Fordringar hos övriga företag som det finns ett ägarintresse i',
-        accountRange: [
-          1573,
-          1573,
-        ],
+        accountRange: [1573, 1573],
       },
       claimOtherCompanies2: {
         title: 'Fordringar hos övriga företag som det finns ett ägarintresse i',
-        accountRange: [
-          1673,
-          1673,
-        ],
+        accountRange: [1673, 1673],
       },
       claimCompanyOfInterest3: {
         title: 'Fordringar hos intresseföretag och gemensamt styrda företag',
-        accountRange: [
-          1574,
-          1579,
-        ],
+        accountRange: [1574, 1579],
       },
       claimCompanyOfInterest4: {
         title: 'Fordringar hos intresseföretag och gemensamt styrda företag',
-        accountRange: [
-          1674,
-          1679,
-        ],
+        accountRange: [1674, 1679],
       },
       OtherClaims: {
         title: 'Övriga fordringar',
-        accountRange: [
-          1590,
-          1619,
-        ],
+        accountRange: [1590, 1619],
       },
       OtherClaims2: {
         title: 'Övriga fordringar',
-        accountRange: [
-          1630,
-          1659,
-        ],
+        accountRange: [1630, 1659],
       },
       OtherClaims3: {
         title: 'Övriga fordringar',
-        accountRange: [
-          1680,
-          1689,
-        ],
+        accountRange: [1680, 1689],
       },
     },
   },
@@ -382,17 +248,11 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       NotYetInvoiced: {
         title: 'Upparbetad men ej fakturerad intäkt',
-        accountRange: [
-          1620,
-          1629,
-        ],
+        accountRange: [1620, 1629],
       },
       tenancy: {
         title: 'Tecknat men ej inbetalat kapital',
-        accountRange: [
-          1690,
-          1699,
-        ],
+        accountRange: [1690, 1699],
       },
     },
   },
@@ -402,12 +262,8 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       prepaidCostsAndDelayedIncome: {
         title: 'Förutbetalda kostnader och upplupna intäkter',
-        accountRange: [
-          1700,
-          1799,
-        ],
+        accountRange: [1700, 1799],
       },
-
     },
   },
   shortPlacements: {
@@ -416,28 +272,17 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       otherShortSecurities: {
         title: 'Övriga kortfristiga placeringar',
-        accountRange: [
-          1800,
-          1859,
-        ],
+        accountRange: [1800, 1859],
       },
       stocksGroupCompany: {
         title: 'Andelar i koncernföretag',
-        accountRange: [
-          1860,
-          1869,
-        ],
+        accountRange: [1860, 1869],
       },
       otherShortSecurities2: {
         title: 'Övriga kortfristiga placeringar',
-        accountRange: [
-          1870,
-          1899,
-        ],
+        accountRange: [1870, 1899],
       },
-
     },
-
   },
   CashAndBankBalances: {
     title: 'Kassa och bank',
@@ -445,19 +290,12 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     children: {
       cashAndBank: {
         title: 'Kassa och bank',
-        accountRange: [
-          1900,
-          1989,
-        ],
+        accountRange: [1900, 1989],
       },
       tenancy: {
         title: 'Redovisningsmedel',
-        accountRange: [
-          1990,
-          1999,
-        ],
+        accountRange: [1990, 1999],
       },
-
     },
   },
   currentAssets: {
@@ -470,7 +308,6 @@ const balanceAssetsSections: BalanceAssetsSectionsInterface = {
     sumTitle: 'Totalt tillgångar',
     children: {},
   },
-
 };
 
 export type { BalanceSectionInterface, BalanceAssetsSectionsInterface };

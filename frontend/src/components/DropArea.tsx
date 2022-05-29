@@ -5,7 +5,9 @@ import useStore from '../hooks/useStore';
 import fileReader from '../functions/fileReader';
 import extractCompanyFromSie from '../functions/extractCompanyFromSie';
 import calculateResults from '../functions/calculateResults';
-import calculateBalanceAssets, { calculateBalanceEquity } from '../functions/calculateBalances';
+import calculateBalanceAssets, {
+  calculateBalanceEquity,
+} from '../functions/calculateBalances';
 
 const DropArea = styled.div`
   display: flex;
@@ -13,7 +15,7 @@ const DropArea = styled.div`
   align-items: center;
   height: 30vh;
   text-align: center;
-  background-color:#918686;
+  background-color: #918686;
   border-radius: 8px;
 `;
 
@@ -32,15 +34,12 @@ const DropFile = observer(() => {
   return (
     <Dropzone onDrop={handleOnDrop}>
       {({ getRootProps, getInputProps }) => (
-
         <DropArea {...getRootProps()}>
           <input {...getInputProps()} />
           <p>Släpp din SIE-fil här för att ladda upp filen.</p>
         </DropArea>
-
       )}
     </Dropzone>
-
   );
 });
 

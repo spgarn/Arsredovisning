@@ -1,38 +1,43 @@
 module.exports = {
-  env: {
-    browser: true,
-    commonjs: true,
-    es2021: true,
-  },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:import/typescript',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'modules',
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
+
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+
+  extends: [
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'plugin:prettier/recommended',
+    'plugin:react/jsx-runtime',
   ],
+
   rules: {
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    'jsx-a11y/control-has-associated-label': 'off',
-    'import/extensions': 'off',
-    'react/jsx-filename-extension': 'off',
-    'key-spacing': 2,
-    'react/no-array-index-key': 'off',
-    '@typescript-eslint/no-unused-vars': 'error',
-    'no-unused-vars': 'off',
-    'max-len': [2, 400, 4, { ignoreUrls: true }],
+    'comma-dangle': ['error', 'only-multiline'],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    complexity: ['error', 20],
+    'generator-star-spacing': 'off',
+    'max-len': ['error', 150],
+    'no-restricted-properties': 0,
+    'prefer-template': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        semi: true,
+        printWidth: 80,
+        singleQuote: true,
+      },
+    ],
   },
 };

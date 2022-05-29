@@ -1,10 +1,6 @@
 import { FC, Fragment } from 'react';
-import {
-  Button, Grid, TextField,
-} from '@mui/material';
-import {
-  FastField, Form, Formik,
-} from 'formik';
+import { Button, Grid, TextField } from '@mui/material';
+import { FastField, Form, Formik } from 'formik';
 import Card from '../../components/Card';
 import Page from '../../components/Page';
 import MultiRow from '../../components/MultiRow';
@@ -15,17 +11,16 @@ import { Balance } from '../../functions/interfaces';
 import calculateInputBalance from '../../functions/calculateInputBalance';
 import balanceAssetsSections from '../../info/balanceSectionsAssetsData';
 
-interface Child
-  {
-    [resultRowIdentifier: string]: {
-      title: string
-      accountRange: [number, number]
-      current?:number
-      previous?:number
-    }
-  }
+interface Child {
+  [resultRowIdentifier: string]: {
+    title: string;
+    accountRange: [number, number];
+    current?: number;
+    previous?: number;
+  };
+}
 
-const BalanceSheetPage:FC = () => {
+const BalanceSheetPage: FC = () => {
   const { companyStore } = useStore();
 
   const { balance } = companyStore.company;
@@ -50,8 +45,19 @@ const BalanceSheetPage:FC = () => {
             <Card>
               <Grid container direction="column">
                 <SubTitle
-                  current={`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}
-                  previous={companyStore.company.fiscalYears.previousStart && `${formatDate(companyStore.company.fiscalYears.previousStart)} - ${formatDate(companyStore.company.fiscalYears.previousEnd)}`}
+                  current={`${formatDate(
+                    companyStore.company.fiscalYears.currentStart
+                  )} - ${formatDate(
+                    companyStore.company.fiscalYears.currentEnd
+                  )} `}
+                  previous={
+                    companyStore.company.fiscalYears.previousStart &&
+                    `${formatDate(
+                      companyStore.company.fiscalYears.previousStart
+                    )} - ${formatDate(
+                      companyStore.company.fiscalYears.previousEnd
+                    )}`
+                  }
                   subTitle="Balansräkning"
                 />
                 {Object.entries(balanceAssetsSections)?.map(([section, sectionData], i) => (
@@ -93,7 +99,46 @@ const BalanceSheetPage:FC = () => {
                           key={id}
                           subTitle={childData?.title}
                         />
-                      ))}
+                      )}
+                      {Object.entries(sectionData.children as Child)
+                        .filter(
+                          ([child]) =>
+                            balance[section].children[child].current > 0 ||
+                            balance[section].children[child].previous > 0
+                        )
+                        .map(([child, childData], id) => (
+                          <MultiRow
+                            current={
+                              <FastField
+                                type="number"
+                                label={childData?.title}
+                                name={`balance.${[section]}.children.${[
+                                  child,
+                                ]}.current`}
+                                as={TextField}
+                                setField
+                                fullWidth
+                              />
+                            }
+                            previous={
+                              companyStore.company.fiscalYears
+                                .previousStart && (
+                                <FastField
+                                  type="number"
+                                  label={childData?.title}
+                                  name={`balance.${[section]}.children.${[
+                                    child,
+                                  ]}.previous`}
+                                  as={TextField}
+                                  setField
+                                  fullWidth
+                                />
+                              )
+                            }
+                            key={id}
+                            subTitle={childData?.title}
+                          />
+                        ))}
 
                     <MultiRow
                       current={formatCurrency(balance.assets[section]?.current?.toFixed(2), true)}
@@ -107,14 +152,15 @@ const BalanceSheetPage:FC = () => {
                 ))}
 
                 <Grid item alignSelf="center">
-                  <Button type="submit" variant="contained">Fortsätt</Button>
+                  <Button type="submit" variant="contained">
+                    Fortsätt
+                  </Button>
                 </Grid>
               </Grid>
             </Card>
           </Page>
         </Form>
       )}
-
     </Formik>
   );
 };

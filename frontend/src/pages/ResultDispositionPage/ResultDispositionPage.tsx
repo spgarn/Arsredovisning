@@ -1,6 +1,4 @@
-import {
-  Button, Grid, Switch, TextField,
-} from '@mui/material';
+import { Button, Grid, Switch, TextField } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import Card from '../../components/Card';
 import MultiRow from '../../components/MultiRow';
@@ -10,10 +8,10 @@ import { formatDate } from '../../functions/formatting';
 import { Company } from '../../functions/interfaces';
 import useStore from '../../hooks/useStore';
 
-const ResultDispositionPage = ():JSX.Element => {
+const ResultDispositionPage = (): JSX.Element => {
   const { companyStore } = useStore();
 
-  const handleSubmit = (e:Company) => {
+  const handleSubmit = (e: Company) => {
     console.log(e);
   };
   return (
@@ -27,18 +25,24 @@ const ResultDispositionPage = ():JSX.Element => {
             <Card>
               <Grid container direction="column">
                 <SubTitle
-                  current={`${formatDate(companyStore.company.fiscalYears.currentStart)} - ${formatDate(companyStore.company.fiscalYears.currentEnd)} `}
-                  previous={companyStore.company.fiscalYears.previousStart && `${formatDate(companyStore.company.fiscalYears.previousStart)} - ${formatDate(companyStore.company.fiscalYears.previousEnd)}`}
+                  current={`${formatDate(
+                    companyStore.company.fiscalYears.currentStart
+                  )} - ${formatDate(
+                    companyStore.company.fiscalYears.currentEnd
+                  )} `}
+                  previous={
+                    companyStore.company.fiscalYears.previousStart &&
+                    `${formatDate(
+                      companyStore.company.fiscalYears.previousStart
+                    )} - ${formatDate(
+                      companyStore.company.fiscalYears.previousEnd
+                    )}`
+                  }
                   subTitle="Resultatdisposition"
                 />
+                <MultiRow isNoBorder isSum isBold subTitle="Förfogade medel" />
                 <MultiRow
-                  isNoBorder
-                  isSum
-                  isBold
-                  subTitle="Förfogade medel"
-                />
-                <MultiRow
-                  current={(
+                  current={
                     <Field
                       type="number"
                       name=""
@@ -46,8 +50,8 @@ const ResultDispositionPage = ():JSX.Element => {
                       setField
                       fullWidth
                     />
-)}
-                  previous={(
+                  }
+                  previous={
                     <Field
                       type="number"
                       name=""
@@ -55,11 +59,11 @@ const ResultDispositionPage = ():JSX.Element => {
                       setField
                       fullWidth
                     />
-)}
+                  }
                   subTitle="Balanserat resultat"
                 />
                 <MultiRow
-                  current={(
+                  current={
                     <Field
                       type="number"
                       name=""
@@ -67,8 +71,8 @@ const ResultDispositionPage = ():JSX.Element => {
                       setField
                       fullWidth
                     />
-)}
-                  previous={(
+                  }
+                  previous={
                     <Field
                       type="number"
                       name=""
@@ -76,7 +80,7 @@ const ResultDispositionPage = ():JSX.Element => {
                       setField
                       fullWidth
                     />
-)}
+                  }
                   subTitle="Årest resultat"
                 />
                 <MultiRow
@@ -94,7 +98,7 @@ const ResultDispositionPage = ():JSX.Element => {
                 />
                 <MultiRow
                   subTitle="Utdelas till aktieägare"
-                  current={(
+                  current={
                     <Field
                       type="number"
                       name=""
@@ -102,8 +106,8 @@ const ResultDispositionPage = ():JSX.Element => {
                       setField
                       fullWidth
                     />
-)}
-                  previous={(
+                  }
+                  previous={
                     <Field
                       type="number"
                       name=""
@@ -111,11 +115,11 @@ const ResultDispositionPage = ():JSX.Element => {
                       setField
                       fullWidth
                     />
-)}
+                  }
                 />
                 <MultiRow
                   subTitle="Återbetalning av aktieägartillskott"
-                  current={(
+                  current={
                     <Field
                       type="number"
                       name=""
@@ -123,8 +127,8 @@ const ResultDispositionPage = ():JSX.Element => {
                       setField
                       fullWidth
                     />
-)}
-                  previous={(
+                  }
+                  previous={
                     <Field
                       type="number"
                       name=""
@@ -132,7 +136,7 @@ const ResultDispositionPage = ():JSX.Element => {
                       setField
                       fullWidth
                     />
-)}
+                  }
                 />
                 <MultiRow
                   subTitle="Balanseras i en ny räkning"
@@ -142,17 +146,25 @@ const ResultDispositionPage = ():JSX.Element => {
                   isBold
                 />
 
-                <MultiRow subTitle="Förändringar i eget kapital" isSum isBold isNoBorder current="Lämna kommentar om förändring av kapital?" previous={<Switch />} />
+                <MultiRow
+                  subTitle="Förändringar i eget kapital"
+                  isSum
+                  isBold
+                  isNoBorder
+                  current="Lämna kommentar om förändring av kapital?"
+                  previous={<Switch />}
+                />
 
                 <Grid item alignSelf="center">
-                  <Button type="submit" variant="contained">Fortsätt</Button>
+                  <Button type="submit" variant="contained">
+                    Fortsätt
+                  </Button>
                 </Grid>
               </Grid>
             </Card>
           </Page>
         </Form>
       )}
-
     </Formik>
   );
 };

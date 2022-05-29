@@ -1,14 +1,12 @@
-import {
-  Text, StyleSheet,
-} from '@react-pdf/renderer';
+import { Text, StyleSheet } from '@react-pdf/renderer';
 
-interface Props {
-  areaOne?:any;
-  areaTwo?:any;
-  areaThree?:any;
-  areaFour?:any;
-  areaFive?:any;
-  border?:boolean
+interface IProps {
+  areaOne?: React.ReactNode;
+  areaTwo?: React.ReactNode;
+  areaThree?: React.ReactNode;
+  areaFour?: React.ReactNode;
+  areaFive?: React.ReactNode;
+  border?: boolean;
 }
 
 const styles = StyleSheet.create({
@@ -35,20 +33,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const resultLine:React.FC<Props> = (p) => (
-  <div style={{
-    display: 'flex', flexDirection: 'row', marginTop: '8px', borderBottom: p.border && '1px black solid',
-  }}
+const ResultLine = (props: IProps) => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'row',
+      marginTop: '8px',
+      borderBottom: props.border && '1px black solid',
+    }}
   >
-    <Text style={styles.areaOne}>{p.areaOne}</Text>
-    <Text style={styles.areaThree}>{p.areaThree}</Text>
-    <Text style={styles.areaFour}>
-      {p.areaFour}
-    </Text>
-    <Text style={styles.areaFive}>
-      {p.areaFive}
-    </Text>
+    <Text style={styles.areaOne}>{props.areaOne}</Text>
+    <Text style={styles.areaThree}>{props.areaThree}</Text>
+    <Text style={styles.areaFour}>{props.areaFour}</Text>
+    <Text style={styles.areaFive}>{props.areaFive}</Text>
   </div>
 );
 
-export default resultLine;
+export default ResultLine;

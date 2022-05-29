@@ -3,7 +3,9 @@ import Stack from '@mui/material/Stack';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import StepConnector, {
+  stepConnectorClasses,
+} from '@mui/material/StepConnector';
 import { StepIconProps } from '@mui/material/StepIcon';
 import { useLocation } from 'react-router-dom';
 import StyledNavLink from './StyledNavLink';
@@ -41,7 +43,8 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 const ColorlibStepIconRoot = styled('div')<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+  backgroundColor:
+    theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
   zIndex: 1,
   color: '#fff',
   width: 50,
@@ -61,7 +64,7 @@ const ColorlibStepIconRoot = styled('div')<{
   }),
 }));
 
-function ativeState(area:string) {
+function ativeState(area: string) {
   if (area === '/company-info') return 1;
   if (area === '/result-sheet') return 2;
   if (area === '/balance-sheet-assets') return 3;
@@ -74,9 +77,7 @@ function ativeState(area:string) {
 }
 
 function ColorlibStepIcon(props: StepIconProps) {
-  const {
-    active, completed, className, icon,
-  } = props;
+  const { active, completed, className, icon } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
     1: <NavLink to="/Arsredovisning">1</NavLink>,
@@ -88,19 +89,31 @@ function ColorlibStepIcon(props: StepIconProps) {
     7: <NavLink to="/notes">7</NavLink>,
     8: <NavLink to="/year-story">8</NavLink>,
     9: <NavLink to="/sign">9</NavLink>,
-
   };
 
   return (
-    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+    <ColorlibStepIconRoot
+      ownerState={{ completed, active }}
+      className={className}
+    >
       {icons[String(icon)]}
     </ColorlibStepIconRoot>
   );
 }
 
-const steps = ['Sie-fil', 'Företagsuppgifter', 'Resultaträkning', 'Tillgångar', 'EK/Skulder', 'Resultatdisposition', 'Noter', 'Förvaltningsberättelse', 'Befattningshavare'];
+const steps = [
+  'Sie-fil',
+  'Företagsuppgifter',
+  'Resultaträkning',
+  'Tillgångar',
+  'EK/Skulder',
+  'Resultatdisposition',
+  'Noter',
+  'Förvaltningsberättelse',
+  'Befattningshavare',
+];
 
-export default function CustomizedSteppers():JSX.Element {
+export default function CustomizedSteppers(): JSX.Element {
   const activeArea = useLocation();
   return (
     <Stack sx={{ width: '100%' }} mt={18} spacing={4}>

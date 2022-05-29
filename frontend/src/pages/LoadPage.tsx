@@ -25,7 +25,9 @@ const LoadPage = observer(() => {
     <Page>
       <DropArea />
       <PreviewText />
-      <button type="button" onClick={() => setGeneratePdf(true)}>Generate PDF</button>
+      <button type="button" onClick={() => setGeneratePdf(true)}>
+        Generate PDF
+      </button>
     </Page>
   );
 });

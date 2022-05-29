@@ -1,5 +1,8 @@
 import type {
-  Company, CompanyAddressInfo, FiscalYears, Accounts,
+  Company,
+  CompanyAddressInfo,
+  FiscalYears,
+  Accounts,
 } from './interfaces';
 
 function splitWords(row: string, removeQuotes = false) {
@@ -22,7 +25,9 @@ function getCompanyName(rows: string[]) {
 
 // E.g. "#ORGNR 559207-6037"
 function getCompanyRegistrationNumber(rows: string[]) {
-  const row = rows.find((r) => r.startsWith('#ORGNR')).replace(/(\d{6})(\d{4})/, '$1-$2');
+  const row = rows
+    .find((r) => r.startsWith('#ORGNR'))
+    .replace(/(\d{6})(\d{4})/, '$1-$2');
 
   if (!row) return 'unknown';
 
@@ -49,8 +54,12 @@ function getFiscalYears(rows: string[]): FiscalYears {
   const currentYearRow = rows.find((r) => r.startsWith('#RAR 0'));
   const previousYearRow = rows.find((r) => r.startsWith('#RAR -1'));
 
-  const [, , currentStart, currentEnd] = currentYearRow ? splitWords(currentYearRow) : [];
-  const [, , previousStart, previousEnd] = previousYearRow ? splitWords(previousYearRow) : [];
+  const [, , currentStart, currentEnd] = currentYearRow
+    ? splitWords(currentYearRow)
+    : [];
+  const [, , previousStart, previousEnd] = previousYearRow
+    ? splitWords(previousYearRow)
+    : [];
 
   return {
     currentStart,
@@ -64,7 +73,11 @@ function getFiscalYears(rows: string[]): FiscalYears {
 // E.g. #RES 0 3041 -2258200 0
 // E.g. #UB 0 1930 150000 0
 function getAccounts(rows: string[]) {
-  const defaultAccount = () => ({ name: '', previousBalance: 0, currentBalance: 0 });
+  const defaultAccount = () => ({
+    name: '',
+    previousBalance: 0,
+    currentBalance: 0,
+  });
   return rows.reduce((accounts, row) => {
     // if (row.startsWith('#KONTO')) {
     //   const [, id, name] = splitWords(row, true);
@@ -73,7 +86,8 @@ function getAccounts(rows: string[]) {
 
     if (row.startsWith('#UB')) {
       const [, year, id, balance] = splitWords(row);
-      const balanceKey = Number(year) === -1 ? 'previousBalance' : 'currentBalance';
+      const balanceKey =
+        Number(year) === -1 ? 'previousBalance' : 'currentBalance';
       const r = {
         ...accounts,
         [id]: {
@@ -86,14 +100,14 @@ function getAccounts(rows: string[]) {
 
     if (row.startsWith('#RES')) {
       const [, year, id, balance] = splitWords(row);
-      const balanceKey = Number(year) === -1 ? 'previousBalance' : 'currentBalance';
+      const balanceKey =
+        Number(year) === -1 ? 'previousBalance' : 'currentBalance';
       return {
         ...accounts,
         [id]: {
           ...(accounts[id] ? accounts[id] : defaultAccount()),
           [balanceKey]: Number(balance),
         },
-
       };
     }
     return accounts;
@@ -101,9 +115,7 @@ function getAccounts(rows: string[]) {
 }
 
 function extractCompanyFromSie(sieString: string): Company {
-  const rows = sieString
-    .replaceAll('\r', '')
-    .split('\n');
+  const rows = sieString.replaceAll('\r', '').split('\n');
 
   return {
     info: {

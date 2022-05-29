@@ -1,7 +1,7 @@
 import CompanyStore from './CompanyStore';
 
 class RootStore {
-  companyStore: CompanyStore
+  companyStore: CompanyStore;
 
   constructor() {
     this.companyStore = new CompanyStore(this);

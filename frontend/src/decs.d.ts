@@ -1,1 +1,1 @@
-declare module 'legacy-encoding'
+declare module 'legacy-encoding';

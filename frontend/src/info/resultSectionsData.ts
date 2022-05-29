@@ -1,24 +1,24 @@
 interface ResultSectionInterface {
-  title: string
-  sumTitle: string
+  title: string;
+  sumTitle: string;
   children: {
     [resultRowIdentifier: string]: {
-      title: string
-      accountRange: [number, number]
-    }
-  }
+      title: string;
+      accountRange: [number, number];
+    };
+  };
 }
 
 interface ResultSectionsInterface {
-  operatingIncome: ResultSectionInterface
-  operatingCosts: ResultSectionInterface
-  financialPosts: ResultSectionInterface
-  yearEndDistribution: ResultSectionInterface
-  taxes: ResultSectionInterface
-  operatingProfit: ResultSectionInterface
-  financialProfit: ResultSectionInterface
-  profitBeforeTaxes: ResultSectionInterface
-  yearResult: ResultSectionInterface
+  operatingIncome: ResultSectionInterface;
+  operatingCosts: ResultSectionInterface;
+  financialPosts: ResultSectionInterface;
+  yearEndDistribution: ResultSectionInterface;
+  taxes: ResultSectionInterface;
+  operatingProfit: ResultSectionInterface;
+  financialProfit: ResultSectionInterface;
+  profitBeforeTaxes: ResultSectionInterface;
+  yearResult: ResultSectionInterface;
 }
 
 const resultSections: ResultSectionsInterface = {
@@ -28,24 +28,15 @@ const resultSections: ResultSectionsInterface = {
     children: {
       netSales: {
         title: 'Nettoomsättning',
-        accountRange: [
-          3000,
-          3799,
-        ],
+        accountRange: [3000, 3799],
       },
       changedInventory: {
         title: 'Förändring av lager',
-        accountRange: [
-          3800,
-          3899,
-        ],
+        accountRange: [3800, 3899],
       },
       otherIncomes: {
         title: 'Övriga rörelseintäkter',
-        accountRange: [
-          3900,
-          3999,
-        ],
+        accountRange: [3900, 3999],
       },
     },
   },
@@ -55,45 +46,27 @@ const resultSections: ResultSectionsInterface = {
     children: {
       rawMaterialsConsumables: {
         title: 'Råvaror och förnödenheter',
-        accountRange: [
-          4000,
-          4999,
-        ],
+        accountRange: [4000, 4999],
       },
       otherExternalExpenses: {
         title: 'Övriga externa kostnader',
-        accountRange: [
-          5000,
-          6999,
-        ],
+        accountRange: [5000, 6999],
       },
       staffCosts: {
         title: 'Personalkostnader',
-        accountRange: [
-          7000,
-          7699,
-        ],
+        accountRange: [7000, 7699],
       },
       writeDownsReversalOfWriteDowns: {
         title: 'Nedskrivningar och återföring av nedskrivningar',
-        accountRange: [
-          7700,
-          7799,
-        ],
+        accountRange: [7700, 7799],
       },
       depreciationAccordingToPlan: {
         title: 'Avskrivningar enligt plan',
-        accountRange: [
-          7800,
-          7899,
-        ],
+        accountRange: [7800, 7899],
       },
       otherOperatingExpenses: {
         title: 'Övriga rörelsekostnader',
-        accountRange: [
-          7900,
-          7999,
-        ],
+        accountRange: [7900, 7999],
       },
     },
   },
@@ -103,38 +76,23 @@ const resultSections: ResultSectionsInterface = {
     children: {
       profitParticipationsGroupCompanies: {
         title: 'Resultat från andelar i koncernbolag',
-        accountRange: [
-          8000,
-          8099,
-        ],
+        accountRange: [8000, 8099],
       },
       profitSharesJointlyControlledCompanies: {
         title: 'Resultat från andelar i gemensamt styrda företag',
-        accountRange: [
-          8100,
-          8199,
-        ],
+        accountRange: [8100, 8199],
       },
       profitOtherFinancialFixedAssets: {
         title: 'Resultat från övriga finansiella anläggningstillgångar',
-        accountRange: [
-          8200,
-          8299,
-        ],
+        accountRange: [8200, 8299],
       },
       otherInterestIncomeAndSimilarItems: {
         title: 'Övriga ränteintäkter och liknande resultatposter',
-        accountRange: [
-          8300,
-          8399,
-        ],
+        accountRange: [8300, 8399],
       },
       interestExpensesAndSimilarIncomeItems: {
         title: 'Räntekostnader och liknande resultatposter',
-        accountRange: [
-          8400,
-          8499,
-        ],
+        accountRange: [8400, 8499],
       },
     },
   },
@@ -143,18 +101,13 @@ const resultSections: ResultSectionsInterface = {
     sumTitle: 'Summa bokslutsdispositioner',
     children: {
       changeInAccruals: {
-        title: 'Förändring av periodiseringsfonder för juridisk person och enskild näringsidkare',
-        accountRange: [
-          8810,
-          8819,
-        ],
+        title:
+          'Förändring av periodiseringsfonder för juridisk person och enskild näringsidkare',
+        accountRange: [8810, 8819],
       },
       appropriationsAllCompanyForms: {
         title: 'Bokslutsdispositioner för samtliga företagsformer',
-        accountRange: [
-          8820,
-          8899,
-        ],
+        accountRange: [8820, 8899],
       },
     },
   },
@@ -164,10 +117,7 @@ const resultSections: ResultSectionsInterface = {
     children: {
       taxesYearProfit: {
         title: 'Skatter på årets resultat',
-        accountRange: [
-          8910,
-          8999,
-        ],
+        accountRange: [8910, 8999],
       },
     },
   },
@@ -191,7 +141,6 @@ const resultSections: ResultSectionsInterface = {
     sumTitle: '',
     children: {},
   },
-
 };
 
 export type { ResultSectionInterface, ResultSectionsInterface };

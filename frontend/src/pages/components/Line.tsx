@@ -1,14 +1,12 @@
-import {
-  Text, StyleSheet,
-} from '@react-pdf/renderer';
+import { Text, StyleSheet } from '@react-pdf/renderer';
 
-interface Props {
-  areaOne?:any;
-  areaTwo?:any;
-  areaThree?:any;
-  areaFour?:any;
-  areaFive?:any;
-  border?:boolean
+interface IProps {
+  areaOne?: React.ReactNode;
+  areaTwo?: React.ReactNode;
+  areaThree?: React.ReactNode;
+  areaFour?: React.ReactNode;
+  areaFive?: React.ReactNode;
+  border?: boolean;
 }
 
 const styles = StyleSheet.create({
@@ -16,7 +14,6 @@ const styles = StyleSheet.create({
     minWidth: '40%',
     textAlign: 'left',
     fontSize: '10px',
-
   },
   areaTwo: {
     width: '15%',
@@ -40,27 +37,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const Line:React.FC<Props> = (p: Props) => {
-  const { border } = p;
-  const { areaOne } = p;
-  const { areaTwo } = p;
-  const { areaThree } = p;
-  const { areaFour } = p;
-  const { areaFive } = p;
+const Line = ({
+  border,
+  areaOne,
+  areaTwo,
+  areaThree,
+  areaFour,
+  areaFive,
+}: IProps) => {
   return (
-    <div style={{
-      display: 'flex', flexDirection: 'row', marginTop: '8px', padding: '2px 0px', borderBottom: border && '1px black solid',
-    }}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: '8px',
+        padding: '2px 0px',
+        borderBottom: border && '1px black solid',
+      }}
     >
       <Text style={styles.areaOne}>{areaOne}</Text>
       <Text style={styles.areaTwo}>{areaTwo}</Text>
       <Text style={styles.areaThree}>{areaThree}</Text>
-      <Text style={styles.areaFour}>
-        {areaFour}
-      </Text>
-      <Text style={styles.areaFive}>
-        {areaFive}
-      </Text>
+      <Text style={styles.areaFour}>{areaFour}</Text>
+      <Text style={styles.areaFive}>{areaFive}</Text>
     </div>
   );
 };

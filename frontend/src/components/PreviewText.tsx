@@ -8,7 +8,7 @@ const TextArea = styled.div`
   align-items: center;
   flex-direction: column;
   height: 100%;
-  text-align:  center;
+  text-align: center;
   background-color: #f5f7fa;
   border-radius: 8px;
   margin-top: 12px;
@@ -16,10 +16,10 @@ const TextArea = styled.div`
 `;
 
 const Test = styled.div`
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 50px;
-  `;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 50px;
+`;
 
 const PreviewText = observer(() => {
   const { companyStore } = useStore();

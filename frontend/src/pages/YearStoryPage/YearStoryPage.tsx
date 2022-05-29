@@ -8,11 +8,20 @@ const YearStoryPage = () => (
   <Page>
     <Card>
       <SubTitle subTitle="Förvaltningsberättelse" />
-      <Typography mb={12} variant="h5"> Allmänt om verksamheten</Typography>
+      <Typography mb={12} variant="h5">
+        {' '}
+        Allmänt om verksamheten
+      </Typography>
       <TextareaAutosize cols={100} minRows={20} />
-      <Typography mb={12} mt={12} variant="h5"> Väsentliga händelser under räkenskapsårets</Typography>
+      <Typography mb={12} mt={12} variant="h5">
+        {' '}
+        Väsentliga händelser under räkenskapsårets
+      </Typography>
       <TextareaAutosize cols={100} minRows={20} />
-      <Typography mb={12} mt={12} variant="h5"> Väsentliga händelser efter räkenskapsårets slut</Typography>
+      <Typography mb={12} mt={12} variant="h5">
+        {' '}
+        Väsentliga händelser efter räkenskapsårets slut
+      </Typography>
       <TextareaAutosize cols={100} minRows={20} />
     </Card>
     <NavLink to="/sign">
