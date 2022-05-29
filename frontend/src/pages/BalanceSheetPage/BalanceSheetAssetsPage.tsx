@@ -7,9 +7,9 @@ import MultiRow from '../../components/MultiRow';
 import SubTitle from '../../components/SubTitle';
 import { formatDate, formatCurrency } from '../../functions/formatting';
 import useStore from '../../hooks/useStore';
-import { Company } from '../../functions/interfaces';
-import calculateInputResults from '../../functions/calculateInputResults';
-import balanceSections from '../../info/balanceSectionsData';
+import { Balance } from '../../functions/interfaces';
+import calculateInputBalance from '../../functions/calculateInputBalance';
+import balanceAssetsSections from '../../info/balanceSectionsAssetsData';
 
 interface Child {
   [resultRowIdentifier: string]: {
@@ -28,15 +28,16 @@ const BalanceSheetPage: FC = () => {
   // eslint-disable-next-line
   const entries = Object.entries as <T>(o: T) => [Extract<keyof T, string>, T[keyof T]][];
 
-  const handleSubmit = (company: Company) => {
-    calculateInputResults(company);
-    companyStore.hydrate(company);
+  const handleSubmit = (assets: Balance) => {
+    calculateInputBalance(assets);
+    balance.assets = assets;
+    // companyStore.hydrate();
   };
 
   return (
     <Formik
       onSubmit={(e) => handleSubmit(e)}
-      initialValues={companyStore.company}
+      initialValues={companyStore?.company?.balance?.assets}
     >
       {() => (
         <Form>
@@ -59,15 +60,44 @@ const BalanceSheetPage: FC = () => {
                   }
                   subTitle="Balansräkning"
                 />
-                {Object.entries(balanceSections).map(
-                  ([section, sectionData], i) => (
-                    <Fragment key={i}>
-                      {sectionData.title && (
+                {Object.entries(balanceAssetsSections)?.map(([section, sectionData], i) => (
+                  <Fragment key={i}>
+                    {sectionData.title && (
+                    <MultiRow
+                      isNoBorder
+                      isSum
+                      isBold
+                      subTitle={sectionData?.title}
+                    />
+                    )}
+                    {Object.entries(sectionData.children as Child)
+                      .filter(([child]) => balance?.assets[section]?.children[child]?.current > 0 || balance?.assets[section]?.children[child]?.previous > 0)
+                      .map(([child, childData], id) => (
                         <MultiRow
-                          isNoBorder
-                          isSum
-                          isBold
-                          subTitle={sectionData.title}
+                          current={(
+                            <FastField
+                              type="number"
+                              label={childData?.title}
+                              name={`${[section]}.children.${[child]}.current`}
+                              as={TextField}
+                              setField
+                              fullWidth
+                            />
+)}
+                          previous={(
+                          companyStore.company.fiscalYears.previousStart && (
+                          <FastField
+                            type="number"
+                            label={childData?.title}
+                            name={`${[section]}.children.${[child]}.previous`}
+                            as={TextField}
+                            setField
+                            fullWidth
+                          />
+                          )
+)}
+                          key={id}
+                          subTitle={childData?.title}
                         />
                       )}
                       {Object.entries(sectionData.children as Child)
@@ -110,25 +140,16 @@ const BalanceSheetPage: FC = () => {
                           />
                         ))}
 
-                      <MultiRow
-                        current={formatCurrency(
-                          balance[section]?.current?.toFixed(2),
-                          true
-                        )}
-                        previous={
-                          companyStore.company.fiscalYears.previousStart &&
-                          formatCurrency(
-                            balance[section]?.previous?.toFixed(2),
-                            true
-                          )
-                        }
-                        isSum
-                        isBold
-                        subTitle={sectionData.sumTitle || sectionData.title}
-                      />
-                    </Fragment>
-                  )
-                )}
+                    <MultiRow
+                      current={formatCurrency(balance.assets[section]?.current?.toFixed(2), true)}
+                      previous={companyStore.company.fiscalYears.previousStart
+                        && formatCurrency(balance.assets[section]?.previous?.toFixed(2), true)}
+                      isSum
+                      isBold
+                      subTitle={sectionData.sumTitle || sectionData.title}
+                    />
+                  </Fragment>
+                ))}
 
                 <Grid item alignSelf="center">
                   <Button type="submit" variant="contained">

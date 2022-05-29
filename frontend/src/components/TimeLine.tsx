@@ -67,11 +67,12 @@ const ColorlibStepIconRoot = styled('div')<{
 function ativeState(area: string) {
   if (area === '/company-info') return 1;
   if (area === '/result-sheet') return 2;
-  if (area === '/balance-sheet') return 3;
-  if (area === '/result-disposition') return 4;
-  if (area === '/notes') return 5;
-  if (area === '/year-story') return 6;
-  if (area === '/sign') return 7;
+  if (area === '/balance-sheet-assets') return 3;
+  if (area === '/balance-sheet-equity') return 4;
+  if (area === '/result-disposition') return 5;
+  if (area === '/notes') return 6;
+  if (area === '/year-story') return 7;
+  if (area === '/sign') return 8;
   return 0;
 }
 
@@ -82,11 +83,12 @@ function ColorlibStepIcon(props: StepIconProps) {
     1: <NavLink to="/Arsredovisning">1</NavLink>,
     2: <NavLink to="/company-info">2</NavLink>,
     3: <NavLink to="/result-sheet">3</NavLink>,
-    4: <NavLink to="/balance-sheet">4</NavLink>,
-    5: <NavLink to="/result-disposition">5</NavLink>,
-    6: <NavLink to="/notes">6</NavLink>,
-    7: <NavLink to="/year-story">7</NavLink>,
-    8: <NavLink to="/sign">8</NavLink>,
+    4: <NavLink to="/balance-sheet-assets">4</NavLink>,
+    5: <NavLink to="/balance-sheet-equity">5</NavLink>,
+    6: <NavLink to="/result-disposition">6</NavLink>,
+    7: <NavLink to="/notes">7</NavLink>,
+    8: <NavLink to="/year-story">8</NavLink>,
+    9: <NavLink to="/sign">9</NavLink>,
   };
 
   return (
@@ -103,7 +105,8 @@ const steps = [
   'Sie-fil',
   'Företagsuppgifter',
   'Resultaträkning',
-  'Balansräkning',
+  'Tillgångar',
+  'EK/Skulder',
   'Resultatdisposition',
   'Noter',
   'Förvaltningsberättelse',

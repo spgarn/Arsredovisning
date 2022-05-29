@@ -14,7 +14,8 @@ import type CompanyStore from '../../stores/CompanyStore';
 import Line from '../components/Line';
 import Result from './Result';
 import { formatDate } from '../../functions/formatting';
-import Balance from './Balance';
+import BalanceAssets from './BalanceAssets';
+import BalanceEquity from './BalanceEquity';
 
 Font.register({ family: 'ComfortaaRegular', src: fontRegular });
 Font.register({ family: 'ComfortaaBold', src: fontBold });
@@ -278,7 +279,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
             border
           />
 
-          <Balance balance={company.balance?.assets} />
+          <BalanceAssets balance={company.balance?.assets} />
         </View>
         <View break style={styles.section}>
           {/* Balansräkning */}
@@ -294,7 +295,7 @@ const Pdf = observer(({ companyStore }: { companyStore: CompanyStore }) => {
           />
 
           {/* Eget kapital och skulder */}
-          <Balance balance={company.balance?.equity} />
+          <BalanceEquity balance={company.balance?.equity} />
         </View>
 
         <View break style={styles.section}>
