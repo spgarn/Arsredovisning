@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import { PDFViewer } from '@react-pdf/renderer';
 import { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Box } from '@mui/material';
 import TimeLine from '../components/TimeLine';
 import useStore from '../hooks/useStore';
 import CompanyInfoPage from '../pages/CompanyInfoPage/CompanyInfoPage';
@@ -19,44 +20,35 @@ import BalanceSheetAssetsPage from '../pages/BalanceSheetPage/BalanceSheetAssets
 
 const Navigation = () => {
   const { companyStore } = useStore();
-  const companyInfo = JSON.parse(localStorage.getItem('companyInfo'));
-  if (companyInfo) companyStore.hydrate(companyInfo);
+  const [showPdf, setShowPdf] = useState(false);
 
-  const [isGeneratePdf, setIsGeneratePdf] = useState(false);
-
-  if (isGeneratePdf) {
+  if (showPdf) {
     return (
       <div style={{ height: '100vh' }}>
-        <Grid
-          container
-          justifyContent="flex-end"
-          position="absolute"
-          top={70}
-          right={25}
-        >
+        <Box position="absolute" top={12} right={160}>
           <Button
-            onClick={() => setIsGeneratePdf(!isGeneratePdf)}
+            onClick={() => setShowPdf(!showPdf)}
             disabled={!companyStore.isReady}
             variant="contained"
           >
             Avbryt
           </Button>
-        </Grid>
+        </Box>
         <PDFViewer width="100%" height="100%">
           <Pdf companyStore={companyStore} />
         </PDFViewer>
       </div>
     );
   }
+
   return (
     <BrowserRouter>
       <Grid container justifyContent="flex-end">
-        <Button
-          onClick={() => setIsGeneratePdf(!isGeneratePdf)}
-          variant="contained"
-        >
-          Förhandsgranska
-        </Button>
+        <Grid item>
+          <Button onClick={() => setShowPdf(!showPdf)} variant="contained">
+            Förhandsgranska
+          </Button>
+        </Grid>
       </Grid>
       <TimeLine />
       <Routes>
@@ -69,8 +61,14 @@ const Navigation = () => {
         {/* Resultaträkning */}
         <Route path="/result-sheet" element={<ResultSheetPage />} />
         {/* Balansräkning */}
-        <Route path="/balance-sheet-assets" element={<BalanceSheetAssetsPage />} />
-        <Route path="/balance-sheet-equity" element={<BalanceSheetEquityPage />} />
+        <Route
+          path="/balance-sheet-assets"
+          element={<BalanceSheetAssetsPage />}
+        />
+        <Route
+          path="/balance-sheet-equity"
+          element={<BalanceSheetEquityPage />}
+        />
         {/* Resultatdisposition */}
         <Route path="/result-disposition" element={<ResultDispositionPage />} />
         {/* Noter */}

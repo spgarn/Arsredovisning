@@ -1,12 +1,13 @@
-import { styled } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
-import Stepper from '@mui/material/Stepper';
+import { Box } from '@mui/material';
 import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
 import StepConnector, {
   stepConnectorClasses,
 } from '@mui/material/StepConnector';
 import { StepIconProps } from '@mui/material/StepIcon';
+import StepLabel from '@mui/material/StepLabel';
+import Stepper from '@mui/material/Stepper';
+import { styled } from '@mui/material/styles';
+import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import StyledNavLink from './StyledNavLink';
 
@@ -64,70 +65,55 @@ const ColorlibStepIconRoot = styled('div')<{
   }),
 }));
 
-function ativeState(area: string) {
-  if (area === '/company-info') return 1;
-  if (area === '/result-sheet') return 2;
-  if (area === '/balance-sheet-assets') return 3;
-  if (area === '/balance-sheet-equity') return 4;
-  if (area === '/result-disposition') return 5;
-  if (area === '/notes') return 6;
-  if (area === '/year-story') return 7;
-  if (area === '/sign') return 8;
-  return 0;
-}
-
-function ColorlibStepIcon(props: StepIconProps) {
-  const { active, completed, className, icon } = props;
-
-  const icons: { [index: string]: React.ReactElement } = {
-    1: <NavLink to="/Arsredovisning">1</NavLink>,
-    2: <NavLink to="/company-info">2</NavLink>,
-    3: <NavLink to="/result-sheet">3</NavLink>,
-    4: <NavLink to="/balance-sheet-assets">4</NavLink>,
-    5: <NavLink to="/balance-sheet-equity">5</NavLink>,
-    6: <NavLink to="/result-disposition">6</NavLink>,
-    7: <NavLink to="/notes">7</NavLink>,
-    8: <NavLink to="/year-story">8</NavLink>,
-    9: <NavLink to="/sign">9</NavLink>,
-  };
-
-  return (
-    <ColorlibStepIconRoot
-      ownerState={{ completed, active }}
-      className={className}
-    >
-      {icons[String(icon)]}
-    </ColorlibStepIconRoot>
-  );
-}
-
 const steps = [
-  'Sie-fil',
-  'Företagsuppgifter',
-  'Resultaträkning',
-  'Tillgångar',
-  'EK/Skulder',
-  'Resultatdisposition',
-  'Noter',
-  'Förvaltningsberättelse',
-  'Befattningshavare',
+  { title: 'Sie-fil', path: '/arsredovisning' },
+  { title: 'Företagsuppgifter', path: '/company-info' },
+  { title: 'Resultaträkning', path: '/result-sheet' },
+  { title: 'Tillgångar', path: '/balance-sheet-assets' },
+  { title: 'Balansräkning', path: '/balance-sheet-equity' },
+  { title: 'Resultatdisposition', path: '/result-disposition' },
+  { title: 'Noter', path: '/notes' },
+  { title: 'Förvaltningsberättelse', path: '/year-story' },
+  { title: 'Befattningshavare', path: '/sign' },
 ];
 
-export default function CustomizedSteppers(): JSX.Element {
-  const activeArea = useLocation();
+const ColorlibStepIcon = ({
+  active,
+  completed,
+  className,
+  icon,
+}: StepIconProps) => (
+  <ColorlibStepIconRoot
+    ownerState={{ completed, active }}
+    className={className}
+  >
+    <NavLink to={steps[Number(icon) - 1].path}>{icon}</NavLink>
+  </ColorlibStepIconRoot>
+);
+
+export default function CustomizedSteppers() {
+  const { pathname } = useLocation();
+
+  const activeStep = useMemo(() => {
+    const step = steps.map(({ path }) => path).indexOf(pathname);
+    return step === -1 ? 0 : step;
+  }, [pathname]);
+
   return (
-    <Stack sx={{ width: '100%' }} mt={18} spacing={4}>
+    <Box width="100%" mt={18}>
       <Stepper
         alternativeLabel
-        activeStep={ativeState(activeArea.pathname)}
+        activeStep={activeStep}
         connector={<ColorlibConnector />}
       >
         {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+          <Step key={label.title}>
+            <StepLabel StepIconComponent={ColorlibStepIcon}>
+              {label.title}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
-    </Stack>
+    </Box>
   );
 }

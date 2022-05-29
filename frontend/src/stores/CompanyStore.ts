@@ -69,17 +69,13 @@ class CompanyStore {
     });
 
     this.rootStore = rootStore;
+
+    const savedCompany = JSON.parse(localStorage.getItem('companyInfo'));
+    if (savedCompany) this.hydrate(savedCompany);
   }
 
   hydrate(company: Company): void {
     runInAction(() => {
-      this.company = {
-        info: {},
-        fiscalYears: {},
-        balance: {},
-        result: {},
-        accounts: {},
-      } as Company;
       this.company = merge(this.company, company);
       this.isReady = true;
       localStorage.setItem('companyInfo', JSON.stringify(this.company));
