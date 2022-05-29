@@ -1,17 +1,17 @@
-import { FC, Fragment } from 'react';
 import { Button, Grid, TextField } from '@mui/material';
 import { FastField, Form, Formik } from 'formik';
+import { Fragment } from 'react';
 import Card from '../../components/Card';
-import Page from '../../components/Page';
 import MultiRow from '../../components/MultiRow';
+import Page from '../../components/Page';
 import SubTitle from '../../components/SubTitle';
-import { formatDate, formatCurrency } from '../../functions/formatting';
-import useStore from '../../hooks/useStore';
-import { Balance } from '../../functions/interfaces';
 import calculateInputBalance from '../../functions/calculateInputBalance';
+import { formatCurrency, formatDate } from '../../functions/formatting';
+import { Balance } from '../../functions/interfaces';
+import useStore from '../../hooks/useStore';
 import balanceAssetsSections from '../../info/balanceSectionsAssetsData';
 
-interface Child {
+interface Children {
   [resultRowIdentifier: string]: {
     title: string;
     accountRange: [number, number];
@@ -20,7 +20,7 @@ interface Child {
   };
 }
 
-const BalanceSheetPage: FC = () => {
+const BalanceSheetPage = () => {
   const { companyStore } = useStore();
 
   const { balance } = companyStore.company;
@@ -71,12 +71,12 @@ const BalanceSheetPage: FC = () => {
                           subTitle={sectionData?.title}
                         />
                       )}
-                      {Object.entries(sectionData.children as Child)
+                      {Object.entries(sectionData.children as Children)
                         .filter(
                           ([child]) =>
-                            balance?.assets[section]?.children[child]?.current >
-                              0 ||
-                            balance?.assets[section]?.children[child]
+                            balance?.assets?.[section]?.children[child]
+                              ?.current > 0 ||
+                            balance?.assets?.[section]?.children[child]
                               ?.previous > 0
                         )
                         .map(([child, childData], id) => (
@@ -112,11 +112,11 @@ const BalanceSheetPage: FC = () => {
                             subTitle={childData?.title}
                           />
                         ))}
-                      {Object.entries(sectionData.children as Child)
+                      {Object.entries(sectionData.children as Children)
                         .filter(
                           ([child]) =>
-                            balance[section].children[child].current > 0 ||
-                            balance[section].children[child].previous > 0
+                            balance[section]?.children[child].current > 0 ||
+                            balance[section]?.children[child].previous > 0
                         )
                         .map(([child, childData], id) => (
                           <MultiRow

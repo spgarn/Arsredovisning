@@ -1,19 +1,18 @@
-import { FC, ReactElement } from 'react';
 import { formatCurrency } from '../../functions/formatting';
 import type { Balance as CompanyBalance } from '../../functions/interfaces';
 import balanceAssetsSections from '../../info/balanceSectionsAssetsData';
 import ResultLine from '../components/resultLine';
 
-interface BalanceProps {
-  balance: CompanyBalance
+interface IProps {
+  balance: CompanyBalance;
 }
 
 // eslint-disable-next-line
 const entries = Object.entries as <T>(o: T) => [Extract<keyof T, string>, T[keyof T]][];
 
-const BalanceAssets: FC<BalanceProps> = ({ balance }): ReactElement => (
+const BalanceAssets = ({ balance }: IProps) => (
   <>
-    {Object.entries(balanceAssetsSections).map(([section, sectionData]) => (
+    {Object.entries(balanceAssetsSections).map(([section, sectionData]) =>
       balance[section]?.current || balance[section]?.previous ? (
         <ResultLine
           border
@@ -23,7 +22,7 @@ const BalanceAssets: FC<BalanceProps> = ({ balance }): ReactElement => (
           areaFive={formatCurrency(balance[section]?.previous?.toFixed(2))}
         />
       ) : null
-    ))}
+    )}
   </>
 );
 export default BalanceAssets;
