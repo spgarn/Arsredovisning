@@ -126,6 +126,7 @@ function extractCompanyFromSie(sieString: string): Company {
     fiscalYears: getFiscalYears(rows),
     accounts: getAccounts(rows),
     balance: { assets: {}, equity: {} },
+    notes: {},
   };
 }
 

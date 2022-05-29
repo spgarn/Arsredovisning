@@ -40,13 +40,43 @@ export interface Sum {
   };
 }
 
+export type Result = {
+  [section: string]: Sum;
+};
+
 export interface Balance {
   [section: string]: Sum;
 }
 
-export type Result = {
-  [section: string]: Sum;
-};
+export interface Notes {
+  accountingPrinciples?: {
+    comment: string;
+    hasFixedPriceAssignments: boolean;
+    hasSelfMadeGoods: boolean;
+  };
+  averageAmountEmployees?: {
+    comment: string;
+    amount: string;
+  };
+  providedCollateral?: {
+    comment: string;
+  };
+  contingentLiabilities?: {
+    comment: string;
+  };
+  exceptionalIncomeExpenses?: {
+    comment: string;
+  };
+  assetsProvisionsLiabilities?: {
+    comment: string;
+  };
+  financialArrangements?: {
+    comment: string;
+  };
+  otherComments?: {
+    comment: string;
+  };
+}
 
 export interface Company {
   info: CompanyInfo;
@@ -54,4 +84,5 @@ export interface Company {
   accounts: Accounts;
   result?: Result;
   balance?: { equity: Balance; assets: Balance };
+  notes: Notes;
 }

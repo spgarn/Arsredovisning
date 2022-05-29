@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 type Props = {
-  subTitle: string;
+  subTitle?: string;
   isBold?: boolean;
   isSum?: boolean;
   isBig?: boolean;
@@ -29,9 +29,11 @@ const MultiRow = ({
           {subTitle}
         </Typography>
       ) : (
-        <Typography alignSelf="center" fontWeight={isBold && 900}>
-          {subTitle}
-        </Typography>
+        subTitle && (
+          <Typography alignSelf="center" fontWeight={isBold && 900}>
+            {subTitle}
+          </Typography>
+        )
       )}
     </Grid>
 

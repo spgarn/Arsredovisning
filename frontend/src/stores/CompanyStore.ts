@@ -55,6 +55,7 @@ class CompanyStore {
         equity: { current: 0, previous: 0, children: {} },
       },
     },
+    notes: {},
   };
 
   isReady = false;

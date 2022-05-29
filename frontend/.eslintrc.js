@@ -30,6 +30,7 @@ module.exports = {
     'generator-star-spacing': 'off',
     'max-len': ['error', 150],
     'no-restricted-properties': 0,
+    '@typescript-eslint/no-empty-function': 'warn',
     'prefer-template': 'error',
     'prettier/prettier': [
       'error',

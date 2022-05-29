@@ -1,17 +1,11 @@
-import { Grid, Paper, Switch, Typography } from '@mui/material';
-import { useCallback, useState } from 'react';
+import { Grid, Paper, Typography } from '@mui/material';
 
 interface IProps {
   title: string;
   children?: React.ReactNode;
 }
 
-const Note = ({ title, children }: IProps) => {
-  const [activated, setActivated] = useState(false);
-  const toggle = useCallback(() => {
-    setActivated((prev) => !prev);
-  }, []);
-
+export const NoteWrapper = ({ title, children }: IProps) => {
   return (
     <Paper
       elevation={5}
@@ -24,15 +18,9 @@ const Note = ({ title, children }: IProps) => {
               {title}
             </Typography>
           </Grid>
-
-          <Grid item>
-            <Switch onClick={toggle} />
-          </Grid>
         </Grid>
-        {activated && children}
+        {children}
       </>
     </Paper>
   );
 };
-
-export default Note;

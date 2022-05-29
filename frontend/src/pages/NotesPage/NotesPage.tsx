@@ -1,141 +1,102 @@
-import { Button, Switch, TextareaAutosize, TextField } from '@mui/material';
+import { Box, Button, SelectChangeEvent } from '@mui/material';
+import { Form, Formik } from 'formik';
 import { observer } from 'mobx-react-lite';
-import { NavLink } from 'react-router-dom';
+import { useCallback, useState } from 'react';
 import Card from '../../components/Card';
-import MultiRow from '../../components/MultiRow';
-import Note from '../../components/Notes';
 import Page from '../../components/Page';
+import StyledNavLink from '../../components/StyledNavLink';
 import SubTitle from '../../components/SubTitle';
-import { formatDate } from '../../functions/formatting';
+import { Notes } from '../../functions/interfaces';
 import useStore from '../../hooks/useStore';
+import { NoteContent } from './NoteContent';
+import { NotesSelector } from './NotesSelector';
+import { NoteWrapper } from './NoteWrapper';
+
+export const NOTES: Record<keyof Notes, { title: string }> = {
+  accountingPrinciples: {
+    title: 'Redovisningsprinciper',
+  },
+  averageAmountEmployees: {
+    title: 'Medelantal anställda',
+  },
+  providedCollateral: {
+    title: 'Ställda säkerheter',
+  },
+  contingentLiabilities: {
+    title: 'Eventualförpliktelser',
+  },
+  exceptionalIncomeExpenses: {
+    title: 'Exceptionella intäkter och kostnader',
+  },
+  assetsProvisionsLiabilities: {
+    title: 'Tillgångar, avsättningar och skulder som avser flera poster',
+  },
+  financialArrangements: {
+    title: 'Ekonomiska arrangemang som inte redovisas i balansräkningen',
+  },
+  otherComments: {
+    title: 'Övriga kommentarer',
+  },
+};
+
+const titleToKey = Object.entries(NOTES).reduce(
+  (acc, [key, { title }]) => ({
+    ...acc,
+    [title]: key,
+  }),
+  {}
+);
 
 const NotesPage = observer(() => {
   const { companyStore } = useStore();
+  const [selectedNotes, setSelectedNotes] = useState<string[]>([]);
+
+  const handleChange = useCallback(
+    ({ target: { value } }: SelectChangeEvent<typeof selectedNotes>) => {
+      setSelectedNotes(typeof value === 'string' ? value.split(',') : value);
+    },
+    []
+  );
+
+  const handleSubmit = useCallback((data) => {
+    console.log({ data });
+  }, []);
 
   return (
-    <Page>
-      <Card>
-        <SubTitle subTitle="Noter" />
-        <Note title="Redovisningsprinciper">
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Regelverk"
-            current={<TextareaAutosize cols={50} minRows={5} minLength={200} />}
-          />
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Tjänste- och entreprenaduppdrag"
-          />
-          <MultiRow
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Utför företaget tjänste- och/eller entreprenaduppdrag till fast pris?"
-            current={<Switch />}
-          />
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Egentillverkade varor"
-          />
-          <MultiRow
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Tillverkar företaget egna varor?"
-            current={<Switch />}
-          />
-        </Note>
-        <Note title="Medelantal anställda">
-          <MultiRow
-            subTitle=""
-            current={`${formatDate(
-              companyStore.company.fiscalYears.currentStart
-            )} - ${formatDate(companyStore.company.fiscalYears.currentEnd)}`}
-          />
-          <MultiRow
-            subTitle="Medelantal anställda under året"
-            current={<TextField label="Måste anges" />}
-          />
-        </Note>
-        <Note title="Ställda säkerheter">
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Regelverk"
-            current={<TextareaAutosize cols={50} minRows={5} minLength={200} />}
-          />
-        </Note>
-        <Note title="Eventualförpliktelser">
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Regelverk"
-            current={<TextareaAutosize cols={50} minRows={5} minLength={200} />}
-          />
-        </Note>
-        <Note title="Exceptionella intäkter och kostnder">
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Regelverk"
-            current={<TextareaAutosize cols={50} minRows={5} minLength={200} />}
-          />
-        </Note>
-        <Note title="Tillgångar, Avsättningar och Skulder som avser flera poster">
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Regelverk"
-            current={<TextareaAutosize cols={50} minRows={5} minLength={200} />}
-          />
-        </Note>
-        <Note title="Ekonomiska arrangemang som inte redovisas i balansräkningen">
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Regelverk"
-            current={<TextareaAutosize cols={50} minRows={5} minLength={200} />}
-          />
-        </Note>
-        <Note title="Övriga kommentarer">
-          <MultiRow
-            isBig
-            isBold
-            isSum
-            isNoBorder
-            subTitle="Regelverk"
-            current={<TextareaAutosize cols={50} minRows={5} minLength={200} />}
-          />
-        </Note>
+    <>
+      <Page>
+        <Card>
+          <SubTitle subTitle="Noter" />
 
-        <NavLink to="/year-story">
-          <div
-            style={{ display: 'grid', justifyContent: 'center', marginTop: 12 }}
+          <NotesSelector value={selectedNotes} onChange={handleChange} />
+
+          <Formik
+            onSubmit={handleSubmit}
+            initialValues={{ ...companyStore.company.notes }}
           >
-            <Button variant="contained">Fortsätt</Button>
-          </div>
-        </NavLink>
-      </Card>
-    </Page>
+            {({ dirty }) => (
+              <Form>
+                {selectedNotes.map((title) => (
+                  <NoteWrapper key={titleToKey[title]} title={title}>
+                    <NoteContent noteKey={titleToKey[title]} title={title} />
+                  </NoteWrapper>
+                ))}
+
+                <Box mt={12} textAlign="center">
+                  <Button disabled={!dirty} type="submit" variant="contained">
+                    spara
+                  </Button>
+                </Box>
+              </Form>
+            )}
+          </Formik>
+        </Card>
+      </Page>
+
+      <StyledNavLink to="/year-story">
+        <Button variant="contained">Fortsätt</Button>
+      </StyledNavLink>
+    </>
   );
 });
 export default NotesPage;
