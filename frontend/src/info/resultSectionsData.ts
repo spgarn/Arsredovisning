@@ -117,7 +117,7 @@ const resultSections: ResultSectionsInterface = {
     children: {
       taxesYearProfit: {
         title: 'Skatter på årets resultat',
-        accountRange: [8910, 8999],
+        accountRange: [8910, 8910],
       },
     },
   },
@@ -139,7 +139,12 @@ const resultSections: ResultSectionsInterface = {
   yearResult: {
     title: 'Årets resultat',
     sumTitle: '',
-    children: {},
+    children: {
+      yearProfit: {
+        title: 'Årets resultat',
+        accountRange: [8999, 8999],
+      },
+    },
   },
 };
 
